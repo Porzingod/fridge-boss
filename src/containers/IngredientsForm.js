@@ -18,11 +18,11 @@ class IngredientsForm extends React.Component {
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
-    }, () => console.log(this.state))
+    })
   }
 
   handleExpirationDate = (e, time) => {
-    this.setState({ expiration_date: time }, () => console.log(this.state.expiration_date.toDateString().slice(4)))
+    this.setState({ expiration_date: time })
   }
 
   handleSubmit = e => {

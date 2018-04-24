@@ -5,18 +5,18 @@ import { bindActionCreators } from 'redux'
 
 import { fetchIngredients } from '../actions/ingredients'
 
-import Paper from 'material-ui/Paper';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
-import Subheader from 'material-ui/Subheader';
+import Ingredient from '../components/Ingredient'
 
-import Checkbox from 'material-ui/Checkbox';
+import Paper from 'material-ui/Paper';
 
 const style = {
-  maxHeight: 550,
-  width: "20%",
-  float: 'left',
-  overflowY: 'auto',
+  paper: {
+    maxHeight: 700,
+    minWidth: 250,
+    maxWidth: "15%",
+    float: 'left',
+    overflowY: 'auto',
+  }
 };
 
 class IngredientsList extends React.Component {
@@ -37,12 +37,12 @@ class IngredientsList extends React.Component {
     if (selectedIngredients.map(x => x.id).includes(e.target.dataset.id)) {
       let index = selectedIngredients.findIndex(x => x.id === e.target.dataset.id)
       let updatedSelections = [...selectedIngredients.slice(0, index), ...selectedIngredients.slice(index + 1)]
-      this.setState({ selectedIngredients: updatedSelections}, () => console.log(this.state))
+      this.setState({ selectedIngredients: updatedSelections})
     }
     else {
       this.setState({ selectedIngredients:
         [...selectedIngredients, {id: e.target.dataset.id, name: e.target.value}]
-      }, () => console.log(this.state))
+      })
     }
   }
 
@@ -58,11 +58,14 @@ class IngredientsList extends React.Component {
         return xDate < yDate ? -1 : 1
       }
     })
-    const mappedIngredients = sortedIngredients.map( (ingr, index) => <div><Checkbox key={ingr.id} data-id={ingr.id} value={ingr.name} label={ingr.name} onCheck={this.handleCheck}/>Expires: {ingr.expiration_date}</div> )
+    const mappedIngredients = sortedIngredients.map( (ingr, index) =>
+      <Ingredient id={ingr.id} name={ingr.name} expiration_date={ingr.expiration_date} />
+    )
 
     return (
       <div>
-        <Paper style={style}>
+        <Paper style={style.paper}>
+          <h2>Ingredients: </h2>
           {mappedIngredients}
         </Paper>
       </div>
