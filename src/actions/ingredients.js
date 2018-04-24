@@ -46,8 +46,7 @@ export const deleteIngredient = (ingredientId) => {
     return fetch(`http://localhost:3000/api/v1/users/1/ingredients/${ingredientId}`, {
       method: "DELETE"
     })
-    .then(res => res.json())
-    .then(json => dispatch({
+    .then(res => dispatch({
       type: "DELETING_INGREDIENT_FULFILLED",
       payload: ingredientId
     }))

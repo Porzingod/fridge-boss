@@ -38,15 +38,21 @@ class Ingredient extends React.Component {
     return expiringSoon
   }
 
+  handleCheck = (e) => {
+    const {id, name} = this.props
+    this.props.handleCheck(id, name)
+  }
+
   handleDelete = (e) => {
     this.props.deleteIngredient(this.props.id)
   }
 
   render() {
-    const {id, name, expiration_date} = this.props
+    const {id, name, expiration_date, checked} = this.props
     return (
       <div style={{paddingBottom: 70}}>
         <Checkbox
+          defaultChecked={checked}
           style={style.root}
           labelStyle={style.label}
           iconStyle={style.icon}

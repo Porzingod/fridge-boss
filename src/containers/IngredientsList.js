@@ -32,17 +32,24 @@ class IngredientsList extends React.Component {
     return this.state.selectedIngredients !== nextState.selectedIngredients ? false : true
   }
 
-  handleCheck = e => {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.ingredients.length === 0) {
+      let firstThree = this.props.ingredients.slice(0, 3).map(x => Object.assign({}, {}, {id: x.id, name: x.name}))
+      this.setState({ selectedIngredients: firstThree })
+    }
+  }
+
+  handleCheck = (id, name) => {
     let selectedIngredients = this.state.selectedIngredients
-    if (selectedIngredients.map(x => x.id).includes(e.target.dataset.id)) {
-      let index = selectedIngredients.findIndex(x => x.id === e.target.dataset.id)
+    if ( selectedIngredients.map(x => x.id).find(x => x === id) ) {
+      let index = selectedIngredients.findIndex(x => x.id === id)
       let updatedSelections = [...selectedIngredients.slice(0, index), ...selectedIngredients.slice(index + 1)]
-      this.setState({ selectedIngredients: updatedSelections})
+      this.setState({ selectedIngredients: updatedSelections}, () => console.log(this.state))
     }
     else {
       this.setState({ selectedIngredients:
-        [...selectedIngredients, {id: e.target.dataset.id, name: e.target.value}]
-      })
+        [...selectedIngredients, {id: id, name: name}]
+      }, () => console.log(this.state))
     }
   }
 
@@ -58,15 +65,15 @@ class IngredientsList extends React.Component {
         return xDate < yDate ? -1 : 1
       }
     })
-    const mappedIngredients = sortedIngredients.map( (ingr, index) =>
-      <Ingredient id={ingr.id} name={ingr.name} expiration_date={ingr.expiration_date} />
-    )
+    const firstThreeIngredients = sortedIngredients.slice(0, 3).map ((ingr, index) => <Ingredient key={ingr.id} id={ingr.id} name={ingr.name} expiration_date={ingr.expiration_date} checked={true} handleCheck={this.handleCheck}/>)
+    const followingIngredients = sortedIngredients.slice(3).map((ingr, index) => <Ingredient key={ingr.id} id={ingr.id} name={ingr.name} expiration_date={ingr.expiration_date} checked={false} handleCheck={this.handleCheck}/>)
 
     return (
       <div>
         <Paper style={style.paper}>
           <h2>Ingredients: </h2>
-          {mappedIngredients}
+          {firstThreeIngredients}
+          {followingIngredients}
         </Paper>
       </div>
     )
