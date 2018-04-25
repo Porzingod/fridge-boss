@@ -19,7 +19,7 @@ class App extends Component {
             <IngredientsForm />
             <IngredientsList />
           </div>
-          <div style={{}}>
+          <div style={{paddingRight: 20, paddingTop: 15}}>
             <RecipesList />
           </div>
         </div>

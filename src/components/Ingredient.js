@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { deleteIngredient } from '../actions/ingredients_actions'
+import { deleteIngredient, selectIngredient, deselectIngredient } from '../actions/ingredients_actions'
 
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
@@ -39,9 +39,10 @@ class Ingredient extends React.Component {
     return expiringSoon
   }
 
-  handleCheck = (e) => {
-    const {id, name} = this.props
-    this.props.handleCheck(id, name)
+  handleCheck = e => {
+    const {selectedIngredients, id} = this.props
+    const {selectIngredient, deselectIngredient} = this.props
+    selectedIngredients.map(ingr => ingr.id).find(ingr => ingr === id) ? deselectIngredient(id) : selectIngredient(id)
   }
 
   handleDelete = (e) => {
@@ -80,10 +81,19 @@ class Ingredient extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    ingredients: state.ingredients.ingredients,
+    selectedIngredients: state.ingredients.selectedIngredients
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    deleteIngredient: deleteIngredient
+    deleteIngredient: deleteIngredient,
+    selectIngredient: selectIngredient,
+    deselectIngredient: deselectIngredient,
   }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(Ingredient)
+export default connect(mapStateToProps, mapDispatchToProps)(Ingredient)

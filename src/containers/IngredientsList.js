@@ -24,59 +24,49 @@ const style = {
 };
 
 class IngredientsList extends React.Component {
-  state = {
-    selectedIngredients: []
-  }
+  // state = {
+  //   selectedIngredients: []
+  // }
 
   componentDidMount() {
     this.props.fetchIngredients()
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.selectedIngredients !== nextState.selectedIngredients ? false : true
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // return this.state.selectedIngredients !== nextState.selectedIngredients ? false : true
+  // }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.ingredients.length === 0) {
-      let firstThree = this.props.ingredients.slice(0, 3).map(ingr => {return {id: ingr.id, name: ingr.name}})
-      // let firstThree = this.props.ingredients.slice(0, 3).map(ingr => ({...{}, id: ingr.id, name: ingr.name}))
-      this.setState({ selectedIngredients: firstThree })
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.ingredients.length === 0) {
+  //     let firstThree = this.props.ingredients.slice(0, 3).map(ingr => {return {id: ingr.id, name: ingr.name}})
+  //     // let firstThree = this.props.ingredients.slice(0, 3).map(ingr => ({...{}, id: ingr.id, name: ingr.name}))
+  //     this.setState({ selectedIngredients: firstThree }, () => console.log(this.state.selectedIngredients))
+  //   }
+  // }
 
-  handleCheck = (id, name) => {
-    let selectedIngredients = this.state.selectedIngredients
-    if ( selectedIngredients.map(ingr => ingr.id).find(ingr => ingr === id) ) {
-      let index = selectedIngredients.findIndex(ingr => ingr.id === id)
-      let updatedSelections = [...selectedIngredients.slice(0, index), ...selectedIngredients.slice(index + 1)]
-      this.setState({ selectedIngredients: updatedSelections}, () => console.log(this.state))
-    }
-    else {
-      this.setState({ selectedIngredients:
-        [...selectedIngredients, {id: id, name: name}]
-      }, () => console.log(this.state))
-    }
-  }
+  // handleCheck = (id, name) => {
+  //   let selectedIngredients = this.state.selectedIngredients
+  //   if ( selectedIngredients.map(ingr => ingr.id).find(ingr => ingr === id) ) {
+  //     let index = selectedIngredients.findIndex(ingr => ingr.id === id)
+  //     let updatedSelections = [...selectedIngredients.slice(0, index), ...selectedIngredients.slice(index + 1)]
+  //     this.setState({ selectedIngredients: updatedSelections}, () => console.log(this.state))
+  //   }
+  //   else {
+  //     this.setState({ selectedIngredients:
+  //       [...selectedIngredients, {id: id, name: name}]
+  //     }, () => console.log(this.state))
+  //   }
+  // }
 
   handleSearch = () => {
-    const selectedIngredients = this.state.selectedIngredients.map(ingr => ingr.name)
+    const selectedIngredients = this.props.selectedIngredients.map(ingr => ingr.name)
     this.props.searchRecipes(selectedIngredients)
   }
 
   render() {
     const {ingredients} = this.props
-    const sortedIngredients = ingredients.sort((a, b) => {
-      let aDate = a.expiration_date
-      let bDate = b.expiration_date
-      if (aDate === bDate) {
-        return 0
-      }
-      else {
-        return aDate < bDate ? -1 : 1
-      }
-    })
-    const firstThreeIngredients = sortedIngredients.slice(0, 3).map ((ingr, index) => <Ingredient key={ingr.id} id={ingr.id} name={ingr.name} expiration_date={ingr.expiration_date} checked={true} handleCheck={this.handleCheck}/>)
-    const followingIngredients = sortedIngredients.slice(3).map((ingr, index) => <Ingredient key={ingr.id} id={ingr.id} name={ingr.name} expiration_date={ingr.expiration_date} checked={false} handleCheck={this.handleCheck}/>)
+    const firstThreeIngredients = ingredients.slice(0, 3).map ((ingr, index) => <Ingredient key={ingr.id} id={ingr.id} name={ingr.name} expiration_date={ingr.expiration_date} checked={true} handleCheck={this.handleCheck}/>)
+    const followingIngredients = ingredients.slice(3).map((ingr, index) => <Ingredient key={ingr.id} id={ingr.id} name={ingr.name} expiration_date={ingr.expiration_date} checked={false} handleCheck={this.handleCheck}/>)
 
     return (
       <div>
@@ -93,7 +83,8 @@ class IngredientsList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.ingredients.ingredients
+    ingredients: state.ingredients.ingredients,
+    selectedIngredients: state.ingredients.selectedIngredients
   }
 }
 

@@ -62,3 +62,15 @@ export const deleteIngredient = (ingredientId) => {
     )
   }
 }
+
+export const selectIngredient = (ingredientId) => {
+  return (dispatch) => {
+    dispatch({ type: "SELECT_INGREDIENT", payload: ingredientId })
+  }
+}
+
+export const deselectIngredient = (ingredientId) => {
+  return (dispatch) => {
+    dispatch({ type: "DESELECT_INGREDIENT", payload: ingredientId })
+  }
+}
