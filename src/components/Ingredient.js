@@ -8,7 +8,6 @@ import { deleteIngredient, selectIngredient, deselectIngredient } from '../actio
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import ContentRemove from 'material-ui/svg-icons/content/remove.js'
-import Divider from 'material-ui/Divider';
 
 const style = {
   root: {
@@ -66,8 +65,8 @@ class Ingredient extends React.Component {
               <span style={{fontWeight: 'bold'}}>{name}</span>
               <br/>
               {this.expiringSoon() ?
-                <span style={{fontSize: 12, opacity: 0.8, color: "red"}}>Expires: {expiration_date}</span>
-              : <span style={{fontSize: 12, opacity: 0.8}}>Expires: {expiration_date}</span>
+                <span style={{fontSize: 12, opacity: 0.8, color: "red"}}>Best Before: {expiration_date}</span>
+              : <span style={{fontSize: 12, opacity: 0.8}}>Best Before: {expiration_date}</span>
               }
             </label>
           )}

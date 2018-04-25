@@ -10,16 +10,16 @@ let initialState = {
   deleted: true
 }
 
-const sortIngredients = (array) => {
-  return array.sort((a, b) => {
-    let aDate = a.expiration_date
-    let bDate = b.expiration_date
-    if (aDate === bDate) { return 0 }
-    else { return aDate < bDate ? -1 : 1 }
-  })
-}
 
 export const ingredientsReducer = (state = initialState, {type, payload}) => {
+  const sortIngredients = (array) => {
+    return array.sort((a, b) => {
+      let aDate = a.expiration_date
+      let bDate = b.expiration_date
+      if (aDate === bDate) { return 0 }
+      else { return aDate < bDate ? -1 : 1 }
+    })
+  }
   switch(type) {
     case "FETCH_INGREDIENTS_PENDING":
       return {...state, fetching: true}

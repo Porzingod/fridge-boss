@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -9,9 +8,11 @@ import RecipesList from './containers/RecipesList'
 
 class App extends Component {
   render() {
+    const windowHeight = window.innerHeight
+    const windowWidth = window.innerWidth
     return (
       <MuiThemeProvider>
-        <div className="App">
+        <div className="App" style={{maxWidth: windowWidth, maxHeight: windowHeight}}>
           {/* <header className="App-header">
 
           </header> */}
@@ -19,7 +20,7 @@ class App extends Component {
             <IngredientsForm />
             <IngredientsList />
           </div>
-          <div style={{paddingRight: 20, paddingTop: 15}}>
+          <div style={{paddingRight: 20}}>
             <RecipesList />
           </div>
         </div>
