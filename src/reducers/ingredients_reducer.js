@@ -24,7 +24,7 @@ export const ingredientsReducer = (state = initialState, {type, payload}) => {
   let sortedIngredients = []
   let selectedIngredients = []
   let updatedIngredients = []
-  let findSelectedIngredients = (array) => array.filter( ele => ele.selected == true)
+  let findSelectedIngredients = (array) => array.filter( ele => ele.selected === true)
   let updateAtIndex = (array, index) => array.map((ele, i) => index === i ? {...ele, selected: !ele.selected} : ele)
 
   switch(type) {
@@ -58,13 +58,13 @@ export const ingredientsReducer = (state = initialState, {type, payload}) => {
       return {...state, deleting: false, deleted: false, errors: payload}
 
     case "SELECT_INGREDIENT":
-      let selectedIndex = state.ingredients.findIndex( ingr => ingr.id == payload )
+      let selectedIndex = state.ingredients.findIndex( ingr => ingr.id === payload )
       updatedIngredients = updateAtIndex(state.ingredients, selectedIndex)
       selectedIngredients = findSelectedIngredients(updatedIngredients)
       return {...state, ingredients: updatedIngredients, selectedIngredients: selectedIngredients}
 
     case "DESELECT_INGREDIENT":
-      let deselectedIndex = state.ingredients.findIndex( ingr => ingr.id == payload )
+      let deselectedIndex = state.ingredients.findIndex( ingr => ingr.id === payload )
       updatedIngredients = updateAtIndex(state.ingredients, deselectedIndex)
       selectedIngredients = findSelectedIngredients(updatedIngredients)
       return {...state, ingredients: updatedIngredients, selectedIngredients: selectedIngredients}

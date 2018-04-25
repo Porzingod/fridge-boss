@@ -74,7 +74,8 @@ class IngredientsList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.ingredients.ingredients
+    ingredients: state.ingredients.ingredients,
+    selectedIngredients: state.ingredients.selectedIngredients
   }
 }
 

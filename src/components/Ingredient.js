@@ -30,7 +30,7 @@ const style = {
 class Ingredient extends React.Component {
 
   expiringSoon = () => {
-    let propExpiry = new Date(this.props.expiration_date)
+    let propExpiry = new Date(this.props.ingredient.expiration_date)
     var today = new Date();
     var soon = new Date();
     soon.setDate(today.getDate() + 5);
@@ -45,7 +45,7 @@ class Ingredient extends React.Component {
   }
 
   handleDelete = (e) => {
-    this.props.deleteIngredient(this.props.id)
+    this.props.deleteIngredient(this.props.ingredient.id)
   }
 
   render() {

@@ -12,15 +12,15 @@ class App extends Component {
     const windowWidth = window.innerWidth
     return (
       <MuiThemeProvider>
-        <div className="App" style={{maxWidth: windowWidth, maxHeight: windowHeight}}>
+        <div className="App" style={{maxWidth: windowWidth, maxHeight: windowHeight, paddingLeft: 20, paddingRight: 20}}>
           {/* <header className="App-header">
 
           </header> */}
-          <div style={{float: "left", paddingLeft: 20, width: 260}}>
+          <div style={{float: "left", width: 260}}>
             <IngredientsForm />
             <IngredientsList />
           </div>
-          <div style={{paddingRight: 20}}>
+          <div>
             <RecipesList />
           </div>
         </div>

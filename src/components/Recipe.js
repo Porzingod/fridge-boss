@@ -33,7 +33,7 @@ class Recipe extends React.Component {
         titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
         actionIcon={<IconButton><ActionInfoOutline color="white" onClick={this.props.viewDetails}/></IconButton>}
       >
-        <img src={imageUrlsBySize["90"]} />
+        <img src={imageUrlsBySize["90"]} alt={recipeName}/>
       </GridTile>
     )
   }

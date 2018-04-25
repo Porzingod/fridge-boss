@@ -65,7 +65,7 @@ class IngredientsForm extends React.Component {
   }
 
   render() {
-    const {name, expiration_date} = this.state
+    const {name} = this.state
     return (
       <Paper style={style.paper}>
         <TextField inputStyle={style.textInputField} hintStyle={style.textHintField} onChange={this.handleChange} hintText="Ingredient" name="name" value={name}/>

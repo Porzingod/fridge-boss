@@ -48,12 +48,10 @@ export const searchRecipes = (ingredients) => {
     dispatch({ type: "SEARCH_RECIPES_PENDING" })
     fetch(YUMMLY_API_URL + searchIngredients)
       .then(res => res.json())
-      .then(json => {
-        debugger
-        dispatch({
+      .then(json => dispatch({
         type: "SEARCH_RECIPES_FULFILLED",
         payload: json.matches
-      })}
+      })
     )
       .catch(err => dispatch({
         type: "SEARCH_RECIPES_REJECTED",
