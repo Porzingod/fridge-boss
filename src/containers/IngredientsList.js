@@ -3,19 +3,23 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { fetchIngredients } from '../actions/ingredients'
+import { fetchIngredients } from '../actions/ingredients_actions'
+import { searchRecipes } from '../actions/recipes_actions'
 
 import Ingredient from '../components/Ingredient'
 
 import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton'
 
 const style = {
   paper: {
     maxHeight: 700,
     minWidth: 250,
     maxWidth: "15%",
-    float: 'left',
     overflowY: 'auto',
+  },
+  button: {
+    marginBottom: 10
   }
 };
 
@@ -34,15 +38,16 @@ class IngredientsList extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.ingredients.length === 0) {
-      let firstThree = this.props.ingredients.slice(0, 3).map(x => Object.assign({}, {}, {id: x.id, name: x.name}))
+      let firstThree = this.props.ingredients.slice(0, 3).map(ingr => {return {id: ingr.id, name: ingr.name}})
+      // let firstThree = this.props.ingredients.slice(0, 3).map(ingr => ({...{}, id: ingr.id, name: ingr.name}))
       this.setState({ selectedIngredients: firstThree })
     }
   }
 
   handleCheck = (id, name) => {
     let selectedIngredients = this.state.selectedIngredients
-    if ( selectedIngredients.map(x => x.id).find(x => x === id) ) {
-      let index = selectedIngredients.findIndex(x => x.id === id)
+    if ( selectedIngredients.map(ingr => ingr.id).find(ingr => ingr === id) ) {
+      let index = selectedIngredients.findIndex(ingr => ingr.id === id)
       let updatedSelections = [...selectedIngredients.slice(0, index), ...selectedIngredients.slice(index + 1)]
       this.setState({ selectedIngredients: updatedSelections}, () => console.log(this.state))
     }
@@ -53,16 +58,21 @@ class IngredientsList extends React.Component {
     }
   }
 
+  handleSearch = () => {
+    const selectedIngredients = this.state.selectedIngredients.map(ingr => ingr.name)
+    this.props.searchRecipes(selectedIngredients)
+  }
+
   render() {
     const {ingredients} = this.props
-    const sortedIngredients = ingredients.sort((x, y) => {
-      let xDate = x.expiration_date
-      let yDate = y.expiration_date
-      if (xDate === yDate) {
+    const sortedIngredients = ingredients.sort((a, b) => {
+      let aDate = a.expiration_date
+      let bDate = b.expiration_date
+      if (aDate === bDate) {
         return 0
       }
       else {
-        return xDate < yDate ? -1 : 1
+        return aDate < bDate ? -1 : 1
       }
     })
     const firstThreeIngredients = sortedIngredients.slice(0, 3).map ((ingr, index) => <Ingredient key={ingr.id} id={ingr.id} name={ingr.name} expiration_date={ingr.expiration_date} checked={true} handleCheck={this.handleCheck}/>)
@@ -71,7 +81,8 @@ class IngredientsList extends React.Component {
     return (
       <div>
         <Paper style={style.paper}>
-          <h2>Ingredients: </h2>
+          <h2>My Fridge: </h2>
+          <RaisedButton style={style.button} label="Search Recipes" onClick={this.handleSearch}/>
           {firstThreeIngredients}
           {followingIngredients}
         </Paper>
@@ -88,7 +99,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    fetchIngredients: fetchIngredients
+    fetchIngredients: fetchIngredients,
+    searchRecipes: searchRecipes
   }, dispatch)
 }
 

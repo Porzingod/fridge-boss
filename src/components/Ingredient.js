@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { deleteIngredient } from '../actions/ingredients'
+import { deleteIngredient } from '../actions/ingredients_actions'
 
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
@@ -13,7 +13,8 @@ import Divider from 'material-ui/Divider';
 const style = {
   root: {
     float: "left",
-    width: "81%"
+    width: "81%",
+    paddingBottom: 20
   },
   label: {
     textAlign: 'left'
@@ -50,7 +51,7 @@ class Ingredient extends React.Component {
   render() {
     const {id, name, expiration_date, checked} = this.props
     return (
-      <div style={{paddingBottom: 70}}>
+      <div>
         <Checkbox
           defaultChecked={checked}
           style={style.root}

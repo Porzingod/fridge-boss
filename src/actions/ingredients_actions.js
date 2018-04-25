@@ -3,15 +3,17 @@ export const fetchIngredients = () => {
     dispatch({ type: "FETCH_INGREDIENTS_PENDING" })
     // fix this later to dynamically add user_id
     return fetch("http://localhost:3000/api/v1/users/1/ingredients")
-    .then(res => res.json())
-    .then(ingredients => {dispatch({
-      type: "FETCH_INGREDIENTS_FULFILLED",
-      payload: ingredients
-    })})
-    .catch(err => dispatch({
-      type: "FETCH_INGREDIENTS_REJECTED",
-      payload: err
-    }))
+      .then(res => res.json())
+      .then(ingredients => dispatch({
+        type: "FETCH_INGREDIENTS_FULFILLED",
+        payload: ingredients
+      })
+    )
+      .catch(err => dispatch({
+        type: "FETCH_INGREDIENTS_REJECTED",
+        payload: err
+      })
+    )
   }
 }
 
@@ -27,15 +29,17 @@ export const addIngredient = (ingredient) => {
         "Content-Type": "application/json"
       }
     })
-    .then(res => res.json())
-    .then(ingredient => dispatch({
-      type: "ADDING_INGREDIENT_FULFILLED",
-      payload: ingredient
-    }))
-    .catch(err => dispatch({
-      type: "ADDING_INGREDIENT_REJECTED",
-      payload: err
-    }))
+      .then(res => res.json())
+      .then(ingredient => dispatch({
+        type: "ADDING_INGREDIENT_FULFILLED",
+        payload: ingredient
+      })
+    )
+      .catch(err => dispatch({
+        type: "ADDING_INGREDIENT_REJECTED",
+        payload: err
+      })
+    )
   }
 }
 
@@ -46,13 +50,15 @@ export const deleteIngredient = (ingredientId) => {
     return fetch(`http://localhost:3000/api/v1/users/1/ingredients/${ingredientId}`, {
       method: "DELETE"
     })
-    .then(res => dispatch({
-      type: "DELETING_INGREDIENT_FULFILLED",
-      payload: ingredientId
-    }))
-    .then(err => dispatch({
-      type: "DELETING_INGREDIENT_REJECTED",
-      payload: err
-    }))
+      .then(res => dispatch({
+        type: "DELETING_INGREDIENT_FULFILLED",
+        payload: ingredientId
+      })
+    )
+      .then(err => dispatch({
+        type: "DELETING_INGREDIENT_REJECTED",
+        payload: err
+      })
+    )
   }
 }

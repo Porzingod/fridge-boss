@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import IngredientsForm from './containers/IngredientsForm'
 import IngredientsList from './containers/IngredientsList'
+import RecipesList from './containers/RecipesList'
 
 class App extends Component {
   render() {
@@ -14,9 +15,13 @@ class App extends Component {
           {/* <header className="App-header">
 
           </header> */}
-          <IngredientsForm />
-          <hr></hr>
-          <IngredientsList />
+          <div style={{float: "left", paddingLeft: 20, width: 260}}>
+            <IngredientsForm />
+            <IngredientsList />
+          </div>
+          <div style={{}}>
+            <RecipesList />
+          </div>
         </div>
       </MuiThemeProvider>
     );
