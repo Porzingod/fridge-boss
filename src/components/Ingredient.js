@@ -39,9 +39,9 @@ class Ingredient extends React.Component {
   }
 
   handleCheck = e => {
-    const {selectedIngredients, id} = this.props
+    const {id} = this.props.ingredient
     const {selectIngredient, deselectIngredient} = this.props
-    selectedIngredients.map(ingr => ingr.id).find(ingr => ingr === id) ? deselectIngredient(id) : selectIngredient(id)
+    e.target.checked ? selectIngredient(id) : deselectIngredient(id)
   }
 
   handleDelete = (e) => {
@@ -49,7 +49,8 @@ class Ingredient extends React.Component {
   }
 
   render() {
-    const {id, name, expiration_date, checked} = this.props
+    const {id, name, expiration_date} = this.props.ingredient
+    const {checked} = this.props
     return (
       <div>
         <Checkbox

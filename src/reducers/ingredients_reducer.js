@@ -20,34 +20,59 @@ export const ingredientsReducer = (state = initialState, {type, payload}) => {
       else { return aDate < bDate ? -1 : 1 }
     })
   }
+
+  let sortedIngredients = []
+  let selectedIngredients = []
+  let updatedIngredients = []
+  let findSelectedIngredients = (array) => array.filter( ele => ele.selected == true)
+  let updateAtIndex = (array, index) => array.map((ele, i) => index === i ? {...ele, selected: !ele.selected} : ele)
+
   switch(type) {
     case "FETCH_INGREDIENTS_PENDING":
       return {...state, fetching: true}
     case "FETCH_INGREDIENTS_FULFILLED":
-      let sortedFetchedIngredients = sortIngredients(payload)
-      return {...state, fetching: false, fetched: true, ingredients: sortedFetchedIngredients, selectedIngredients: sortedFetchedIngredients.slice(0, 3)}
+      sortedIngredients = sortIngredients(payload)
+      let selectedTrue = sortedIngredients.slice(0,3).map( ingr => {return {...ingr, selected: true}} )
+      let selectedFalse = sortedIngredients.slice(3).map( ingr => {return{...ingr, selected: false}} )
+      let selectionApplied = [...selectedTrue, ...selectedFalse]
+      return {...state, fetching: false, fetched: true, ingredients: selectionApplied, selectedIngredients: selectedTrue}
     case "FETCH_INGREDIENTS_REJECTED":
       return {...state, fetching: false, errors: payload}
+
     case "ADDING_INGREDIENT_PENDING":
       return {...state, posting: true, posted: false}
     case "ADDING_INGREDIENT_FULFILLED":
-      let sortedIngredientsPlusAdded = sortIngredients([...state.ingredients, payload])
-      return {...state, posting: false, posted: true, ingredients: sortedIngredientsPlusAdded, selectedIngredients: sortedIngredientsPlusAdded.slice(0, 3)}
+      sortedIngredients = sortIngredients([...state.ingredients, {...payload, selected: false}])
+      selectedIngredients = findSelectedIngredients(sortedIngredients)
+      return {...state, posting: false, posted: true, ingredients: sortedIngredients, selectedIngredients: selectedIngredients}
     case "ADDING_INGREDIENT_REJECTED":
       return {...state, posting: false, posted: false, errors: payload}
+
     case "DELETING_INGREDIENT_PENDING":
       return {...state, deleting: true, deleted: false}
     case "DELETING_INGREDIENT_FULFILLED":
-      let ingredientsLessDeleted = state.ingredients.filter( ingr => ingr.id !== payload )
-      return {...state, deleting: false, deleted: true, ingredients: ingredientsLessDeleted, selectedIngredients: ingredientsLessDeleted.slice(0,3)}
+      let ingredientsMinusDeleted = state.ingredients.filter( ingr => ingr.id !== payload )
+      selectedIngredients = findSelectedIngredients(ingredientsMinusDeleted)
+      return {...state, deleting: false, deleted: true, ingredients: ingredientsMinusDeleted, selectedIngredients: selectedIngredients}
     case "DELETING_INGREDIENT_REJECTED":
       return {...state, deleting: false, deleted: false, errors: payload}
+
     case "SELECT_INGREDIENT":
-      let selectedIngredient = state.ingredients.find( ingr => ingr.id === payload )
-      return {...state, selectedIngredients: [...state.selectedIngredients, selectedIngredient]}
+      let selectedIndex = state.ingredients.findIndex( ingr => ingr.id == payload )
+      updatedIngredients = updateAtIndex(state.ingredients, selectedIndex)
+      selectedIngredients = findSelectedIngredients(updatedIngredients)
+      return {...state, ingredients: updatedIngredients, selectedIngredients: selectedIngredients}
+
     case "DESELECT_INGREDIENT":
-      let ingredientsLessDeselected = state.selectedIngredients.filter( ingr => ingr.id !== payload )
-      return {...state, selectedIngredients: ingredientsLessDeselected}
+      let deselectedIndex = state.ingredients.findIndex( ingr => ingr.id == payload )
+      updatedIngredients = updateAtIndex(state.ingredients, deselectedIndex)
+      selectedIngredients = findSelectedIngredients(updatedIngredients)
+      return {...state, ingredients: updatedIngredients, selectedIngredients: selectedIngredients}
+
+    case "CLEAR_SELECTED_INGREDIENTS":
+      updatedIngredients = state.ingredients.map( ingr => {return{...ingr, selected: false}} )
+      return {...state, ingredients: updatedIngredients, selectedIngredients: []}
+
     default:
       return state
   }

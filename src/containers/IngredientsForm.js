@@ -5,18 +5,15 @@ import { bindActionCreators } from 'redux'
 
 import { addIngredient } from '../actions/ingredients_actions'
 
+import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField'
 import DatePicker from 'material-ui/DatePicker'
 import RaisedButton from 'material-ui/RaisedButton'
 
 const style = {
-  div: {
-    width: 260,
-    marginBottom: 10
-  },
   datePicker: {
     maxWidth: 250,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   textInputField: {
     textAlign: 'center'
@@ -24,6 +21,14 @@ const style = {
   textHintField: {
     textAlign: "center",
     width: "100%"
+  },
+  paper: {
+    width: 260,
+    marginBottom: 10
+  },
+  button: {
+    marginTop: -20,
+    marginBottom: 20
   }
 }
 
@@ -62,13 +67,13 @@ class IngredientsForm extends React.Component {
   render() {
     const {name, expiration_date} = this.state
     return (
-      <div style={style.div}>
+      <Paper style={style.paper}>
         <TextField inputStyle={style.textInputField} hintStyle={style.textHintField} onChange={this.handleChange} hintText="Ingredient" name="name" value={name}/>
         <br/>
-        <DatePicker inputStyle={style.datePicker} onChange={this.handleExpirationDate} hintText="Expiration Date" name="expiration_date" value={expiration_date} mode="landscape"/>
+        <DatePicker inputStyle={style.datePicker} hintStyle={style.textHintField} onChange={this.handleExpirationDate} hintText="Expiration Date" name="expiration_date" mode="landscape"/>
         <br/>
-        <RaisedButton onClick={this.handleSubmit} label="Add Ingredient"></RaisedButton>
-      </div>
+        <RaisedButton style={style.button} onClick={this.handleSubmit} label="Add Ingredient"></RaisedButton>
+      </Paper>
     )
   }
 }

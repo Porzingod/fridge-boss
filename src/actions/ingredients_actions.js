@@ -74,3 +74,9 @@ export const deselectIngredient = (ingredientId) => {
     dispatch({ type: "DESELECT_INGREDIENT", payload: ingredientId })
   }
 }
+
+export const clearSelection = () => {
+  return (dispatch) => {
+    dispatch({ type: "CLEAR_SELECTED_INGREDIENTS" })
+  }
+}
