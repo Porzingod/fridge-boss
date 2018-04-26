@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { fetchIngredients, clearSelection } from '../actions/ingredients_actions'
-import { searchRecipes } from '../actions/recipes_actions'
+import { searchRecipesInitial } from '../actions/recipes_actions'
 
 import Ingredient from '../components/Ingredient'
 
@@ -46,8 +46,7 @@ class IngredientsList extends React.Component {
   }
 
   handleSearch = () => {
-    const selectedIngredients = this.props.selectedIngredients.map( ingr => ingr.name )
-    this.props.searchRecipes(selectedIngredients)
+    this.props.searchRecipesInitial(this.props.selectedIngredients)
   }
 
   render() {
@@ -75,14 +74,15 @@ class IngredientsList extends React.Component {
 const mapStateToProps = state => {
   return {
     ingredients: state.ingredients.ingredients,
-    selectedIngredients: state.ingredients.selectedIngredients
+    selectedIngredients: state.ingredients.selectedIngredients,
+    page: state.recipes.page
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     fetchIngredients: fetchIngredients,
-    searchRecipes: searchRecipes,
+    searchRecipesInitial: searchRecipesInitial,
     clearSelection: clearSelection
   }, dispatch)
 }

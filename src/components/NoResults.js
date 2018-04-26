@@ -2,26 +2,24 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
-import { List } from 'semantic-ui-react'
-
 const NoResults = (props) => {
   const ingredientNames = props.selectedIngredients.map( ingr => ingr.name )
   const last = ingredientNames.length - 1
   const ingredients = `"${ingredientNames.slice(0, last).join(", ")} and ${ingredientNames[last]}"`
   return (
-    <div style={{float: 'right', width: 1000, margin: 200}}>
+    <div style={{width: "auto"}}>
       <h3>
         We couldn't find any recipes including {ingredients}
       </h3>
       <hr></hr>
-      <h4>
+      <h3>
         Search Tips:
-      </h4>
-      <List>
-        <List.Item>Double check your spelling.</List.Item>
-        <List.Item>Try using single words (e.g. "chicken", "tomato).</List.Item>
-        <List.Item>Try searching for an ingredient that is less specific.</List.Item>
-      </List>
+      </h3>
+      <div>
+        <p>Double check your spelling.</p>
+        <p>Try using single words (e.g. "chicken", "tomato).</p>
+        <p>Try searching for an ingredient that is less specific.</p>
+      </div>
     </div>
   )
 }

@@ -38,13 +38,13 @@ class Ingredient extends React.Component {
     return expiringSoon
   }
 
-  handleCheck = e => {
+  handleCheck = (e) => {
     const {id} = this.props.ingredient
     const {selectIngredient, deselectIngredient} = this.props
     e.target.checked ? selectIngredient(id) : deselectIngredient(id)
   }
 
-  handleDelete = (e) => {
+  handleDelete = () => {
     this.props.deleteIngredient(this.props.ingredient.id)
   }
 

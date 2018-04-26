@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { fetchRecipes } from '../actions/recipes_actions'
+import { fetchRecipes, searchRecipes, decreasePage, increasePage } from '../actions/recipes_actions'
 
 import Recipe from '../components/Recipe'
 import NoResults from '../components/NoResults'
@@ -12,8 +12,7 @@ import Loading from '../components/Loading'
 import {GridList} from 'material-ui/GridList';
 import RaisedButton from 'material-ui/RaisedButton'
 
-const windowHeight = window.innerHeight
-const gridHeight = windowHeight - 82
+const gridHeight = window.innerHeight - 82
 
 const style = {
   root: {
@@ -23,7 +22,7 @@ const style = {
   },
   gridList: {
     width: "auto",
-    maxWidth: "70%",
+    maxWidth: "85%",
     height: gridHeight,
     maxHeight: 850,
     overflowY: 'auto',
@@ -35,7 +34,7 @@ const style = {
 
 class RecipesList extends React.Component {
   componentDidMount() {
-    this.props.fetchRecipes()
+    !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
   }
 
   renderFetch = (recipes, fetched, element) => {
@@ -48,14 +47,31 @@ class RecipesList extends React.Component {
     }
   }
 
+  decreasePage = () => {
+    const {criteria, selectedIngredients, page} = this.props
+    const {searchRecipes, fetchRecipes} = this.props
+    debugger
+    this.props.decreasePage()
+    criteria ? searchRecipes(selectedIngredients, page) : fetchRecipes(page)
+  }
+
+  increasePage = () => {
+    const {criteria, selectedIngredients, page} = this.props
+    const {searchRecipes, fetchRecipes} = this.props
+    debugger
+    this.props.increasePage()
+    criteria ? searchRecipes(selectedIngredients, page) : fetchRecipes(page)
+  }
+
   render() {
-    const {recipes, fetched} = this.props
+    const {recipes, fetched, page} = this.props
     const mappedRecipes = recipes.map( recipe => <Recipe key={recipe.id} recipe={recipe} /> )
     const grid = (
       <div>
-        <RaisedButton style={style.button} label="More Recipes"/>
+        {page > 0 ? <RaisedButton style={style.button} label="Previous Recipes" onClick={this.decreasePage}/> : null}
+        <RaisedButton style={style.button} label="More Recipes" onClick={this.increasePage}/>
         <div style={style.root}>
-          <GridList style={style.gridList} cols="2" >
+          <GridList style={style.gridList} cols="4" >
             {mappedRecipes}
           </GridList>
         </div>
@@ -72,13 +88,19 @@ class RecipesList extends React.Component {
 const mapStateToProps = state => {
   return {
     recipes: state.recipes.recipes,
-    fetched: state.recipes.fetched
+    criteria: state.recipes.criteria,
+    fetched: state.recipes.fetched,
+    page: state.recipes.page,
+    selectedIngredients: state.ingredients.selectedIngredients
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     fetchRecipes: fetchRecipes,
+    searchRecipes: searchRecipes,
+    decreasePage: decreasePage,
+    increasePage: increasePage,
   }, dispatch)
 }
 

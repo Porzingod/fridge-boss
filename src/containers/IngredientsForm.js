@@ -38,7 +38,7 @@ class IngredientsForm extends React.Component {
     expiration_date: new Date()
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -48,7 +48,7 @@ class IngredientsForm extends React.Component {
     this.setState({ expiration_date: time })
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault()
     let {expiration_date} = this.state
     if (typeof expiration_date !== "string") {

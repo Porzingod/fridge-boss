@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+import { connect } from 'react-redux'
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import IngredientsForm from './containers/IngredientsForm'
 import IngredientsList from './containers/IngredientsList'
 import RecipesList from './containers/RecipesList'
+import FullRecipe from './containers/FullRecipe'
+
+const YUMMLY_ATTRIBUTION = "Recipe search powered by <a href='http://www.yummly.co/recipes'><img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></a>"
 
 class App extends Component {
   render() {
@@ -21,7 +26,7 @@ class App extends Component {
             <IngredientsList />
           </div>
           <div>
-            <RecipesList />
+            {this.props.recipe ? <FullRecipe recipe={this.props.recipe}/> : <RecipesList />}
           </div>
         </div>
       </MuiThemeProvider>
@@ -29,4 +34,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    recipe: state.recipes.recipe
+  }
+}
+
+export default connect(mapStateToProps)(App);
