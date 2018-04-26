@@ -3,13 +3,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { fetchRecipeImage, getRecipe } from '../actions/recipes_actions'
+import { fetchRecipeImage, getRecipe, addFavorite, removeFavorite } from '../actions/recipes_actions'
 
 import placeholder from '../images/placeholder_meal.png'
 
 import {GridTile} from 'material-ui/GridList'
 import IconButton from 'material-ui/IconButton'
 import ActionInfoOutline from 'material-ui/svg-icons/action/info-outline'
+import Favorite from 'material-ui/svg-icons/action/favorite'
+import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import Popover from 'material-ui/Popover';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton'
@@ -64,9 +66,15 @@ class Recipe extends React.Component {
     this.props.getRecipe(this.props.recipe.id)
   }
 
+  handleFavorite = () => {
+    const {favorites, recipe} = this.props
+    favorites.map( rec => rec.id).includes(recipe.id) ? this.props.removeFavorite(recipe) : this.props.addFavorite(recipe)
+  }
+
   renderPopover = () => {
-    const {recipeName, totalTimeInSeconds, ingredients, attributes} = this.props.recipe
+    const {recipeName, totalTimeInSeconds, ingredients, attributes, id} = this.props.recipe
     let ingredientsList = ingredients.map( (ingr, index) => <li key={index}>{ingr}</li> )
+    const favoriteIcon = this.props.favorites.map( rec => rec.id ).includes(id) ? <Favorite color="red"/> : <FavoriteBorder />
     return (
       <Popover
         open={this.state.open}
@@ -77,6 +85,7 @@ class Recipe extends React.Component {
       >
         <Paper style={style.paper} >
           <h2>{recipeName}</h2>
+          <RaisedButton label="Favorite" labelPosition="before" icon={favoriteIcon} style={{margin: 12}} onClick={this.handleFavorite}/>
           {attributes.cuisine ? <h3>{attributes.cuisine}</h3> : null}
           <p><strong>Cook Time: </strong>{totalTimeInSeconds / 60} mins</p>
           <h3>Ingredients:</h3>
@@ -117,14 +126,17 @@ class Recipe extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    myIngredients: state.ingredients.ingredients
+    myIngredients: state.ingredients.ingredients,
+    favorites: state.recipes.favorites
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     fetchRecipeImage: fetchRecipeImage,
-    getRecipe: getRecipe
+    getRecipe: getRecipe,
+    addFavorite: addFavorite,
+    removeFavorite: removeFavorite,
   }, dispatch)
 }
 
