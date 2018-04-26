@@ -135,3 +135,15 @@ export const backToRecipes = () => {
     dispatch({ type: "BACK_TO_RECIPES" })
   }
 }
+
+export const addFavorite = (recipe) => {
+  return(dispatch) => {
+    dispatch({ type: "ADD_FAVORITE", payload: recipe })
+  }
+}
+
+export const removeFavorite = (recipe) => {
+  return(dispatch) => {
+    dispatch({ type: "REMOVE_FAVORITE", payload: recipe })
+  }
+}

@@ -24,7 +24,15 @@ const style = {
     margin: 10
   },
   paper: {
-    minWidth: "40%"
+    minWidth: "40%",
+    padding: 10,
+    width: "auto",
+    overflowWrap: 'break-word'
+  },
+  button: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
   }
 }
 
@@ -37,7 +45,7 @@ class Recipe extends React.Component {
 
   }
 
-  handleClick = (e) => {
+  showPopover = (e) => {
     // This prevents ghost click.
     e.preventDefault()
     this.setState({
@@ -67,7 +75,7 @@ class Recipe extends React.Component {
         targetOrigin={{horizontal: 'left', vertical: 'top'}}
         onRequestClose={this.handleRequestClose}
       >
-        <Paper style={style.paper}>
+        <Paper style={style.paper} >
           <h2>{recipeName}</h2>
           {attributes.cuisine ? <h3>{attributes.cuisine}</h3> : null}
           <p><strong>Cook Time: </strong>{totalTimeInSeconds / 60} mins</p>
@@ -75,10 +83,14 @@ class Recipe extends React.Component {
           <ul>
             {ingredientsList}
           </ul>
-          <RaisedButton label="View Full Recipe" onClick={this.getFullRecipe}/>
+          <RaisedButton style={style.button} label="View Full Recipe" onClick={this.getFullRecipe}/>
         </Paper>
       </Popover>
     )
+  }
+
+  favoriteRecipe = () => {
+
   }
 
   render() {
@@ -86,12 +98,12 @@ class Recipe extends React.Component {
     const {recipeName, smallImageUrls} = recipe
     const image = smallImageUrls ? smallImageUrls[0].slice(0, (smallImageUrls[0].length - 4)) : placeholder
     return(
-      <GridTile style={style.gridTile} title={recipeName} onClick={this.handleClick}
+      <GridTile style={style.gridTile} title={recipeName} onClick={this.showPopover}
         titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
         actionIcon={
           <div>
             <IconButton>
-              <ActionInfoOutline color="white" onClick={this.handleClick}/>
+              <ActionInfoOutline color="white" actionPosition="right"/>
             </IconButton>
             {this.renderPopover()}
           </div>

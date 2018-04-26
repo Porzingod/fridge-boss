@@ -2,6 +2,7 @@ let initialState = {
   recipes: [],
   recipe: null,
   criteria: [],
+  favorites: [],
   page: 0,
   errors: null,
   fetching: false,
@@ -38,13 +39,19 @@ export const recipesReducer = (state = initialState, {type, payload}) => {
     case "SEARCH_RECIPE_REJECTED":
       return {...state, fetching: true, errors: payload}
 
-    case "BACK_TO_RECIPES":
-      return {...state, recipe: null}
-
     case "DECREASE_RECIPES_PAGE":
       return {...state, page: state.page - 1}
     case "INCREASE_RECIPES_PAGE":
       return {...state, page: state.page + 1}
+
+    case "BACK_TO_RECIPES":
+      return {...state, recipe: null}
+
+    case "ADD_FAVORITE":
+      return {...state, favorites: [...state.favorites, payload]}
+    case "REMOVE_FAVORITE":
+      let favorites = state.favorites.filter( recipe => recipe.id !== payload.id )
+      return {...state, favorites: favorites}
 
     default:
       return state
