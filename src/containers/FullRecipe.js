@@ -37,8 +37,9 @@ const style = {
 class FullRecipe extends React.Component {
 
   handleFavorite = () => {
-    const {favorites, recipe} = this.props
-    favorites.map( rec => rec.id).includes(recipe.id) ? this.props.removeFavorite(recipe) : this.props.addFavorite(recipe)
+    const {favorites, recipes, recipe} = this.props
+    let foundRecipe = recipes.find( rec => rec.id === recipe.id )
+    favorites.map( rec => rec.id).includes(recipe.id) ? this.props.removeFavorite(foundRecipe) : this.props.addFavorite(foundRecipe)
   }
 
   render() {
@@ -74,6 +75,7 @@ class FullRecipe extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    recipes: state.recipes.recipes,
     favorites: state.recipes.favorites
   }
 }
