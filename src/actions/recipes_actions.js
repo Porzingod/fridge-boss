@@ -69,7 +69,7 @@ export const searchRecipesInitial = (ingredients) => {
     fetch(YUMMLY_RECIPES_API_URL + MY_YUMMLY_ID_AND_KEY + searchIngredients + results(40, 0))
       .then(res => res.json())
       .then(json => {
-        // debugger
+        debugger
           dispatch({
           type: "SEARCH_RECIPES_WITH_INGREDIENTS_FULFILLED",
           payload: {

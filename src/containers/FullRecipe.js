@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 
 import { backToRecipes } from '../actions/recipes_actions'
 
+import placeholder from '../images/placeholder_meal.png'
+
 import RaisedButton from 'material-ui/RaisedButton'
 
 const divHeight = window.innerHeight - 82
@@ -29,7 +31,7 @@ class FullRecipe extends React.Component {
     const {course, cuisine} = attributes
     const {hostedLargeUrl} = images[0]
     const {sourceDisplayName, sourceRecipeUrl} = source
-    const image = hostedLargeUrl.slice(0, (hostedLargeUrl.length - 5))
+    const image = hostedLargeUrl ? hostedLargeUrl.slice(0, (hostedLargeUrl.length - 5)) : placeholder
     return(
       <div>
         <RaisedButton style={style.button} label="Back to Recipes" onClick={this.props.backToRecipes}/>

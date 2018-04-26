@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux'
 
 import { fetchRecipeImage, getRecipe } from '../actions/recipes_actions'
 
+import placeholder from '../images/placeholder_meal.png'
+
 import {GridTile} from 'material-ui/GridList'
 import IconButton from 'material-ui/IconButton'
 import ActionInfoOutline from 'material-ui/svg-icons/action/info-outline'
@@ -81,7 +83,8 @@ class Recipe extends React.Component {
 
   render() {
     const {recipe} = this.props
-    const {recipeName, imageUrlsBySize} = recipe
+    const {recipeName, smallImageUrls} = recipe
+    const image = smallImageUrls ? smallImageUrls[0].slice(0, (smallImageUrls[0].length - 4)) : placeholder
     return(
       <GridTile style={style.gridTile} title={recipeName} onClick={this.handleClick}
         titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
@@ -94,7 +97,7 @@ class Recipe extends React.Component {
           </div>
         }
       >
-        <img src={imageUrlsBySize["90"].slice(0, (imageUrlsBySize["90"].length - 6))} alt={recipeName}/>
+        <img src={image} alt={recipeName}/>
       </GridTile>
     )
   }
