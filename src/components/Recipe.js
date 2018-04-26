@@ -141,10 +141,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recipe)
-
-
-// recipeName ""
-// id ""
-// totalTimeInSeconds ""
-// ingredients []
-// - name ""
