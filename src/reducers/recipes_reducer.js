@@ -64,7 +64,7 @@ export const recipesReducer = (state = initialState, {type, payload}) => {
     case "ADD_FAVORITE":
       return {...state, favorites: [...state.favorites, payload]}
     case "REMOVE_FAVORITE":
-      let favorites = state.favorites.filter( recipe => recipe.id !== payload.id )
+      let favorites = state.favorites.filter( recipe => recipe.recipeId !== payload.id || recipe.id !== payload.id)
       return {...state, favorites: favorites}
 
     case "ADDING_FAVORITE_PENDING":
@@ -73,26 +73,12 @@ export const recipesReducer = (state = initialState, {type, payload}) => {
       return {...state, posting: false, posted: true}
 
     case "REMOVING_FAVORITE_PENDING":
-      let updatedFavorites = state.favorites.filter( recipe => recipe.recipeId !== payload.recipeId)
+      let updatedFavorites = state.favorites.filter( recipe => recipe.recipeId !== payload.id && recipe.id !== payload.id )
       return {...state, deleting: true, deleted: false, favorites: updatedFavorites}
     case "REMOVING_FAVORITE_FULFILLED":
       return {...state, deleting: false, deleted: true}
     case "REMOVING_FAVORITE_REJECTED":
       return {...state, deleting: false, errors: payload}
-
-    case "CREATING_USER_RECIPE_JOIN_PENDING":
-      return {...state}
-    case "CREATING_USER_RECIPE_JOIN_FULFILLED":
-      return {...state}
-    case "CREATING_USER_RECIPE_JOIN_REJECTED":
-      return {...state}
-
-    case "DESTROYING_USER_RECIPE_JOIN_PENDING":
-      return {...state}
-    case "DESTROYING_USER_RECIPE_JOIN_FULFILLED":
-      return {...state}
-    case "DESTROYING_USER_RECIPE_JOIN_REJECTED":
-      return {...state}
 
     default:
       return state

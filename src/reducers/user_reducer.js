@@ -1,6 +1,6 @@
 const initialState = {
   //dynamically
-  userId: 2
+  userId: 1
 }
 
 export const userReducer = (state = initialState, {type, payload}) => {

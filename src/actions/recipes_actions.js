@@ -11,7 +11,7 @@ export const fetchRecipes = (page) => {
   // debugger
   return (dispatch) => {
     dispatch({ type: "FETCH_RECIPES_PENDING"})
-    fetch(YUMMLY_RECIPES_API_URL + MY_YUMMLY_ID_AND_KEY + allowedHoliday + nearestHoliday + results(40, page))
+    fetch(YUMMLY_RECIPES_API_URL + MY_YUMMLY_ID_AND_KEY + allowedHoliday + nearestHoliday + results(10, page))
       .then(res => res.json())
       .then(json => {
         dispatch({
@@ -72,7 +72,6 @@ export const searchRecipesInitial = (ingredients) => {
     fetch(YUMMLY_RECIPES_API_URL + MY_YUMMLY_ID_AND_KEY + searchIngredients + results(40, 0))
       .then(res => res.json())
       .then(json => {
-        debugger
           dispatch({
           type: "SEARCH_RECIPES_WITH_INGREDIENTS_FULFILLED",
           payload: {
@@ -139,19 +138,7 @@ export const backToRecipes = () => {
   }
 }
 
-export const addFavorite = (recipe) => {
-  return (dispatch) => {
-    dispatch({ type: "ADD_FAVORITE", payload: recipe })
-  }
-}
-
-export const removeFavorite = (recipe) => {
-  return (dispatch) => {
-    dispatch({ type: "REMOVE_FAVORITE", payload: recipe })
-  }
-}
-
-export const addFavoriteTest = (recipe, userId) => {
+export const addFavorite = (recipe, userId) => {
   let draftBody = {
     ...{},
     recipe: {
@@ -183,5 +170,23 @@ export const addFavoriteTest = (recipe, userId) => {
           type: "ADDING_FAVORITE_FULFILLED"
         })
       )
+  }
+}
+
+export const removeFavorite = (recipe, userId) => {
+  return (dispatch) => {
+    dispatch({ type: "REMOVING_FAVORITE_PENDING", payload: recipe })
+    fetch(`${MY_API_URL}/user_recipes/delete`, {
+      method: "POST",
+      body: JSON.stringify({user_id: userId, recipeId: recipe.id}),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => dispatch({
+        type: "REMOVING_FAVORITE_FULFILLED"
+      })
+    )
   }
 }
