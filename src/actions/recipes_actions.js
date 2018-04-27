@@ -144,10 +144,10 @@ export const addFavorite = (recipe, userId) => {
     recipe: {
       recipeId: recipe.id,
       recipeName: recipe.recipeName,
-      ingredients: recipe.ingredients,
       totalTimeInSeconds: recipe.totalTimeInSeconds
     },
-    user_id: userId
+    user_id: userId,
+    ingredients: recipe.ingredients
   }
   let body = recipe.smallImageUrls
   ?
