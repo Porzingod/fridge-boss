@@ -36,10 +36,11 @@ export const fetchFavorites = (userId) => {
     dispatch({ type: "FETCH_FAVORITES_PENDING" })
     fetch(`${MY_API_URL}/users/${userId}/favorites`)
       .then(res => res.json())
-      .then(favorites => dispatch({
+      .then(favorites => {
+        dispatch({
         type: "FETCH_FAVORITES_FULFILLED",
         payload: favorites
-      })
+      })}
     )
       .catch(err => dispatch({
         type: "FETCH_FAVORITES_REJECTED",
