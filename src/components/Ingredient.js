@@ -45,7 +45,7 @@ class Ingredient extends React.Component {
   }
 
   handleDelete = () => {
-    this.props.deleteIngredient(this.props.ingredient.id)
+    this.props.deleteIngredient(this.props.ingredient.id, this.props.userId)
   }
 
   render() {
@@ -83,6 +83,7 @@ class Ingredient extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    userId: state.user.userId,
     ingredients: state.ingredients.ingredients,
     selectedIngredients: state.ingredients.selectedIngredients
   }

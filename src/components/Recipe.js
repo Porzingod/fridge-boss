@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { fetchRecipeImage, getRecipe, addFavorite, removeFavorite } from '../actions/recipes_actions'
+import { fetchRecipeImage, getRecipe, addFavoriteTest, removeFavorite } from '../actions/recipes_actions'
 
 import placeholder from '../images/placeholder_meal.png'
 
@@ -67,14 +67,14 @@ class Recipe extends React.Component {
   }
 
   handleFavorite = () => {
-    const {favorites, recipe} = this.props
-    favorites.map( rec => rec.id).includes(recipe.id) ? this.props.removeFavorite(recipe) : this.props.addFavorite(recipe)
+    const {favorites, recipe, userId} = this.props
+    favorites.map( rec => rec.id).includes(recipe.id) ? this.props.removeFavorite(recipe) : this.props.addFavoriteTest(recipe, userId)
   }
 
   renderPopover = () => {
     const {recipeName, totalTimeInSeconds, ingredients, attributes, id} = this.props.recipe
     let ingredientsList = ingredients.map( (ingr, index) => <li key={index}>{ingr}</li> )
-    const favoriteIcon = this.props.favorites.map( rec => rec.id ).includes(id) ? <Favorite color="red"/> : <FavoriteBorder />
+    const favoriteIcon = this.props.favorites.map( rec => rec.recipeId || rec.id ).includes(id) ? <Favorite color="red"/> : <FavoriteBorder />
     return (
       <Popover
         open={this.state.open}
@@ -127,7 +127,8 @@ class Recipe extends React.Component {
 const mapStateToProps = state => {
   return {
     myIngredients: state.ingredients.ingredients,
-    favorites: state.recipes.favorites
+    favorites: state.recipes.favorites,
+    userId: state.user.userId
   }
 }
 
@@ -135,7 +136,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     fetchRecipeImage: fetchRecipeImage,
     getRecipe: getRecipe,
-    addFavorite: addFavorite,
+    addFavoriteTest: addFavoriteTest,
     removeFavorite: removeFavorite,
   }, dispatch)
 }

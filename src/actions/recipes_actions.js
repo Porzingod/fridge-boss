@@ -1,27 +1,11 @@
-import { config } from '../config.js'
-
-const yummly = {
-  appId: config["X-Yummly-App-ID"],
-  appKey: config["X-Yummly-App-Key"]
-}
-
-const shutterStock = {
-  key: config["ShutterStock-Consumer-Key"],
-  secret: config["ShutterStock-Consumer-Secret"]
-}
-
-// YUMMLY
-const YUMMLY_RECIPES_API_URL = `http://api.yummly.com/v1/api/recipes`
-const YUMMLY_GET_RECIPE_API_URL = `http://api.yummly.com/v1/api/recipe/`
-const MY_YUMMLY_ID_AND_KEY = `?_app_id=${yummly.appId}&_app_key=${yummly.appKey}`
-const allowedIngr = "&allowedIngredient[]="
-const allowedHoliday = "&allowedHoliday[]=holiday^holiday-"
-const yummlyHolidays = ["Christmas", "Summer", "Thanksgiving", "New+Year", "Super+Bowl", "Game+Day", "Halloween", "Hanukkah", "4th+of+July"]
-const nearestHoliday = yummlyHolidays[1]
-const results = (count, page) => `&maxResult=${count}&start=${count * page}`
-
-// ShutterStock
-const SHUTTERSTOCK_API_URL = 'https://api.shutterstock.com/v2/images/search'
+// URLS
+import { YUMMLY_RECIPES_API_URL, YUMMLY_GET_RECIPE_API_URL, MY_YUMMLY_ID_AND_KEY, MY_API_URL } from '../constants'
+// keys
+import { yummly } from '../constants'
+// appendables
+import { allowedIngr, allowedHoliday, nearestHoliday } from '../constants'
+// functions
+import { results } from '../constants'
 
 export const fetchRecipes = (page) => {
   // debugger
@@ -36,10 +20,29 @@ export const fetchRecipes = (page) => {
             matches: json.matches,
             criteria: json.criteria.allowedIngredient
           }
-        })}
-      )
+        })
+      })
       .catch(err => dispatch({
         type: "FETCH_RECIPES_REJECTED",
+        payload: err
+      })
+    )
+  }
+}
+
+export const fetchFavorites = (userId) => {
+  return (dispatch) => {
+    // dynamically
+    dispatch({ type: "FETCH_FAVORITES_PENDING" })
+    fetch(`${MY_API_URL}/users/${userId}/favorites`)
+      .then(res => res.json())
+      .then(favorites => dispatch({
+        type: "FETCH_FAVORITES_FULFILLED",
+        payload: favorites
+      })
+    )
+      .catch(err => dispatch({
+        type: "FETCH_FAVORITES_REJECTED",
         payload: err
       })
     )
@@ -131,19 +134,54 @@ export const getRecipe = (recipeId) => {
 }
 
 export const backToRecipes = () => {
-  return(dispatch) => {
+  return (dispatch) => {
     dispatch({ type: "BACK_TO_RECIPES" })
   }
 }
 
 export const addFavorite = (recipe) => {
-  return(dispatch) => {
+  return (dispatch) => {
     dispatch({ type: "ADD_FAVORITE", payload: recipe })
   }
 }
 
 export const removeFavorite = (recipe) => {
-  return(dispatch) => {
+  return (dispatch) => {
     dispatch({ type: "REMOVE_FAVORITE", payload: recipe })
+  }
+}
+
+export const addFavoriteTest = (recipe, userId) => {
+  let draftBody = {
+    ...{},
+    recipe: {
+      recipeId: recipe.id,
+      recipeName: recipe.recipeName,
+      ingredients: recipe.ingredients,
+      totalTimeInSeconds: recipe.totalTimeInSeconds
+    },
+    user_id: userId
+  }
+  let body = recipe.smallImageUrls
+  ?
+  { ...draftBody, recipe: { ...draftBody.recipe, smallImageUrls: recipe.smallImageUrls[0] } }
+  :
+  { ...draftBody, recipe: { ...draftBody.recipe, smallImageUrls: "" } }
+
+  return (dispatch) => {
+    dispatch({ type: "ADDING_FAVORITE_PENDING", payload: recipe })
+    fetch(`${MY_API_URL}/recipes`, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(recipe => dispatch({
+          type: "ADDING_FAVORITE_FULFILLED"
+        })
+      )
   }
 }

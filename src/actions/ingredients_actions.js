@@ -1,8 +1,10 @@
-export const fetchIngredients = () => {
+import { MY_API_URL } from '../constants'
+
+export const fetchIngredients = (userId) => {
   return (dispatch) => {
     dispatch({ type: "FETCH_INGREDIENTS_PENDING" })
     // fix this later to dynamically add user_id
-    return fetch("http://localhost:3000/api/v1/users/1/ingredients")
+    return fetch(`${MY_API_URL}/users/${userId}/ingredients`)
       .then(res => res.json())
       .then(ingredients => dispatch({
         type: "FETCH_INGREDIENTS_FULFILLED",
@@ -17,13 +19,13 @@ export const fetchIngredients = () => {
   }
 }
 
-export const addIngredient = (ingredient) => {
+export const addIngredient = (ingredient, userId) => {
   return (dispatch) => {
     dispatch({ type: "ADDING_INGREDIENT_PENDING" })
     // fix this later to dynamically add user_id
-    return fetch("http://localhost:3000/api/v1/users/1/ingredients", {
+    return fetch(`${MY_API_URL}/users/${userId}/ingredients`, {
       method: "POST",
-      body: JSON.stringify({ingredient: {...ingredient, user_id: 1}}),
+      body: JSON.stringify({ingredient: {...ingredient, user_id: userId}}),
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"
@@ -43,11 +45,11 @@ export const addIngredient = (ingredient) => {
   }
 }
 
-export const deleteIngredient = (ingredientId) => {
+export const deleteIngredient = (ingredientId, userId) => {
   return (dispatch) => {
     dispatch({ type: "DELETING_INGREDIENT_PENDING" })
     // fix this later to dynamically add user_id
-    return fetch(`http://localhost:3000/api/v1/users/1/ingredients/${ingredientId}`, {
+    return fetch(`${MY_API_URL}/users/${userId}/ingredients/${ingredientId}`, {
       method: "DELETE"
     })
       .then(res => dispatch({

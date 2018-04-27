@@ -55,7 +55,7 @@ class IngredientsForm extends React.Component {
       this.setState({
         expiration_date: expiration_date.toDateString().slice(4)
       }, () => {
-        this.props.addIngredient(this.state)
+        this.props.addIngredient(this.state, this.props.userId)
         this.setState({
           name: "",
           expiration_date: new Date()
@@ -78,10 +78,16 @@ class IngredientsForm extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    userId: state.user.userId,
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     addIngredient: addIngredient
   }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(IngredientsForm)
+export default connect(mapStateToProps, mapDispatchToProps)(IngredientsForm)

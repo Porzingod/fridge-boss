@@ -42,7 +42,7 @@ const style = {
 class IngredientsList extends React.Component {
 
   componentDidMount() {
-    this.props.fetchIngredients()
+    this.props.fetchIngredients(this.props.userId)
   }
 
   handleSearch = () => {
@@ -73,6 +73,7 @@ class IngredientsList extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    userId: state.user.userId,
     ingredients: state.ingredients.ingredients,
     selectedIngredients: state.ingredients.selectedIngredients,
     page: state.recipes.page
