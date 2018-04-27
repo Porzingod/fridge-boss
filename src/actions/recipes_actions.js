@@ -1,17 +1,11 @@
 // URLS
-import { YUMMLY_RECIPES_API_URL, YUMMLY_GET_RECIPE_API_URL, MY_YUMMLY_ID_AND_KEY, MY_API_URL } from '../constants'
-// keys
-import { yummly } from '../constants'
-// appendables
-import { allowedIngr, allowedHoliday, nearestHoliday } from '../constants'
-// functions
-import { results } from '../constants'
+import { MY_API_URL } from '../constants'
 
 export const fetchRecipes = (page) => {
   // debugger
   return (dispatch) => {
     dispatch({ type: "FETCH_RECIPES_PENDING"})
-    fetch(YUMMLY_RECIPES_API_URL + MY_YUMMLY_ID_AND_KEY + allowedHoliday + nearestHoliday + results(10, page))
+    fetch(`${MY_API_URL}/fetch_recipes?q=${page}`)
       .then(res => res.json())
       .then(json => {
         dispatch({
@@ -32,7 +26,6 @@ export const fetchRecipes = (page) => {
 
 export const fetchFavorites = (userId) => {
   return (dispatch) => {
-    // dynamically
     dispatch({ type: "FETCH_FAVORITES_PENDING" })
     fetch(`${MY_API_URL}/users/${userId}/favorites`)
       .then(res => res.json())
@@ -68,9 +61,18 @@ export const fetchRecipeImage = () => {
 
 export const searchRecipesInitial = (ingredients) => {
   return (dispatch) => {
-    let searchIngredients = ingredients.map(ingr => ingr.name.split(" ").join("+")).map(ingr => allowedIngr + ingr).join("")
     dispatch({ type: "SEARCH_RECIPES_WITH_INGREDIENTS_PENDING" })
-    fetch(YUMMLY_RECIPES_API_URL + MY_YUMMLY_ID_AND_KEY + searchIngredients + results(40, 0))
+    fetch(`${MY_API_URL}/search_recipes`, {
+      method: "POST",
+      body: JSON.stringify({
+        ingredients: ingredients,
+        q: 0
+      }),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    })
       .then(res => res.json())
       .then(json => {
           dispatch({
@@ -92,9 +94,18 @@ export const searchRecipesInitial = (ingredients) => {
 
 export const searchRecipes = (ingredients, page) => {
   return (dispatch) => {
-    let searchIngredients = ingredients.map(ingr => ingr.name.split(" ").join("+")).map(ingr => allowedIngr + ingr).join("")
     dispatch({ type: "SEARCH_MORE_RECIPES_WITH_INGREDIENTS_PENDING" })
-    fetch(YUMMLY_RECIPES_API_URL + MY_YUMMLY_ID_AND_KEY + searchIngredients + results(40, page))
+    fetch(`${MY_API_URL}/search_recipes`, {
+      method: "POST",
+      body: JSON.stringify({
+        ingredients: ingredients,
+        q: page
+      }),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    })
       .then(res => res.json())
       .then(json => {
         // debugger
@@ -118,7 +129,7 @@ export const searchRecipes = (ingredients, page) => {
 export const getRecipe = (recipeId) => {
   return (dispatch) => {
     dispatch({ type: "SEARCH_RECIPE_PENDING"})
-    fetch(YUMMLY_GET_RECIPE_API_URL + recipeId + MY_YUMMLY_ID_AND_KEY)
+    fetch(`${MY_API_URL}/find_recipe?q=${recipeId}`)
       .then(res => res.json())
       .then(json => dispatch({
         type: "SEARCH_RECIPE_FULFILLED",
