@@ -21,9 +21,6 @@ const style = {
   icon: {
     marginTop: 6,
     marginRight: 20
-  },
-  input: {
-
   }
 }
 

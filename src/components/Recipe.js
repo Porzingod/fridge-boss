@@ -14,6 +14,7 @@ import Favorite from 'material-ui/svg-icons/action/favorite'
 import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import Popover from 'material-ui/Popover';
 import Paper from 'material-ui/Paper';
+import Menu from 'material-ui/Menu';
 import RaisedButton from 'material-ui/RaisedButton'
 
 const style = {
@@ -25,17 +26,19 @@ const style = {
   gridTile: {
     margin: 10
   },
-  paper: {
+  menu: {
     minWidth: "40%",
     padding: 10,
     width: "auto",
-    overflowWrap: 'break-word'
+    overflowWrap: 'break-word',
+    borderTop: "none",
+    borderBottom: "none"
   },
   button: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-  }
+  },
 }
 
 class Recipe extends React.Component {
@@ -83,7 +86,7 @@ class Recipe extends React.Component {
         targetOrigin={{horizontal: 'left', vertical: 'top'}}
         onRequestClose={this.handleRequestClose}
       >
-        <Paper style={style.paper} >
+        <Menu style={style.menu}>
           <h2>{recipeName}</h2>
           <RaisedButton label="Favorite" labelPosition="before" icon={favoriteIcon} style={{margin: 12}} onClick={this.handleFavorite}/>
           {attributes.cuisine ? <h3>{attributes.cuisine}</h3> : null}
@@ -93,7 +96,7 @@ class Recipe extends React.Component {
             {ingredientsList}
           </ul>
           <RaisedButton style={style.button} label="View Full Recipe" onClick={this.getFullRecipe}/>
-        </Paper>
+        </Menu>
       </Popover>
     )
   }
