@@ -72,7 +72,7 @@ class RecipesList extends React.Component {
         {page > 0 ? <RaisedButton style={style.button} label="Previous Recipes" onClick={this.decreasePage}/> : null}
         <RaisedButton style={style.button} label="More Recipes" onClick={this.increasePage}/>
         <div style={style.root}>
-          <GridList style={style.gridList} cols="4" >
+          <GridList style={style.gridList} cols={4} >
             {mappedRecipes}
           </GridList>
         </div>

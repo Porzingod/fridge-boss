@@ -30,9 +30,17 @@ export const fetchFavorites = (userId) => {
     fetch(`${MY_API_URL}/users/${userId}/favorites`)
       .then(res => res.json())
       .then(favorites => {
+        let parsed = favorites.map( fave => {
+          return {
+            ...fave,
+            ingredients: JSON.parse(fave.ingredients),
+            attributes: {cuisine: JSON.parse(fave.cuisines_list)},
+            smallImageUrls: [fave.smallImageUrls]
+          }
+        } )
         dispatch({
         type: "FETCH_FAVORITES_FULFILLED",
-        payload: favorites
+        payload: parsed
       })}
     )
       .catch(err => dispatch({
@@ -156,16 +164,22 @@ export const addFavorite = (recipe, userId) => {
     recipe: {
       recipeId: recipe.id,
       recipeName: recipe.recipeName,
-      totalTimeInSeconds: recipe.totalTimeInSeconds
+      totalTimeInSeconds: recipe.totalTimeInSeconds,
     },
     user_id: userId,
-    ingredients: recipe.ingredients
+    ingredients: recipe.ingredients,
   }
   let body = recipe.smallImageUrls
   ?
   { ...draftBody, recipe: { ...draftBody.recipe, smallImageUrls: recipe.smallImageUrls[0] } }
   :
   { ...draftBody, recipe: { ...draftBody.recipe, smallImageUrls: "" } }
+
+  body = recipe.attributes.cuisine
+  ?
+  { ...body, cuisines: recipe.attributes.cuisine}
+  :
+  { ...body, cuisines: []}
 
   return (dispatch) => {
     dispatch({ type: "ADDING_FAVORITE_PENDING", payload: recipe })
@@ -186,11 +200,18 @@ export const addFavorite = (recipe, userId) => {
 }
 
 export const removeFavorite = (recipe, userId) => {
+  let body
+  typeof recipe.id === "number" ?
+  body = {user_id: userId, recipeId: recipe.recipeId}
+  :
+  body = {user_id: userId, recipeId: recipe.id}
+  debugger
+
   return (dispatch) => {
     dispatch({ type: "REMOVING_FAVORITE_PENDING", payload: recipe })
     fetch(`${MY_API_URL}/user_recipes/delete`, {
       method: "POST",
-      body: JSON.stringify({user_id: userId, recipeId: recipe.id}),
+      body: JSON.stringify(body),
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"

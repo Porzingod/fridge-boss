@@ -71,7 +71,7 @@ class Recipe extends React.Component {
 
   handleFavorite = () => {
     const {favorites, recipe, userId} = this.props
-    favorites.map( rec => rec.recipeId || rec.id).includes(recipe.id) ? this.props.removeFavorite(recipe, userId) : this.props.addFavorite(recipe, userId)
+    favorites.map( rec => {return {recipeId: rec.recipeId, id: rec.id} } ).find( rec => rec.recipeId === recipe.id || rec.id === recipe.id ) ? this.props.removeFavorite(recipe, userId) : this.props.addFavorite(recipe, userId)
   }
 
   renderPopover = () => {
@@ -115,7 +115,7 @@ class Recipe extends React.Component {
         actionIcon={
           <div>
             <IconButton>
-              <ActionInfoOutline color="white" actionPosition="right"/>
+              <ActionInfoOutline color="white"/>
             </IconButton>
             {this.renderPopover()}
           </div>

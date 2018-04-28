@@ -8,6 +8,7 @@ import IngredientsForm from './containers/IngredientsForm'
 import IngredientsList from './containers/IngredientsList'
 import RecipesList from './containers/RecipesList'
 import FullRecipe from './containers/FullRecipe'
+import Favorites from './containers/Favorites'
 
 const YUMMLY_ATTRIBUTION = "Recipe search powered by <a href='http://www.yummly.co/recipes'><img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></a>"
 
@@ -27,6 +28,7 @@ class App extends Component {
           </div>
           <div>
             {this.props.recipe ? <FullRecipe recipe={this.props.recipe}/> : <RecipesList />}
+            {/* <Favorites /> */}
           </div>
         </div>
       </MuiThemeProvider>
