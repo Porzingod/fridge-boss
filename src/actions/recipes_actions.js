@@ -205,7 +205,6 @@ export const removeFavorite = (recipe, userId) => {
   body = {user_id: userId, recipeId: recipe.recipeId}
   :
   body = {user_id: userId, recipeId: recipe.id}
-  debugger
 
   return (dispatch) => {
     dispatch({ type: "REMOVING_FAVORITE_PENDING", payload: recipe })

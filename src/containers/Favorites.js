@@ -1,11 +1,3 @@
-// const image = smallImageUrls ? smallImageUrls[0].slice(0, (smallImageUrls[0].length - 4)) : placeholder
-// recipeName ""
-// id "" -> recipeId ""
-// totalTimeInSeconds ""
-
-// ingredients []
-// - name ""
-
 import React from 'react'
 
 import { connect } from 'react-redux'
@@ -26,9 +18,8 @@ const style = {
     justifyContent: 'space-around',
   },
   gridList: {
-    width: "auto",
-    maxWidth: "85%",
-    height: gridHeight,
+    width: "85%",
+    minHeight: "auto",
     maxHeight: 850,
     overflowY: 'auto',
   },

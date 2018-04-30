@@ -3,6 +3,7 @@ let initialState = {
   recipe: null,
   criteria: [],
   favorites: [],
+  cuisines: ["American", "Italian", "Asian", "Mexican", "Southern & Soul Food", "French", "Southwestern", "Barbecue", "Indian", "Chinese", "Cajun & Creole", "English", "Mediterranean", "Greek", "Spanish", "German", "Thai", "Moroccan", "Irish", "Japanese", "Cuban", "Hawaiian", "Swedish", "Hungarian", "Portugese"],
   page: 0,
   errors: null,
   fetching: false,

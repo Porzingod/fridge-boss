@@ -28,7 +28,7 @@ class App extends Component {
           </div>
           <div>
             {this.props.recipe ? <FullRecipe recipe={this.props.recipe}/> : <RecipesList />}
-            {/* <Favorites /> */}
+            <Favorites />
           </div>
         </div>
       </MuiThemeProvider>

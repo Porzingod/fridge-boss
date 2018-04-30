@@ -101,10 +101,6 @@ class Recipe extends React.Component {
     )
   }
 
-  favoriteRecipe = () => {
-
-  }
-
   render() {
     const {recipe} = this.props
     const {recipeName, smallImageUrls} = recipe
