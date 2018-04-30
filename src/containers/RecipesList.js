@@ -71,17 +71,17 @@ class RecipesList extends React.Component {
   }
 
   decreasePage = () => {
-    const {criteria, selectedIngredients, page} = this.props
+    const {criteria, selectedIngredients, page, cuisine, course} = this.props
     const {searchRecipes, fetchRecipes} = this.props
     this.props.decreasePage()
-    criteria ? searchRecipes(selectedIngredients, page - 1) : fetchRecipes(page - 1)
+    criteria || course || cuisine ? searchRecipes(selectedIngredients, page - 1, cuisine, course) : fetchRecipes(page - 1)
   }
 
   increasePage = () => {
-    const {criteria, selectedIngredients, page} = this.props
+    const {criteria, selectedIngredients, page, cuisine, course} = this.props
     const {searchRecipes, fetchRecipes} = this.props
     this.props.increasePage()
-    criteria ? searchRecipes(selectedIngredients, page + 1) : fetchRecipes(page + 1)
+    criteria || course || cuisine ? searchRecipes(selectedIngredients, page + 1, cuisine, course) : fetchRecipes(page + 1)
   }
 
   render() {
@@ -115,7 +115,9 @@ const mapStateToProps = state => {
     fetched: state.recipes.fetched,
     page: state.recipes.page,
     selectedIngredients: state.ingredients.selectedIngredients,
-    fetchedFavorites: state.recipes.fetchedFavorites
+    fetchedFavorites: state.recipes.fetchedFavorites,
+    cuisine: state.recipes.cuisine,
+    course: state.recipes.course
   }
 }
 

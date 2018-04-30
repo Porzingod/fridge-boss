@@ -3,8 +3,9 @@ let initialState = {
   recipes: [],
   recipe: null,
   criteria: [],
+  cuisine: null,
+  course: null,
   favorites: [],
-  cuisines: ["American", "Italian", "Asian", "Mexican", "Southern & Soul Food", "French", "Southwestern", "Barbecue", "Indian", "Chinese", "Cajun & Creole", "English", "Mediterranean", "Greek", "Spanish", "German", "Thai", "Moroccan", "Irish", "Japanese", "Cuban", "Hawaiian", "Swedish", "Hungarian", "Portugese"],
   page: 0,
   errors: null,
   fetching: false,
@@ -35,7 +36,7 @@ export const recipesReducer = (state = initialState, {type, payload}) => {
       return {...state, fetchingFavorites: false, errors: payload}
 
     case "SEARCH_RECIPES_WITH_INGREDIENTS_PENDING":
-      return {...state, fetching: true, fetched: false}
+      return {...state, fetching: true, fetched: false, cuisine: payload.cuisine, course: payload.cuisine}
     case "SEARCH_RECIPES_WITH_INGREDIENTS_FULFILLED":
       return {...state, fetching: false, fetched: true, recipes: payload.matches, criteria: payload.criteria, page: 0}
     case "SEARCH_RECIPES_WITH_INGREDIENTS_REJECTED":
@@ -48,11 +49,11 @@ export const recipesReducer = (state = initialState, {type, payload}) => {
     case "SEARCH_MORE_RECIPES_WITH_INGREDIENTS_REJECTED":
       return {...state, fetching: false, errors: payload}
 
-    case "SEARCH_RECIPE_PENDING":
+    case "FIND_RECIPE_PENDING":
       return {...state, fetching: true, fetched: false}
-    case "SEARCH_RECIPE_FULFILLED":
+    case "FIND_RECIPE_FULFILLED":
       return {...state, fetching: true, fetched: true, recipe: payload, view: "recipes"}
-    case "SEARCH_RECIPE_REJECTED":
+    case "FIND_RECIPE_REJECTED":
       return {...state, fetching: true, errors: payload}
 
     case "TOGGLE_BROWSE":

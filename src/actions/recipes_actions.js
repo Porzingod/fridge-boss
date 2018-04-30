@@ -75,13 +75,15 @@ export const increasePage = () => {
   }
 }
 
-export const searchRecipesInitial = (ingredients) => {
+export const searchRecipesInitial = (ingredients, cuisine, course) => {
   return (dispatch) => {
-    dispatch({ type: "SEARCH_RECIPES_WITH_INGREDIENTS_PENDING" })
+    dispatch({ type: "SEARCH_RECIPES_WITH_INGREDIENTS_PENDING", payload: {cuisine, course} })
     fetch(`${MY_API_URL}/search_recipes`, {
       method: "POST",
       body: JSON.stringify({
         ingredients: ingredients,
+        cuisine: cuisine,
+        course: course,
         q: 0
       }),
       headers: {
@@ -108,13 +110,15 @@ export const searchRecipesInitial = (ingredients) => {
   }
 }
 
-export const searchRecipes = (ingredients, page) => {
+export const searchRecipes = (ingredients, page, cuisine, course) => {
   return (dispatch) => {
     dispatch({ type: "SEARCH_MORE_RECIPES_WITH_INGREDIENTS_PENDING" })
     fetch(`${MY_API_URL}/search_recipes`, {
       method: "POST",
       body: JSON.stringify({
         ingredients: ingredients,
+        cuisine: cuisine,
+        course: course,
         q: page
       }),
       headers: {
@@ -144,16 +148,16 @@ export const searchRecipes = (ingredients, page) => {
 
 export const getRecipe = (recipeId) => {
   return (dispatch) => {
-    dispatch({ type: "SEARCH_RECIPE_PENDING"})
+    dispatch({ type: "FIND_RECIPE_PENDING"})
     fetch(`${MY_API_URL}/find_recipe?q=${recipeId}`)
       .then(res => res.json())
       .then(json => dispatch({
-        type: "SEARCH_RECIPE_FULFILLED",
+        type: "FIND_RECIPE_FULFILLED",
         payload: json
       })
     )
       .catch(err => dispatch({
-        type: "SEARCH_RECIPE_REJECTED",
+        type: "FIND_RECIPE_REJECTED",
         payload: err
       })
     )

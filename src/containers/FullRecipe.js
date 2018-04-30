@@ -26,9 +26,9 @@ const style = {
     paddingLeft: 100,
     paddingRight: 100,
   },
-  card: {
-    overflowY: 'auto',
-    border: 'none',
+  image: {
+    width: 500,
+    height: "auto"
   },
   button: {
     marginBottom: 20
@@ -61,9 +61,9 @@ class FullRecipe extends React.Component {
     const favoriteIcon = this.props.favorites.map( recipe => {return {recipeId: recipe.recipeId, id: recipe.id} } ).find( recipe => recipe.recipeId === id || recipe.id === id ) ? <Favorite color="red"/> : <FavoriteBorder />
     return(
       <GridList style={style.gridList} cols={1}>
-        <Card style={style.card}>
-          <CardMedia overlay={<CardTitle title={name} />}>
-            <img src={image} alt={name} />
+        <Card>
+          <CardMedia overlay={<CardTitle title={name} style={style.image}/>}>
+            <img src={image} alt={name}/>
           </CardMedia>
           <CardTitle title={`${course} ${cuisine ? `| ${cuisine}` : ""}`} style={{padding: "0px"}}/>
           <RaisedButton label="Favorite" labelPosition="before" icon={favoriteIcon} style={{margin: 12}} onClick={this.handleFavorite}/>

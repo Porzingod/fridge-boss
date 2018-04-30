@@ -20,7 +20,7 @@ class Navbar extends React.Component{
       <div>
         <FlatButton label="Browse Recipes" labelStyle={{color: "white"}} style={{marginTop: "5px"}} disableTouchRipple={true} onClick={this.props.toggleBrowse}></FlatButton>
         <FlatButton label="Favorites" labelStyle={{color: "white"}} style={{marginTop: "5px"}} disableTouchRipple={true} onClick={this.props.toggleFavorites}></FlatButton>
-          <FlatButton label={this.props.userId > 0 ? "Logout" : "Login"} labelStyle={{color: "white"}} style={{marginTop: "5px"}} disableTouchRipple={true} onClick={this.props.loginLogout}></FlatButton>
+        <FlatButton label={this.props.userId > 0 ? "Logout" : "Login"} labelStyle={{color: "white"}} style={{marginTop: "5px"}} disableTouchRipple={true} onClick={this.props.loginLogout}></FlatButton>
       </div>
     )
     return(
