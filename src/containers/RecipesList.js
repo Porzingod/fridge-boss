@@ -51,17 +51,15 @@ class RecipesList extends React.Component {
   decreasePage = () => {
     const {criteria, selectedIngredients, page} = this.props
     const {searchRecipes, fetchRecipes} = this.props
-    debugger
     this.props.decreasePage()
-    criteria ? searchRecipes(selectedIngredients, page) : fetchRecipes(page)
+    criteria ? searchRecipes(selectedIngredients, page - 1) : fetchRecipes(page - 1)
   }
 
   increasePage = () => {
     const {criteria, selectedIngredients, page} = this.props
     const {searchRecipes, fetchRecipes} = this.props
-    debugger
     this.props.increasePage()
-    criteria ? searchRecipes(selectedIngredients, page) : fetchRecipes(page)
+    criteria ? searchRecipes(selectedIngredients, page + 1) : fetchRecipes(page + 1)
   }
 
   render() {

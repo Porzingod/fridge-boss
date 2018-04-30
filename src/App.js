@@ -13,6 +13,18 @@ import Favorites from './containers/Favorites'
 const YUMMLY_ATTRIBUTION = "Recipe search powered by <a href='http://www.yummly.co/recipes'><img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></a>"
 
 class App extends Component {
+  state = {
+    view: "recipes"
+  }
+
+  renderView = () => {
+    if (this.state.view === "recipes") {
+      this.props.recipe ? <FullRecipe recipe={this.props.recipe}/> : <RecipesList />
+    } else if (this.state.view === "favorites") {
+      <Favorites />
+    }
+  }
+
   render() {
     const windowHeight = window.innerHeight
     const windowWidth = window.innerWidth
@@ -28,7 +40,7 @@ class App extends Component {
           </div>
           <div>
             {this.props.recipe ? <FullRecipe recipe={this.props.recipe}/> : <RecipesList />}
-            <Favorites />
+            {/* <Favorites /> */}
           </div>
         </div>
       </MuiThemeProvider>

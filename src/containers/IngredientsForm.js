@@ -70,7 +70,7 @@ class IngredientsForm extends React.Component {
       <Paper style={style.paper}>
         <TextField inputStyle={style.textInputField} hintStyle={style.textHintField} onChange={this.handleChange} hintText="Ingredient" name="name" value={name}/>
         <br/>
-        <DatePicker inputStyle={style.datePicker} hintStyle={style.textHintField} onChange={this.handleExpirationDate} hintText="Expiration Date" name="expiration_date" mode="landscape"/>
+        <DatePicker inputStyle={style.datePicker} hintStyle={style.textHintField} onChange={this.handleExpirationDate} hintText="Best Before Date" name="expiration_date" mode="landscape"/>
         <br/>
         <RaisedButton style={style.button} onClick={this.handleSubmit} label="Add Ingredient"></RaisedButton>
       </Paper>

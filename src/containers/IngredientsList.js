@@ -28,7 +28,6 @@ const style = {
   paperHeader: {
     height: 150,
     minWidth: 250,
-    maxWdith: "15%",
     paddingTop: 10,
   },
   searchButton: {

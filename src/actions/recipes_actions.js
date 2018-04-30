@@ -63,10 +63,6 @@ export const increasePage = () => {
   }
 }
 
-export const fetchRecipeImage = () => {
-
-}
-
 export const searchRecipesInitial = (ingredients) => {
   return (dispatch) => {
     dispatch({ type: "SEARCH_RECIPES_WITH_INGREDIENTS_PENDING" })

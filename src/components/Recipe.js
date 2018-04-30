@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { fetchRecipeImage, getRecipe, addFavorite, removeFavorite } from '../actions/recipes_actions'
+import { getRecipe, addFavorite, removeFavorite } from '../actions/recipes_actions'
 
 import placeholder from '../images/placeholder_meal.png'
 
@@ -133,7 +133,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    fetchRecipeImage: fetchRecipeImage,
     getRecipe: getRecipe,
     addFavorite: addFavorite,
     removeFavorite: removeFavorite,
