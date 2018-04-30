@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
+import './styles/Sidebar.css'
 import { connect } from 'react-redux'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import Navbar from './components/Navbar'
 import IngredientsForm from './containers/IngredientsForm'
 import IngredientsList from './containers/IngredientsList'
 import RecipesList from './containers/RecipesList'
@@ -13,34 +15,29 @@ import Favorites from './containers/Favorites'
 const YUMMLY_ATTRIBUTION = "Recipe search powered by <a href='http://www.yummly.co/recipes'><img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></a>"
 
 class App extends Component {
-  state = {
-    view: "recipes"
-  }
-
   renderView = () => {
-    if (this.state.view === "recipes") {
-      this.props.recipe ? <FullRecipe recipe={this.props.recipe}/> : <RecipesList />
-    } else if (this.state.view === "favorites") {
+    const { view, recipe } = this.props
+    if (view === "recipes") {
+      recipe ? <FullRecipe recipe={recipe}/> : <RecipesList />
+    } else {
       <Favorites />
     }
   }
 
   render() {
-    const windowHeight = window.innerHeight
-    const windowWidth = window.innerWidth
+    const { view, recipe } = this.props
     return (
       <MuiThemeProvider>
-        <div className="App" style={{maxWidth: windowWidth, maxHeight: windowHeight, paddingLeft: 20, paddingRight: 20}}>
-          {/* <header className="App-header">
-
-          </header> */}
-          <div style={{float: "left", width: 260}}>
+        <Navbar />
+        <div className="App">
+          <div className="Ingredients-sidebar">
             <IngredientsForm />
             <IngredientsList />
           </div>
-          <div>
-            {this.props.recipe ? <FullRecipe recipe={this.props.recipe}/> : <RecipesList />}
-            {/* <Favorites /> */}
+          <div className="Recipes-list">
+            {view === "favorites" ? <Favorites /> : recipe ? <FullRecipe recipe={recipe}/> : <RecipesList/>}
+            {/* {this.props.recipe ? <FullRecipe recipe={this.props.recipe}/> : <RecipesList />} */}
+
           </div>
         </div>
       </MuiThemeProvider>
@@ -50,6 +47,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
+    view: state.recipes.view,
     recipe: state.recipes.recipe
   }
 }

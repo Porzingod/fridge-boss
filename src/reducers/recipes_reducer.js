@@ -1,4 +1,5 @@
 let initialState = {
+  view: "recipes",
   recipes: [],
   recipe: null,
   criteria: [],
@@ -50,17 +51,18 @@ export const recipesReducer = (state = initialState, {type, payload}) => {
     case "SEARCH_RECIPE_PENDING":
       return {...state, fetching: true, fetched: false}
     case "SEARCH_RECIPE_FULFILLED":
-      return {...state, fetching: true, fetched: true, recipe: payload}
+      return {...state, fetching: true, fetched: true, recipe: payload, view: "recipes"}
     case "SEARCH_RECIPE_REJECTED":
       return {...state, fetching: true, errors: payload}
 
+    case "TOGGLE_BROWSE":
+      return {...state, view: "recipes", recipe: null}
+    case "TOGGLE_FAVORITES":
+      return {...state, view: "favorites", recipe: null}
     case "DECREASE_RECIPES_PAGE":
       return {...state, page: state.page - 1}
     case "INCREASE_RECIPES_PAGE":
       return {...state, page: state.page + 1}
-
-    case "BACK_TO_RECIPES":
-      return {...state, recipe: null}
 
     case "ADD_FAVORITE":
       return {...state, favorites: [...state.favorites, payload]}

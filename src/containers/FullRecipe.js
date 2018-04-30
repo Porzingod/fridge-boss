@@ -2,26 +2,36 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { backToRecipes, addFavorite, removeFavorite } from '../actions/recipes_actions'
+import '../App.css'
+
+import { addFavorite, removeFavorite } from '../actions/recipes_actions'
 
 import placeholder from '../images/placeholder_meal.png'
 
+import {GridList} from 'material-ui/GridList';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import Favorite from 'material-ui/svg-icons/action/favorite'
 import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
-const divHeight = window.innerHeight - 82
+const windowHeight = window.innerHeight
+const gridHeight = windowHeight - 100
 
 const style = {
-  fullRecipe: {
+  gridList: {
     width: "auto",
-    maxWidth: "85%",
-    height: divHeight,
-    maxHeight: 850,
+    height: gridHeight,
     overflowY: 'auto',
+    paddingLeft: 100,
+    paddingRight: 100,
+  },
+  card: {
+    overflowY: 'auto',
+    border: 'none',
   },
   button: {
-    marginBottom: 10
+    marginBottom: 20
   },
   favoriteIcon: {
     width: 60,
@@ -50,28 +60,26 @@ class FullRecipe extends React.Component {
     const image = hostedLargeUrl ? hostedLargeUrl.slice(0, (hostedLargeUrl.length - 5)) : placeholder
     const favoriteIcon = this.props.favorites.map( recipe => {return {recipeId: recipe.recipeId, id: recipe.id} } ).find( recipe => recipe.recipeId === id || recipe.id === id ) ? <Favorite color="red"/> : <FavoriteBorder />
     return(
-      <div>
-        <RaisedButton style={style.button} label="Back to Recipes" onClick={this.props.backToRecipes}/>
-        <div style={style.fullRecipe}>
-          <img src={image} alt={name} />
-          <p>
-            {name}
-          </p>
+      <GridList style={style.gridList} cols={1}>
+        <Card style={style.card}>
+          <CardMedia overlay={<CardTitle title={name} />}>
+            <img src={image} alt={name} />
+          </CardMedia>
+          <CardTitle title={`${course} ${cuisine ? `| ${cuisine}` : ""}`} style={{padding: "0px"}}/>
           <RaisedButton label="Favorite" labelPosition="before" icon={favoriteIcon} style={{margin: 12}} onClick={this.handleFavorite}/>
-          <p>{course}</p>
-          <p>{cuisine}</p>
-          <p>Servings: {numberOfServings}</p>
-          <p>Cook Time: {totalTime}</p>
-          {/* this is where the recipe is sourced from  */}
-          {/* <p>{sourceDisplayName}</p> */}
-          <a>{sourceRecipeUrl}</a>
-          <p>Ingredients: </p>
-          <ul>{ingredientLines.map( (ingr, index) => <li key={index}>{ingr}</li> )}</ul>
-        </div>
-      </div>
+          <CardText>
+            Servings: {numberOfServings}<br/>
+            Cook Time: {totalTime}<br/><br/>
+            <p>Ingredients: </p>
+            <ul>{ingredientLines.map( (ingr, index) => <li key={index}>{ingr}</li> )}</ul>
+            <RaisedButton href={sourceRecipeUrl} target="_blank" label="Click Here For Recipe Instructions"/>
+          </CardText>
+        </Card>
+      </GridList>
     )
   }
 }
+
 
 const mapStateToProps = state => {
   return {
@@ -83,7 +91,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    backToRecipes: backToRecipes,
     addFavorite: addFavorite,
     removeFavorite: removeFavorite,
   }, dispatch)

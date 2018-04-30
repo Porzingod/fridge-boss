@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/Sidebar.css'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -13,22 +14,14 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton'
 
 const windowHeight = window.innerHeight
-const paperHeight = windowHeight - 360
+const paperHeight = windowHeight - 424
 
 const style = {
-  div: {
-    paddingTop: 10,
-  },
   paper: {
     height: paperHeight,
     minWidth: 260,
     maxWidth: "15%",
     overflowY: 'auto'
-  },
-  paperHeader: {
-    height: 150,
-    minWidth: 250,
-    paddingTop: 10,
   },
   searchButton: {
     marginBottom: 20
@@ -54,14 +47,14 @@ class IngredientsList extends React.Component {
     const dateToday = new Date().toDateString().slice(4)
     return (
       <div>
-        <Paper style={style.paperHeader}>
+        <Paper className="Ingredients-sidebar-list-header">
           <h5 style={{margin: "0"}}>Todays Date: {dateToday}</h5>
           <h2>My Fridge</h2>
           <RaisedButton style={style.searchButton} label="Search Recipes" onClick={this.handleSearch}/>
         </Paper>
         <Paper style={style.paper}>
           <FlatButton style={style.clearButton} label="Clear Selection" onClick={this.props.clearSelection}/>
-          <div style={style.div}>
+          <div style={{paddingTop: '10px'}}>
             {mappedIngredients}
           </div>
         </Paper>

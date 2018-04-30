@@ -66,7 +66,8 @@ class Recipe extends React.Component {
   }
 
   getFullRecipe = () => {
-    this.props.getRecipe(this.props.recipe.id)
+    const {recipe, getRecipe} = this.props
+    typeof recipe.id === "number" ? getRecipe(recipe.recipeId) : getRecipe(recipe.id)
   }
 
   handleFavorite = () => {

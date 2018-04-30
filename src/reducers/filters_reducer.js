@@ -1,7 +1,6 @@
 const initialState = {
   cuisineFilter: null,
   allergyFilter: null,
-  
 }
 
 export const filtersReducer = (state = initialState, {type, payload}) => {

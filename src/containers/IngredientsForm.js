@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/Sidebar.css'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -12,7 +13,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 const style = {
   datePicker: {
-    maxWidth: 250,
     textAlign: 'center',
   },
   textInputField: {
@@ -21,14 +21,6 @@ const style = {
   textHintField: {
     textAlign: "center",
     width: "100%"
-  },
-  paper: {
-    width: 260,
-    marginBottom: 10
-  },
-  button: {
-    marginTop: -20,
-    marginBottom: 20
   }
 }
 
@@ -67,12 +59,12 @@ class IngredientsForm extends React.Component {
   render() {
     const {name} = this.state
     return (
-      <Paper style={style.paper}>
+      <Paper className="Ingredients-sidebar-form-paper">
         <TextField inputStyle={style.textInputField} hintStyle={style.textHintField} onChange={this.handleChange} hintText="Ingredient" name="name" value={name}/>
         <br/>
-        <DatePicker inputStyle={style.datePicker} hintStyle={style.textHintField} onChange={this.handleExpirationDate} hintText="Best Before Date" name="expiration_date" mode="landscape"/>
+        <DatePicker inputStyle={style.datePicker} hintStyle={style.textHintField} onChange={this.handleExpirationDate} hintText="Best Before Date" name="expiration_date" mode="landscape" container="inline"/>
         <br/>
-        <RaisedButton style={style.button} onClick={this.handleSubmit} label="Add Ingredient"></RaisedButton>
+        <RaisedButton className="Ingredients-sidebar-form-button" onClick={this.handleSubmit} label="Add Ingredient"></RaisedButton>
       </Paper>
     )
   }

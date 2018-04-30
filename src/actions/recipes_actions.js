@@ -51,6 +51,18 @@ export const fetchFavorites = (userId) => {
   }
 }
 
+export const toggleBrowse = () => {
+  return (dispatch) => {
+    dispatch({ type: "TOGGLE_BROWSE" })
+  }
+}
+
+export const toggleFavorites = () => {
+  return (dispatch) => {
+    dispatch({ type: "TOGGLE_FAVORITES" })
+  }
+}
+
 export const decreasePage = () => {
   return (dispatch) => {
     dispatch({ type: "DECREASE_RECIPES_PAGE" })
@@ -145,12 +157,6 @@ export const getRecipe = (recipeId) => {
         payload: err
       })
     )
-  }
-}
-
-export const backToRecipes = () => {
-  return (dispatch) => {
-    dispatch({ type: "BACK_TO_RECIPES" })
   }
 }
 

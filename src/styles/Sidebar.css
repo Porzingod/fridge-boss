@@ -1,0 +1,26 @@
+.Ingredients-sidebar {
+  float: left;
+}
+
+.Ingredients-sidebar-form-paper {
+  margin-bottom: 10px;
+}
+
+.Ingredients-sidebar-form-button {
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+
+.Ingredients-sidebar-list-header {
+  height: 150px;
+  padding-top: 10px;
+}
+
+.Ingredients-sidebar-list-paper {
+  overflow-y: auto;
+  height: 60vh;
+}
+
+.Ingredients-sidebar-list {
+
+}

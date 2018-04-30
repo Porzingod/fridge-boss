@@ -10,25 +10,47 @@ import NoResults from '../components/NoResults'
 import Loading from '../components/Loading'
 
 import {GridList} from 'material-ui/GridList';
+import Subheader from 'material-ui/Subheader';
 import RaisedButton from 'material-ui/RaisedButton'
+import IconButton from 'material-ui/IconButton';
+import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left'
+import HardwareKeyboardArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 
-const gridHeight = window.innerHeight - 82
+const windowHeight = window.innerHeight
+const gridHeight = windowHeight - 100
 
 const style = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
   gridList: {
     width: "auto",
-    maxWidth: "85%",
     height: gridHeight,
-    maxHeight: 850,
     overflowY: 'auto',
+    marginRight: 10
   },
   button: {
+    float: 'right',
     marginBottom: 10
+  },
+  prevButtonIcon: {
+    width: 60,
+    height: 60,
+  },
+  prevButton: {
+    width: 120,
+    height: 120,
+    float: 'left',
+    marginTop: windowHeight/2 - 120,
+    marginLeft: 20,
+  },
+  nextButtonIcon: {
+    width: 60,
+    height: 60,
+  },
+  nextButton: {
+    width: 120,
+    height: 120,
+    float: 'right',
+    marginTop: windowHeight/2 - 120,
+    marginRight: 20,
   }
 };
 
@@ -66,14 +88,15 @@ class RecipesList extends React.Component {
     const {recipes, fetched, page} = this.props
     const mappedRecipes = recipes.map( recipe => <Recipe key={recipe.id} recipe={recipe} /> )
     const grid = (
-      <div>
-        {page > 0 ? <RaisedButton style={style.button} label="Previous Recipes" onClick={this.decreasePage}/> : null}
-        <RaisedButton style={style.button} label="More Recipes" onClick={this.increasePage}/>
-        <div style={style.root}>
+      <div style={{display: 'flex',}}>
+        <IconButton iconStyle={style.prevButtonIcon} style={style.prevButton} onClick={this.decreasePage} disabled={page > 0 ? false : true}><HardwareKeyboardArrowLeft/></IconButton>
+        <div >
           <GridList style={style.gridList} cols={4} >
+            <Subheader>Browse</Subheader>
             {mappedRecipes}
           </GridList>
         </div>
+        <IconButton iconStyle={style.nextButtonIcon} style={style.nextButton} onClick={this.increasePage}><HardwareKeyboardArrowRight/></IconButton>
       </div>
     )
     return(
