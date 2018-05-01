@@ -34,7 +34,9 @@ class IngredientsList extends React.Component {
   state = {
     open: false,
     cuisine: null,
-    course: null
+    course: null,
+    allergies: [],
+    diets: []
   }
 
   componentDidMount() {
@@ -42,7 +44,7 @@ class IngredientsList extends React.Component {
   }
 
   handleSearch = () => {
-    this.props.searchRecipesInitial(this.props.selectedIngredients, this.state.cuisine, this.state.course)
+    this.props.searchRecipesInitial(this.props.selectedIngredients, this.state.cuisine, this.state.course, this.state.allergies, this.state.diets)
   }
 
   handleCuisineChange = (e, index, value) => {
@@ -55,6 +57,36 @@ class IngredientsList extends React.Component {
     this.setState({
       course: value
     })
+  }
+
+  handleAllergyChange = (e, index, allergies) => {
+    this.setState({allergies});
+  }
+
+  handleDietChange = (e, index, diets) => {
+    this.setState({diets});
+  }
+
+  allergiesSelectionRenderer = (values) => {
+    switch (values.length) {
+      case 0:
+        return '';
+      case 1:
+        return this.props.allergies.find(a => a.id === values[0].id).name;
+      default:
+        return `${values.length} selected`;
+    }
+  }
+
+  dietsSelectionRenderer = (values) => {
+    switch (values.length) {
+      case 0:
+        return '';
+      case 1:
+        return this.props.diets.find(d => d.id === values[0].id).name;
+      default:
+        return `${values.length} selected`;
+    }
   }
 
   showPopover = (e) => {
@@ -74,10 +106,37 @@ class IngredientsList extends React.Component {
 
   // Filter
   renderPopover = () => {
-    const { cuisines, courses } = this.props
-    const cuisinesSelection = cuisines.map( cuisine => <MenuItem value={cuisine} primaryText={cuisine}/>)
-    const coursesSelection = courses.map( course => <MenuItem value={course} primaryText={course}/>)
-
+    const { cuisines, courses, allergies, diets } = this.props
+    const cuisinesSelection = cuisines.map( cuisine =>
+      <MenuItem
+        value={cuisine}
+        primaryText={cuisine}
+      />
+    )
+    const coursesSelection = courses.map( course =>
+      <MenuItem
+        value={course}
+        primaryText={course}
+      />
+    )
+    const allergiesSelection = allergies.map( allergy =>
+      <MenuItem
+        key={allergy.id}
+        insetChildren={true}
+        checked={this.state.allergies.indexOf(allergy) > -1}
+        value={allergy}
+        primaryText={allergy.name}
+      />
+    )
+    const dietsSelection = diets.map( diet =>
+      <MenuItem
+        key={diet.id}
+        insetChildren={true}
+        checked={this.state.diets.indexOf(diet) > -1}
+        value={diet}
+        primaryText={diet.name}
+      />
+    )
     return (
       <Popover
         className="Ingredients-sidebar-filter"
@@ -88,6 +147,7 @@ class IngredientsList extends React.Component {
         onRequestClose={this.handleRequestClose}
       >
         <Menu>
+          {/* cuisines */}
           <SelectField
             value={this.state.cuisine}
             onChange={this.handleCuisineChange}
@@ -100,7 +160,7 @@ class IngredientsList extends React.Component {
             {cuisinesSelection}
           </SelectField>
           <br />
-
+          {/* courses */}
           <SelectField
             value={this.state.course}
             onChange={this.handleCourseChange}
@@ -112,6 +172,35 @@ class IngredientsList extends React.Component {
             <MenuItem value={null} primaryText="-" />
             {coursesSelection}
           </SelectField>
+          <br />
+          {/* allergies */}
+          <SelectField
+            value={this.state.allergies}
+            onChange={this.handleAllergyChange}
+            selectionRenderer={this.allergiesSelectionRenderer}
+            multiple={true}
+            floatingLabelText="Allergies"
+            floatingLabelFixed={true}
+            inputStyle={{paddingleft: '5px'}}
+            className="Ingredients-sidebar-filter-select"
+          >
+            {allergiesSelection}
+          </SelectField>
+          <br />
+          {/* diets */}
+          <SelectField
+            value={this.state.diets}
+            onChange={this.handleDietChange}
+            selectionRenderer={this.dietsSelectionRenderer}
+            multiple={true}
+            floatingLabelText="Diets"
+            floatingLabelFixed={true}
+            inputStyle={{paddingleft: '5px'}}
+            className="Ingredients-sidebar-filter-select"
+          >
+            {dietsSelection}
+          </SelectField>
+          <br />
         </Menu>
       </Popover>
     )
@@ -163,7 +252,8 @@ const mapStateToProps = state => {
     page: state.recipes.page,
     cuisines: state.filters.cuisines,
     courses: state.filters.courses,
-
+    allergies: state.filters.allergies,
+    diets: state.filters.diets
   }
 }
 

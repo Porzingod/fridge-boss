@@ -70,17 +70,17 @@ class RecipesList extends React.Component {
   }
 
   decreasePage = () => {
-    const {criteria, selectedIngredients, page, cuisine, course} = this.props
+    const {criteria, searchedIngredients, searchedAllergies, searchedDiets, page, cuisine, course} = this.props
     const {searchRecipes, fetchRecipes} = this.props
     this.props.decreasePage()
-    criteria || course || cuisine ? searchRecipes(selectedIngredients, page - 1, cuisine, course) : fetchRecipes(page - 1)
+    criteria || course || cuisine ? searchRecipes(searchedIngredients, page - 1, cuisine, course, searchedAllergies, searchedDiets) : fetchRecipes(page - 1)
   }
 
   increasePage = () => {
-    const {criteria, selectedIngredients, page, cuisine, course} = this.props
+    const {criteria, searchedIngredients, searchedAllergies, searchedDiets, page, cuisine, course} = this.props
     const {searchRecipes, fetchRecipes} = this.props
     this.props.increasePage()
-    criteria || course || cuisine ? searchRecipes(selectedIngredients, page + 1, cuisine, course) : fetchRecipes(page + 1)
+    criteria || course || cuisine ? searchRecipes(searchedIngredients, page + 1, cuisine, course, searchedAllergies, searchedDiets) : fetchRecipes(page + 1)
   }
 
   render() {
@@ -126,7 +126,9 @@ const mapStateToProps = state => {
     criteria: state.recipes.criteria,
     fetched: state.recipes.fetched,
     page: state.recipes.page,
-    selectedIngredients: state.ingredients.selectedIngredients,
+    searchedIngredients: state.recipes.searchedIngredients,
+    searchedAllergies: state.recipes.searchedAllergies,
+    searchedDiets: state.recipes.searchedDiets,
     fetchedFavorites: state.recipes.fetchedFavorites,
     cuisine: state.recipes.cuisine,
     course: state.recipes.course

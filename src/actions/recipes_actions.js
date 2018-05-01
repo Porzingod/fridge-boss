@@ -2,7 +2,6 @@
 import { MY_API_URL } from '../constants'
 
 export const fetchRecipes = (page) => {
-  // debugger
   return (dispatch) => {
     dispatch({ type: "FETCH_RECIPES_PENDING"})
     fetch(`${MY_API_URL}/fetch_recipes?q=${page}`)
@@ -12,7 +11,7 @@ export const fetchRecipes = (page) => {
           type: "FETCH_RECIPES_FULFILLED",
           payload: {
             matches: json.matches,
-            criteria: json.criteria.allowedIngredient
+            criteria: json.criteria
           }
         })
       })
@@ -75,15 +74,17 @@ export const increasePage = () => {
   }
 }
 
-export const searchRecipesInitial = (ingredients, cuisine, course) => {
+export const searchRecipesInitial = (ingredients, cuisine, course, allergies, diets) => {
   return (dispatch) => {
-    dispatch({ type: "SEARCH_RECIPES_WITH_INGREDIENTS_PENDING", payload: {cuisine, course, ingredients} })
+    dispatch({ type: "SEARCH_RECIPES_WITH_INGREDIENTS_PENDING", payload: {cuisine, course, ingredients, allergies, diets} })
     fetch(`${MY_API_URL}/search_recipes`, {
       method: "POST",
       body: JSON.stringify({
         ingredients: ingredients,
         cuisine: cuisine,
         course: course,
+        allergies: allergies,
+        diets: diets,
         q: 0
       }),
       headers: {
@@ -97,7 +98,7 @@ export const searchRecipesInitial = (ingredients, cuisine, course) => {
           type: "SEARCH_RECIPES_WITH_INGREDIENTS_FULFILLED",
           payload: {
             matches: json.matches,
-            criteria: json.criteria.allowedIngredient
+            criteria: json.criteria
           }
         })
       }
@@ -110,7 +111,7 @@ export const searchRecipesInitial = (ingredients, cuisine, course) => {
   }
 }
 
-export const searchRecipes = (ingredients, page, cuisine, course) => {
+export const searchRecipes = (ingredients, page, cuisine, course, allergies, diets) => {
   return (dispatch) => {
     dispatch({ type: "SEARCH_MORE_RECIPES_WITH_INGREDIENTS_PENDING" })
     fetch(`${MY_API_URL}/search_recipes`, {
@@ -119,6 +120,8 @@ export const searchRecipes = (ingredients, page, cuisine, course) => {
         ingredients: ingredients,
         cuisine: cuisine,
         course: course,
+        allergies: allergies,
+        diets: diets,
         q: page
       }),
       headers: {
@@ -128,12 +131,11 @@ export const searchRecipes = (ingredients, page, cuisine, course) => {
     })
       .then(res => res.json())
       .then(json => {
-        // debugger
           dispatch({
           type: "SEARCH_MORE_RECIPES_WITH_INGREDIENTS_FULFILLED",
           payload: {
             matches: json.matches,
-            criteria: json.criteria.allowedIngredient
+            criteria: json.criteria
           }
         })
       }
