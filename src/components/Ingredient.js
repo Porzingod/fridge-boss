@@ -1,5 +1,7 @@
 import React from 'react'
 
+import '../styles/Ingredient.css'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -60,17 +62,17 @@ class Ingredient extends React.Component {
           value={name}
           label={(
             <label>
-              <span style={{fontWeight: 'bold'}}>{name}</span>
+              <span className="Ingredient-checkbox-label">{name}</span>
               <br/>
               {this.expiringSoon() ?
-                <span style={{fontSize: 12, opacity: 0.8, color: "red"}}>Best Before: {expiration_date}</span>
-              : <span style={{fontSize: 12, opacity: 0.8}}>Best Before: {expiration_date}</span>
+                <span className="Ingredient-checkbox-secondary-label-red">Best Before: {expiration_date}</span>
+              : <span className="Ingredient-checkbox-secondary-label">Best Before: {expiration_date}</span>
               }
             </label>
           )}
           onCheck={this.handleCheck}
         />
-        <IconButton style={{float: 'right'}} onClick={this.handleDelete}>
+        <IconButton className="Ingredient-checkbox-remove-button" onClick={this.handleDelete}>
           <ContentRemove/>
         </IconButton>
       </div>

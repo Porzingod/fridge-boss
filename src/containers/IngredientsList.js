@@ -1,4 +1,5 @@
 import React from 'react'
+
 import '../styles/Sidebar.css'
 
 import { connect } from 'react-redux'
@@ -18,7 +19,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 const windowHeight = window.innerHeight
-const paperHeight = windowHeight - 424
+const paperHeight = windowHeight - 420
 
 const style = {
   paper: {
@@ -27,15 +28,6 @@ const style = {
     maxWidth: "15%",
     overflowY: 'auto'
   },
-  searchButton: {
-    marginBottom: 20
-  },
-  clearButton: {
-    marginTop: 5
-  },
-  menuWidth: {
-    width: 200
-  }
 };
 
 class IngredientsList extends React.Component {
@@ -80,13 +72,15 @@ class IngredientsList extends React.Component {
     })
   }
 
+  // Filter
   renderPopover = () => {
     const { cuisines, courses } = this.props
     const cuisinesSelection = cuisines.map( cuisine => <MenuItem value={cuisine} primaryText={cuisine}/>)
-      const coursesSelection = courses.map( course => <MenuItem value={course} primaryText={course}/>)
+    const coursesSelection = courses.map( course => <MenuItem value={course} primaryText={course}/>)
 
     return (
       <Popover
+        className="Ingredients-sidebar-filter"
         open={this.state.open}
         anchorEl={this.state.anchorEl}
         anchorOrigin={{horizontal: 'right', vertical: 'center'}}
@@ -94,13 +88,28 @@ class IngredientsList extends React.Component {
         onRequestClose={this.handleRequestClose}
       >
         <Menu>
-          <SelectField floatingLabelText="Cuisine" value={this.state.cuisine} onChange={this.handleCuisineChange} style={style.menuWidth} hintStyle={{textAlign: 'center'}} >
-            <MenuItem value={null} primaryText="" />
+          <SelectField
+            value={this.state.cuisine}
+            onChange={this.handleCuisineChange}
+            floatingLabelText="Cuisine"
+            floatingLabelFixed={true}
+            inputStyle={{paddingLeft: '5px'}}
+            className="Ingredients-sidebar-filter-select"
+          >
+            <MenuItem value={null} primaryText="-" />
             {cuisinesSelection}
           </SelectField>
           <br />
-          <SelectField floatingLabelText="Course" value={this.state.course} onChange={this.handleCourseChange} style={style.menuWidth} hintStyle={{textAlign: 'center'}} >
-            <MenuItem value={null} primaryText="" />
+
+          <SelectField
+            value={this.state.course}
+            onChange={this.handleCourseChange}
+            floatingLabelText="Course"
+            floatingLabelFixed={true}
+            inputStyle={{paddingLeft: '5px'}}
+            className="Ingredients-sidebar-filter-select"
+          >
+            <MenuItem value={null} primaryText="-" />
             {coursesSelection}
           </SelectField>
         </Menu>
@@ -117,12 +126,26 @@ class IngredientsList extends React.Component {
         <Paper className="Ingredients-sidebar-list-header">
           <h5 style={{margin: "0"}}>Todays Date: {dateToday}</h5>
           <h2>My Fridge</h2>
-          <RaisedButton style={style.searchButton} label="Search Recipes" onClick={this.handleSearch}/>
-          <FlatButton label="Filters" onClick={this.showPopover} disableTouchRipple={true} labelStyle={{fontSize:"10px", padding: "0px"}}></FlatButton>
+          <RaisedButton
+            className="Ingredients-sidebar-search-button"
+            label="Search Recipes"
+            onClick={this.handleSearch}/>
+          <FlatButton
+            label="Filters"
+            onClick={this.showPopover}
+            disableTouchRipple={true}
+            labelStyle={{fontSize:"10px", padding: "0px"}}
+          ></FlatButton>
           {this.renderPopover()}
         </Paper>
+
         <Paper style={style.paper}>
-          <FlatButton style={style.clearButton} label="Clear Selection" onClick={this.props.clearSelection} disableTouchRipple={true}/>
+          <FlatButton
+            className="Ingredients-sidebar-clear-selection"
+            label="Clear Selection"
+            onClick={this.props.clearSelection}
+            disableTouchRipple={true}
+          />
           <div style={{paddingTop: '10px'}}>
             {mappedIngredients}
           </div>

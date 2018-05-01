@@ -1,0 +1,18 @@
+.Ingredient-checkbox-label {
+  font-weight: bold;
+}
+
+.Ingredient-checkbox-secondary-label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.Ingredient-checkbox-secondary-label-red {
+  font-size: 12px;
+  opacity: 0.8;
+  color: red;
+}
+
+.Ingredient-checkbox-remove-button {
+  float: right;
+}

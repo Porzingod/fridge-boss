@@ -1,17 +1,19 @@
 import React from 'react'
 
+import '../styles/NoResults.css'
+
 import { connect } from 'react-redux'
 
 const NoResults = (props) => {
-  const ingredientNames = props.selectedIngredients.map( ingr => ingr.name )
+  const ingredientNames = props.searchedIngredients.map( ingr => ingr.name )
   const last = ingredientNames.length - 1
   const ingredients = `"${ingredientNames.slice(0, last).join(", ")} and ${ingredientNames[last]}"`
   return (
-    <div style={{width: "auto"}}>
+    <div className="No-results-page">
       <h3>
         We couldn't find any recipes including {ingredients}
       </h3>
-      <hr></hr>
+      <hr width="60%"></hr>
       <h3>
         Search Tips:
       </h3>
@@ -26,7 +28,7 @@ const NoResults = (props) => {
 
 const mapStateToProps = state => {
   return {
-    selectedIngredients: state.ingredients.selectedIngredients
+    searchedIngredients: state.recipes.searchedIngredients
   }
 }
 

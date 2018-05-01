@@ -11,7 +11,6 @@ import Loading from '../components/Loading'
 
 import {GridList} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
-import RaisedButton from 'material-ui/RaisedButton'
 import IconButton from 'material-ui/IconButton';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left'
 import HardwareKeyboardArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
@@ -89,14 +88,27 @@ class RecipesList extends React.Component {
     const mappedRecipes = recipes.map( recipe => <Recipe key={recipe.id} recipe={recipe} /> )
     const grid = (
       <div style={{display: 'flex',}}>
-        <IconButton iconStyle={style.prevButtonIcon} style={style.prevButton} onClick={this.decreasePage} disabled={page > 0 ? false : true}><HardwareKeyboardArrowLeft/></IconButton>
+        <IconButton
+          iconStyle={style.prevButtonIcon}
+          style={style.prevButton}
+          onClick={this.decreasePage}
+          disabled={page > 0 ? false : true}
+        >
+          <HardwareKeyboardArrowLeft/>
+        </IconButton>
         <div >
           <GridList style={style.gridList} cols={4} >
             <Subheader>Browse</Subheader>
             {mappedRecipes}
           </GridList>
         </div>
-        <IconButton iconStyle={style.nextButtonIcon} style={style.nextButton} onClick={this.increasePage}><HardwareKeyboardArrowRight/></IconButton>
+        <IconButton
+          iconStyle={style.nextButtonIcon}
+          style={style.nextButton}
+          onClick={this.increasePage}
+        >
+          <HardwareKeyboardArrowRight/>
+        </IconButton>
       </div>
     )
     return(

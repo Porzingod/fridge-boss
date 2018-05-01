@@ -1,4 +1,5 @@
 import React from 'react'
+
 import '../styles/Sidebar.css'
 
 import { connect } from 'react-redux'
@@ -60,11 +61,30 @@ class IngredientsForm extends React.Component {
     const {name} = this.state
     return (
       <Paper className="Ingredients-sidebar-form-paper">
-        <TextField inputStyle={style.textInputField} hintStyle={style.textHintField} onChange={this.handleChange} hintText="Ingredient" name="name" value={name}/>
+        <TextField
+          inputStyle={style.textInputField}
+          hintStyle={style.textHintField}
+          onChange={this.handleChange}
+          hintText="Ingredient"
+          name="name"
+          value={name}
+        />
         <br/>
-        <DatePicker inputStyle={style.datePicker} hintStyle={style.textHintField} onChange={this.handleExpirationDate} hintText="Best Before Date" name="expiration_date" mode="landscape" container="inline"/>
+        <DatePicker
+          inputStyle={style.datePicker}
+          hintStyle={style.textHintField}
+          onChange={this.handleExpirationDate}
+          hintText="Best Before Date"
+          name="expiration_date"
+          mode="landscape"
+          container="inline"
+        />
         <br/>
-        <RaisedButton className="Ingredients-sidebar-form-button" onClick={this.handleSubmit} label="Add Ingredient"></RaisedButton>
+        <RaisedButton
+          className="Ingredients-sidebar-form-button"
+          onClick={this.handleSubmit}
+          label="Add Ingredient"
+        ></RaisedButton>
       </Paper>
     )
   }

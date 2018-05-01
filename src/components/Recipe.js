@@ -1,5 +1,7 @@
 import React from 'react'
 
+import '../styles/Recipe.css'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -13,19 +15,10 @@ import ActionInfoOutline from 'material-ui/svg-icons/action/info-outline'
 import Favorite from 'material-ui/svg-icons/action/favorite'
 import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import Popover from 'material-ui/Popover';
-import Paper from 'material-ui/Paper';
 import Menu from 'material-ui/Menu';
 import RaisedButton from 'material-ui/RaisedButton'
 
 const style = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
-  gridTile: {
-    margin: 10
-  },
   menu: {
     minWidth: "40%",
     padding: 10,
@@ -44,10 +37,6 @@ const style = {
 class Recipe extends React.Component {
   state = {
     open: false
-  }
-
-  componentDidMount() {
-
   }
 
   showPopover = (e) => {
@@ -87,16 +76,28 @@ class Recipe extends React.Component {
         targetOrigin={{horizontal: 'left', vertical: 'top'}}
         onRequestClose={this.handleRequestClose}
       >
+        {/* <Menu className="Recipe-popover"> */}
+
         <Menu style={style.menu}>
           <h2>{recipeName}</h2>
-          <RaisedButton label="Favorite" labelPosition="before" icon={favoriteIcon} style={{margin: 12}} onClick={this.handleFavorite}/>
+          <RaisedButton
+            className="Recipe-popover-favorite-button"
+            label="Favorite"
+            labelPosition="before"
+            icon={favoriteIcon}
+            onClick={this.handleFavorite}
+          />
           {attributes.cuisine ? <h3>{attributes.cuisine}</h3> : null}
           <p><strong>Cook Time: </strong>{totalTimeInSeconds / 60} mins</p>
           <h3>Ingredients:</h3>
           <ul>
             {ingredientsList}
           </ul>
-          <RaisedButton style={style.button} label="View Full Recipe" onClick={this.getFullRecipe}/>
+          <RaisedButton
+            style={style.button}
+            label="View Full Recipe"
+            onClick={this.getFullRecipe}
+          />
         </Menu>
       </Popover>
     )
@@ -107,7 +108,10 @@ class Recipe extends React.Component {
     const {recipeName, smallImageUrls} = recipe
     const image = smallImageUrls ? smallImageUrls[0].slice(0, (smallImageUrls[0].length - 4)) : placeholder
     return(
-      <GridTile style={style.gridTile} title={recipeName} onClick={this.showPopover}
+      <GridTile
+        className="Recipe-grid-tile"
+        title={recipeName}
+        onClick={this.showPopover}
         titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
         actionIcon={
           <div>

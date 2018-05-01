@@ -77,7 +77,7 @@ export const increasePage = () => {
 
 export const searchRecipesInitial = (ingredients, cuisine, course) => {
   return (dispatch) => {
-    dispatch({ type: "SEARCH_RECIPES_WITH_INGREDIENTS_PENDING", payload: {cuisine, course} })
+    dispatch({ type: "SEARCH_RECIPES_WITH_INGREDIENTS_PENDING", payload: {cuisine, course, ingredients} })
     fetch(`${MY_API_URL}/search_recipes`, {
       method: "POST",
       body: JSON.stringify({

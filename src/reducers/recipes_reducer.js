@@ -7,6 +7,7 @@ let initialState = {
   course: null,
   favorites: [],
   page: 0,
+  searchedIngredients: [],
   errors: null,
   fetching: false,
   fetched: false,
@@ -36,7 +37,7 @@ export const recipesReducer = (state = initialState, {type, payload}) => {
       return {...state, fetchingFavorites: false, errors: payload}
 
     case "SEARCH_RECIPES_WITH_INGREDIENTS_PENDING":
-      return {...state, fetching: true, fetched: false, cuisine: payload.cuisine, course: payload.cuisine}
+      return {...state, fetching: true, fetched: false, cuisine: payload.cuisine, course: payload.cuisine, searchedIngredients: payload.ingredients}
     case "SEARCH_RECIPES_WITH_INGREDIENTS_FULFILLED":
       return {...state, fetching: false, fetched: true, recipes: payload.matches, criteria: payload.criteria, page: 0}
     case "SEARCH_RECIPES_WITH_INGREDIENTS_REJECTED":

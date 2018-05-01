@@ -1,14 +1,27 @@
+/* App.js */
 .Ingredients-sidebar {
   float: left;
 }
 
+/* Ingredients Form */
 .Ingredients-sidebar-form-paper {
   margin-bottom: 10px;
 }
 
 .Ingredients-sidebar-form-button {
   margin-top: -20px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+}
+
+/* Ingredients List */
+.Ingredients-sidebar-filter {
+
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.Ingredients-sidebar-filter-select {
+  padding-left: 10px;
 }
 
 .Ingredients-sidebar-list-header {
@@ -16,11 +29,10 @@
   padding-top: 10px;
 }
 
-.Ingredients-sidebar-list-paper {
-  overflow-y: auto;
-  height: 60vh;
+.Ingredients-sidebar-search-button {
+  margin-bottom: 20px;
 }
 
-.Ingredients-sidebar-list {
-
+.Ingredients-sidebar-clear-selection {
+  margin-top: 5px;
 }

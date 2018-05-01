@@ -23,9 +23,6 @@ const style = {
     overflowY: 'auto',
     marginRight: 10
   },
-  button: {
-    marginBottom: 10
-  },
   prevButtonIcon: {
     width: 60,
     height: 60,
@@ -61,14 +58,28 @@ class Favorites extends React.Component{
     const mappedFavorites = favorites.map( recipe => <Recipe key={recipe.id} recipe={recipe} /> )
     return(
       <div style={{display: 'flex'}}>
-        <IconButton iconStyle={style.prevButtonIcon} style={style.prevButton} onClick={this.decreasePage} disabled={true}><HardwareKeyboardArrowLeft/></IconButton>
+        <IconButton
+          style={style.prevButton}
+          iconStyle={style.prevButtonIcon}
+          onClick={this.decreasePage}
+          disabled={true}
+        >
+          <HardwareKeyboardArrowLeft/>
+        </IconButton>
         <div className="Recipes-list-root">
           <GridList style={style.gridList} cols={4} >
             <Subheader>Favorites</Subheader>
             {mappedFavorites}
           </GridList>
         </div>
-        <IconButton iconStyle={style.nextButtonIcon} style={style.nextButton} onClick={this.increasePage} disabled={true}><HardwareKeyboardArrowRight/></IconButton>
+        <IconButton
+          style={style.nextButton}
+          iconStyle={style.nextButtonIcon}
+          onClick={this.increasePage}
+          disabled={true}
+        >
+          <HardwareKeyboardArrowRight/>
+        </IconButton>
       </div>
     )
   }
