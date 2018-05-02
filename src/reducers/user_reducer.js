@@ -15,7 +15,7 @@ export const userReducer = (state = initialState, {type, payload}) => {
       return {...state, errors: payload}
 
     case "LOGOUT_USER":
-      return initialState
+      return {...state, userId: 0, username: null, view: null}
 
     case "TOGGLE_REGISTER_FORM":
       return {...state, view: "register"}

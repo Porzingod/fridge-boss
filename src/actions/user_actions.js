@@ -33,7 +33,7 @@ export const login = (body) => {
 
 export const logout = () => {
   return (dispatch) => {
-    dispatch({ type: "LOGOUT_USER "})
+    dispatch({ type: "LOGOUT_USER" })
   }
 }
 

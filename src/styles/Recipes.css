@@ -1,0 +1,38 @@
+.Recipes-container {
+  flex: 4;
+  display: flex;
+  flex-direction: row;
+}
+
+.Recipes-list {
+  flex: 8;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-right: 10px;
+}
+
+.Recipes-buttons-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.Recipes-previous-button {
+  flex: 1;
+}
+
+.Recipes-next-button {
+  flex: 1;
+}
+
+.Recipes-buttons-container-row-1 {
+  flex: 1
+}
+
+.Recipes-buttons-container-row-2 {
+  flex: 1;
+}
+
+.Recipes-buttons-container-row-3 {
+  flex: 1
+}
