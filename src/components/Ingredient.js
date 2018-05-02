@@ -12,11 +12,6 @@ import IconButton from 'material-ui/IconButton';
 import ContentRemove from 'material-ui/svg-icons/content/remove.js'
 
 const style = {
-  root: {
-    float: "left",
-    width: "81%",
-    paddingBottom: 20
-  },
   label: {
     textAlign: 'left'
   },
@@ -27,6 +22,9 @@ const style = {
 }
 
 class Ingredient extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.ingredient !== nextProps.ingredient ? true : false
+  }
 
   expiringSoon = () => {
     let propExpiry = new Date(this.props.ingredient.expiration_date)
@@ -53,8 +51,8 @@ class Ingredient extends React.Component {
     return (
       <div>
         <Checkbox
+          className="Ingredient"
           defaultChecked={checked}
-          style={style.root}
           labelStyle={style.label}
           iconStyle={style.icon}
           key={id}
@@ -83,8 +81,6 @@ class Ingredient extends React.Component {
 const mapStateToProps = state => {
   return {
     userId: state.user.userId,
-    ingredients: state.ingredients.ingredients,
-    selectedIngredients: state.ingredients.selectedIngredients
   }
 }
 

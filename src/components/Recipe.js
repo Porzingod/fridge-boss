@@ -26,12 +26,7 @@ const style = {
     overflowWrap: 'break-word',
     borderTop: "none",
     borderBottom: "none"
-  },
-  button: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
+  }
 }
 
 class Recipe extends React.Component {
@@ -94,7 +89,7 @@ class Recipe extends React.Component {
             {ingredientsList}
           </ul>
           <RaisedButton
-            style={style.button}
+            className="Recipe-full-detail-button"
             label="View Full Recipe"
             onClick={this.getFullRecipe}
           />

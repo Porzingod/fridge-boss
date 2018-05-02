@@ -27,6 +27,76 @@
   font-size: large;
 }
 
+.login-container {
+  height: 92%;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-row-1 {
+  flex: 1;
+}
+
+.login-row-2 {
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+}
+
+.login-row-3 {
+  flex: 1;
+}
+
+.login-column-1 {
+  flex: 1;
+}
+
+.login-column-2 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.login-column-3 {
+  flex: 1;
+}
+
+.app-container {
+  height: 92%;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.app-column-1 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-column-2 {
+  flex: 4;
+}
+
+.sidebar-row-1 {
+  flex: 1;
+}
+
+.sidebar-row-2 {
+  flex: 1;
+}
+
+.sidebar-row-3 {
+  flex: 3;
+  overflow-y: auto;
+}
+
 .Recipes-list-root {
   display: flex;
   flex-wrap: wrap;

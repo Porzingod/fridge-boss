@@ -42,6 +42,14 @@ class IngredientsList extends React.Component {
   componentDidMount() {
     this.props.fetchIngredients(this.props.userId)
   }
+  //
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextProps.userId !== this.props.userId ? true : false
+  // }
+  //
+  // componentWillUpdate(nextProps, nextState) {
+  //   this.props.fetchIngredients(nextProps.userId)
+  // }
 
   handleSearch = () => {
     this.props.searchRecipesInitial(this.props.selectedIngredients, this.state.cuisine, this.state.course, this.state.allergies, this.state.diets)
@@ -212,7 +220,10 @@ class IngredientsList extends React.Component {
     const dateToday = new Date().toDateString().slice(4)
     return (
       <div>
-        <Paper className="Ingredients-sidebar-list-header">
+        <Paper
+          className="sidebar-row-2"
+          //className="Ingredients-sidebar-list-header"
+        >
           <h5 style={{margin: "0"}}>Todays Date: {dateToday}</h5>
           <h2>My Fridge</h2>
           <RaisedButton
@@ -228,7 +239,10 @@ class IngredientsList extends React.Component {
           {this.renderPopover()}
         </Paper>
 
-        <Paper style={style.paper}>
+        <Paper
+          className="sidebar-row-3"
+          // style={style.paper}
+        >
           <FlatButton
             className="Ingredients-sidebar-clear-selection"
             label="Clear Selection"

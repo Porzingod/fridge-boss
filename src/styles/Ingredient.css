@@ -1,3 +1,9 @@
+.Ingredient {
+  float: left !important;
+  width: 81% !important;
+  padding-bottom: 20px !important;
+}
+
 .Ingredient-checkbox-label {
   font-weight: bold;
 }

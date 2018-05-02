@@ -2,6 +2,21 @@
   margin: 12px;
 }
 
+.Recipe-popover {
+  min-width: 40% !important;
+  padding: 10px !important;
+  width: auto !important;
+  overflow-wrap: break-word !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+.Recipe-full-detail-button {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: space-around !important;
+}
+
 .Recipe-grid-tile {
   margin: 10px;
 }

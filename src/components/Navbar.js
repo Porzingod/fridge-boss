@@ -5,7 +5,7 @@ import "../styles/Navbar.css"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { loginLogout } from '../actions/user_actions.js'
+import { login, logout } from '../actions/user_actions.js'
 import { toggleFavorites, toggleBrowse } from '../actions/recipes_actions.js'
 
 import logo from '../images/logo.svg'
@@ -14,6 +14,10 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton'
 
 class Navbar extends React.Component{
+  loginLogout = () => {
+
+  }
+
   render() {
     const rightButtons = (
       <div>
@@ -36,7 +40,7 @@ class Navbar extends React.Component{
           label={this.props.userId > 0 ? "Logout" : "Login"}
           labelStyle={{color: "white"}}
           disableTouchRipple={true}
-          onClick={this.props.loginLogout}
+          onClick={null}
         ></FlatButton>
       </div>
     )
@@ -53,7 +57,8 @@ class Navbar extends React.Component{
 const mapStateToProps = state => {
   return {
     view: state.recipes.view,
-    userId: state.user.userId
+    userId: state.user.userId,
+    // username: state.user.username,
   }
 }
 
@@ -61,7 +66,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     toggleBrowse: toggleBrowse,
     toggleFavorites: toggleFavorites,
-    loginLogout: loginLogout
+    login: login,
+    logout: logout
   }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
