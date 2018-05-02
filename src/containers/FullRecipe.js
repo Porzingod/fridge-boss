@@ -50,8 +50,9 @@ class FullRecipe extends React.Component {
     const image = hostedLargeUrl ? hostedLargeUrl.slice(0, (hostedLargeUrl.length - 5)) : placeholder
     const favoriteIcon = this.props.favorites.map( recipe => {return {recipeId: recipe.recipeId, id: recipe.id} } ).find( recipe => recipe.recipeId === id || recipe.id === id ) ? <Favorite color="red"/> : <FavoriteBorder />
     return(
-      <div style={style.gridList}>
-        <Card>
+      <div className="Full-recipe-container">
+        <div className="Full-recipe-column-1"></div>
+        <Card className="Full-recipe-column-2">
           <CardMedia
             className="Full-recipe-image"
             overlay={
@@ -81,6 +82,7 @@ class FullRecipe extends React.Component {
             />
           </CardText>
         </Card>
+        <div className="Full-recipe-column-3"></div>
       </div>
     )
   }

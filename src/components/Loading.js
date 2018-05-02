@@ -6,7 +6,15 @@ import CircularProgress from 'material-ui/CircularProgress';
 
 const Loading = () => {
   return (
-    <CircularProgress className="Loading-animation" size={150} thickness={20}/>
+    <div className="Loading-container">
+      <div className="Loading-row-1"></div>
+      <div className="Loading-row-2">
+        <div className="Loading-column-1"></div>
+        <CircularProgress className="Loading-column-2 Loading-animation" size={200} thickness={30}/>
+        <div className="Loading-column-3"></div>
+      </div>
+      <div className="Loading-row-3"></div>
+    </div>
   )
 }
 

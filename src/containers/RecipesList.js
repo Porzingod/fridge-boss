@@ -112,7 +112,7 @@ class RecipesList extends React.Component {
       </div>
     )
     return(
-      <div>
+      <div className="main-container">
         {this.renderFetch(recipes, fetched, grid)}
       </div>
     )

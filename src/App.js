@@ -13,12 +13,22 @@ import FullRecipe from './containers/FullRecipe'
 import Favorites from './containers/Favorites'
 
 import Login from './components/Login'
-import Logout from './components/Logout'
 import Register from './components/Register'
 
 const YUMMLY_ATTRIBUTION = "Recipe search powered by <a href='http://www.yummly.co/recipes'><img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></a>"
 
 class App extends Component {
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (this.props.userId !== nextProps.userId) {
+  //     debugger
+  //     return true
+  //   } else if (this.props.userView !== nextProps.userView) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
+
   renderView = () => {
     const { view, recipe } = this.props
     if (view === "recipes") {
@@ -28,12 +38,10 @@ class App extends Component {
     }
   }
 
-  renderLogin = () => {
+  renderLoginRegister = () => {
     return (
-      <div className="login-container">
-        <Login />
-        {/* <Logout /> */}
-        {/* <Register /> */}
+      <div className="user-container">
+        {this.props.userView === "register" ? <Register /> : <Login />}
       </div>
     )
   }
@@ -46,7 +54,7 @@ class App extends Component {
           <IngredientsForm />
           <IngredientsList />
         </div>
-        <div className="Recipes-list">
+        <div className="main-container">
           {view === "favorites" ? <Favorites /> : recipe ? <FullRecipe recipe={recipe}/> : <RecipesList/>}
         </div>
       </div>
@@ -58,8 +66,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <Navbar />
-        {userId == 0 ? this.renderLogin() : this.renderApp()}
-        {/* {this.renderApp()} */}
+        {userId === 0 ? this.renderLoginRegister() : this.renderApp()}
       </MuiThemeProvider>
     );
   }
@@ -69,7 +76,8 @@ const mapStateToProps = state => {
   return {
     view: state.recipes.view,
     recipe: state.recipes.recipe,
-    userId: state.user.userId
+    userId: state.user.userId,
+    userView: state.user.view,
   }
 }
 
