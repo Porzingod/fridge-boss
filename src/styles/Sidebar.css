@@ -1,38 +1,63 @@
-/* App.js */
-.Ingredients-sidebar {
-  float: left;
+.Ingredients-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Ingredients Form */
-.Ingredients-sidebar-form-paper {
+.Ingredients-form {
+  flex: 1;
   margin-bottom: 10px;
+  padding-bottom: 15px;
 }
 
-.Ingredients-sidebar-form-button {
-  margin-top: -20px;
-  margin-bottom: 15px;
+.Ingredients-list {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
-/* Ingredients List */
-.Ingredients-sidebar-filter {
-
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-
-.Ingredients-sidebar-filter-select {
-  padding-left: 10px;
-}
-
-.Ingredients-sidebar-list-header {
-  height: 150px;
+.Ingredients-list-header {
+  flex: 1;
+  margin-bottom: 10px;
   padding-top: 10px;
+  padding-bottom: 15px;
 }
 
-.Ingredients-sidebar-search-button {
-  margin-bottom: 20px;
+.Ingredients-list-header-title {
+  margin: 14px;
 }
 
-.Ingredients-sidebar-clear-selection {
-  margin-top: 5px;
+.Ingredients-list-container {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  border: 1px;
+  overflow: auto;
+}
+
+.Ingredients-list-item {
+  float: left !important;
+  width: 80% !important;
+  padding-bottom: 20px !important;
+}
+
+
+.Ingredient-list-item-label {
+  font-weight: bold;
+}
+
+.Ingredient-list-item-secondary-label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.Ingredient-list-item-secondary-label-red {
+  font-size: 12px;
+  opacity: 0.8;
+  color: red;
+}
+
+.Ingredient-list-item-remove-button {
+  float: right;
 }

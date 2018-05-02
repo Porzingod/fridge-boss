@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import './styles/User.css'
+import './styles/Recipes.css'
 import './styles/Sidebar.css'
 import { connect } from 'react-redux'
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import Navbar from './components/Navbar'
 import IngredientsForm from './containers/IngredientsForm'
@@ -50,11 +52,11 @@ class App extends Component {
     const { view, recipe } = this.props
     return (
       <div className="App app-container">
-        <div className="Ingredients-sidebar">
+        <div className="Ingredients-container">
           <IngredientsForm />
           <IngredientsList />
         </div>
-        <div className="main-container">
+        <div className="Recipes-container">
           {view === "favorites" ? <Favorites /> : recipe ? <FullRecipe recipe={recipe}/> : <RecipesList/>}
         </div>
       </div>
@@ -65,10 +67,12 @@ class App extends Component {
     const { userId } = this.props
     return (
       <MuiThemeProvider>
-        <Navbar />
-        {userId === 0 ? this.renderLoginRegister() : this.renderApp()}
+        <div className="main-container-column">
+          <Navbar />
+          {userId === 0 ? this.renderLoginRegister() : this.renderApp()}
+        </div>
       </MuiThemeProvider>
-    );
+    )
   }
 }
 
@@ -81,4 +85,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App)

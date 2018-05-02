@@ -1,5 +1,5 @@
 import React from 'react'
-import '../App.css';
+import '../styles/User.css';
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -34,8 +34,8 @@ class Login extends React.Component {
         <div className="user-login-row-1"></div>
 
         <div className="user-login-row-2">
-          <div className="user-column-1"></div>
-          <div className="user-column-2">
+          <div className="user-login-column-1"></div>
+          <div className="user-login-column-2">
             <TextField
               hintText="Username"
               floatingLabelText="Username"
@@ -58,7 +58,7 @@ class Login extends React.Component {
               onClick={this.handleSubmit}
             />
           </div>
-          <div className="user-column-3"></div>
+          <div className="user-login-column-3"></div>
         </div>
 
         <div className="user-login-row-3"></div>

@@ -219,10 +219,10 @@ class IngredientsList extends React.Component {
 
     const dateToday = new Date().toDateString().slice(4)
     return (
-      <div>
-        <Paper className="Ingredients-sidebar-list-header">
+      <div className="Ingredients-list">
+        <Paper className="Ingredients-list-header">
           <h5 style={{margin: "0"}}>Todays Date: {dateToday}</h5>
-          <h2>My Fridge</h2>
+          <h2 className="Ingredients-list-header-title">My Fridge</h2>
           <RaisedButton
             className="Ingredients-sidebar-search-button"
             label="Search Recipes"
@@ -236,7 +236,9 @@ class IngredientsList extends React.Component {
           {this.renderPopover()}
         </Paper>
 
-        <Paper style={style.paper}>
+        <Paper
+          className="Ingredients-list-container"
+        >
           <FlatButton
             className="Ingredients-sidebar-clear-selection"
             label="Clear Selection"

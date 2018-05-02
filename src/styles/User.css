@@ -1,0 +1,68 @@
+.user-container {
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-login-row-1 {
+  flex: 1;
+}
+
+.user-login-row-2 {
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+}
+
+.user-login-row-3 {
+  flex: 1;
+}
+
+.user-login-column-1 {
+  flex: 1;
+}
+
+.user-login-column-2 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.user-login-column-3 {
+  flex: 1;
+}
+
+.user-register-row-1 {
+  flex: 1;
+}
+
+.user-register-row-2 {
+  flex: 3;
+  display: flex;
+  flex-direction: row;
+}
+
+.user-register-row-3 {
+  flex: 1;
+}
+
+.user-register-column-1 {
+  flex: 1;
+}
+
+.user-register-column-2 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.user-register-column-3 {
+  flex: 1;
+}
