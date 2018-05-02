@@ -54,10 +54,10 @@ const style = {
 };
 
 class RecipesList extends React.Component {
-  componentDidMount() {
-    !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
-    !this.props.fetchedFavorites ? this.props.fetchFavorites(this.props.userId) : null
-  }
+  // componentDidMount() {
+  //   !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
+  //   !this.props.fetchedFavorites ? this.props.fetchFavorites(this.props.userId) : null
+  // }
 
   renderFetch = (recipes, fetched, element) => {
     if (recipes.length && fetched) {
@@ -113,7 +113,8 @@ class RecipesList extends React.Component {
     )
     return(
       <div className="main-container">
-        {this.renderFetch(recipes, fetched, grid)}
+        {/* {this.renderFetch(recipes, fetched, grid)} */}
+        <Loading />
       </div>
     )
   }

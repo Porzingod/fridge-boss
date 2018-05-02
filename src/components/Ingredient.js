@@ -51,7 +51,7 @@ class Ingredient extends React.Component {
     return (
       <div>
         <Checkbox
-          className="Ingredient"
+          className="Ingredients-list-item"
           defaultChecked={checked}
           labelStyle={style.label}
           iconStyle={style.icon}

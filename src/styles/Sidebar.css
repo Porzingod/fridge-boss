@@ -1,20 +1,57 @@
-/* App.js */
-.Ingredients-sidebar {
-  float: left;
+.Ingredients-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Ingredients Form */
-.Ingredients-sidebar-form-paper {
+.Ingredients-form {
+  flex: 1;
   margin-bottom: 10px;
+  padding-bottom: 15px;
 }
 
-.Ingredients-sidebar-form-button {
+.Ingredients-list {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.Ingredients-list-header {
+  flex: 1;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
+.Ingredients-list-header-title {
+  margin: 14px;
+}
+
+.Ingredients-list-container {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  border: 1px;
+  overflow: auto;
+}
+
+.Ingredients-list-item {
+  float: left !important;
+  width: 80% !important;
+  padding-bottom: 20px !important;
+}
+/* Ingredients Form */
+/* .Ingredients-sidebar-form-paper {
+  margin-bottom: 10px;
+} */
+
+/* .Ingredients-sidebar-form-button {
   margin-top: -20px;
   margin-bottom: 15px;
-}
+} */
 
 /* Ingredients List */
-.Ingredients-sidebar-filter {
+/* .Ingredients-sidebar-filter {
 
   overflow-y: hidden;
   overflow-x: hidden;
@@ -35,4 +72,4 @@
 
 .Ingredients-sidebar-clear-selection {
   margin-top: 5px;
-}
+} */

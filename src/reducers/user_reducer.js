@@ -1,6 +1,6 @@
 const initialState = {
   //dynamically
-  userId: 0,
+  userId: 1,
   username: null,
   view: null,
 }
