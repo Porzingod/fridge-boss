@@ -215,24 +215,27 @@ class IngredientsList extends React.Component {
             className="Ingredients-sidebar-search-button"
             label="Search Recipes"
             onClick={this.handleSearch}/>
+          <br/>
           <FlatButton
+            className="Ingredients-search-filter"
             label="Filters"
             onClick={this.showPopover}
             disableTouchRipple={true}
-            labelStyle={{fontSize:"10px", padding: "0px"}}
+            labelStyle={{fontSize:"12px", padding: "0px"}}
           ></FlatButton>
+          <br/>
           {this.renderPopover()}
+          <FlatButton
+            label="Clear Selection"
+            labelStyle={{paddingTop: "0px"}}
+            onClick={this.props.clearSelection}
+            disableTouchRipple={true}
+          />
         </Paper>
 
         <Paper
           className="Ingredients-list-container"
         >
-          <FlatButton
-            className="Ingredients-sidebar-clear-selection"
-            label="Clear Selection"
-            onClick={this.props.clearSelection}
-            disableTouchRipple={true}
-          />
           <div style={{paddingTop: '10px'}}>
             {mappedIngredients}
           </div>

@@ -24,11 +24,18 @@
   margin-bottom: 10px;
   padding-top: 10px;
   padding-bottom: 15px;
-  max-height: 135px;
+  max-height: 185px;
 }
 
 .Ingredients-list-header-title {
-  margin: 14px;
+  margin: 10px;
+}
+
+.Ingredients-search-filter {
+  display: inline-block;
+  padding-top: 10px !important;
+  height: 30px !important;
+  line-height: 15px !important;
 }
 
 .Ingredients-list-container {
@@ -44,7 +51,6 @@
   width: 80% !important;
   padding-bottom: 20px !important;
 }
-
 
 .Ingredient-list-item-label {
   font-weight: bold;

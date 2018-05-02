@@ -71,7 +71,7 @@ class RecipesList extends React.Component {
   }
 
   render() {
-    const {recipes, fetched, page} = this.props
+    const {recipes, fetched, page, searchedIngredients, searchedAllergies, searchedDiets, cuisine, course} = this.props
     const mappedRecipes = recipes.map( recipe => <Recipe key={recipe.id} recipe={recipe} /> )
     const grid = (
       <div className="Recipes-container">
@@ -91,7 +91,7 @@ class RecipesList extends React.Component {
 
         <div className="Recipes-list">
           <GridList cols={4} >
-            <Subheader>Browse</Subheader>
+            <Subheader>{searchedIngredients || searchedAllergies || searchedDiets || cuisine || course ? "Search Results" : "Browse"}</Subheader>
             {mappedRecipes}
           </GridList>
         </div>
