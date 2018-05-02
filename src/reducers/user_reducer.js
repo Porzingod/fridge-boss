@@ -1,5 +1,4 @@
 const initialState = {
-  //dynamically
   userId: 0,
   username: null,
   view: null,
@@ -15,7 +14,7 @@ export const userReducer = (state = initialState, {type, payload}) => {
       return {...state, errors: payload}
 
     case "LOGOUT_USER":
-      return {...state, userId: 0, username: null, view: null}
+      return initialState
 
     case "TOGGLE_REGISTER_FORM":
       return {...state, view: "register"}

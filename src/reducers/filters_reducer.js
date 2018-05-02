@@ -31,6 +31,8 @@ const initialState = {
 
 export const filtersReducer = (state = initialState, {type, payload}) => {
   switch(type) {
+    case "CLEAR_FILTERS":
+      return initialState
     default:
       return state
   }

@@ -87,6 +87,9 @@ export const recipesReducer = (state = initialState, {type, payload}) => {
     case "REMOVING_FAVORITE_REJECTED":
       return {...state, deleting: false, errors: payload}
 
+    case "CLEAR_RECIPES":
+      return initialState
+
     default:
       return state
   }

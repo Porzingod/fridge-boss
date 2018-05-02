@@ -34,6 +34,9 @@ export const login = (body) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch({ type: "LOGOUT_USER" })
+    dispatch({ type: "CLEAR_RECIPES" })
+    dispatch({ type: "CLEAR_INGREDIENTS" })
+    dispatch({ type: "CLEAR_FILTERS" })
   }
 }
 

@@ -73,6 +73,9 @@ export const ingredientsReducer = (state = initialState, {type, payload}) => {
       updatedIngredients = state.ingredients.map( ingr => {return{...ingr, selected: false}} )
       return {...state, ingredients: updatedIngredients, selectedIngredients: []}
 
+    case "CLEAR_INGREDIENTS":
+      return initialState
+      
     default:
       return state
   }
