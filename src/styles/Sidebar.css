@@ -11,6 +11,7 @@
 }
 
 .Ingredients-list {
+  flex: 4;
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -40,36 +41,23 @@
   width: 80% !important;
   padding-bottom: 20px !important;
 }
-/* Ingredients Form */
-/* .Ingredients-sidebar-form-paper {
-  margin-bottom: 10px;
-} */
 
-/* .Ingredients-sidebar-form-button {
-  margin-top: -20px;
-  margin-bottom: 15px;
-} */
 
-/* Ingredients List */
-/* .Ingredients-sidebar-filter {
-
-  overflow-y: hidden;
-  overflow-x: hidden;
+.Ingredient-list-item-label {
+  font-weight: bold;
 }
 
-.Ingredients-sidebar-filter-select {
-  padding-left: 10px;
+.Ingredient-list-item-secondary-label {
+  font-size: 12px;
+  opacity: 0.8;
 }
 
-.Ingredients-sidebar-list-header {
-  height: 150px;
-  padding-top: 10px;
+.Ingredient-list-item-secondary-label-red {
+  font-size: 12px;
+  opacity: 0.8;
+  color: red;
 }
 
-.Ingredients-sidebar-search-button {
-  margin-bottom: 20px;
+.Ingredient-list-item-remove-button {
+  float: right;
 }
-
-.Ingredients-sidebar-clear-selection {
-  margin-top: 5px;
-} */
