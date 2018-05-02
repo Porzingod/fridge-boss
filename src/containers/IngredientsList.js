@@ -220,10 +220,7 @@ class IngredientsList extends React.Component {
     const dateToday = new Date().toDateString().slice(4)
     return (
       <div>
-        <Paper
-          className="sidebar-row-2"
-          //className="Ingredients-sidebar-list-header"
-        >
+        <Paper className="Ingredients-sidebar-list-header">
           <h5 style={{margin: "0"}}>Todays Date: {dateToday}</h5>
           <h2>My Fridge</h2>
           <RaisedButton
@@ -239,10 +236,7 @@ class IngredientsList extends React.Component {
           {this.renderPopover()}
         </Paper>
 
-        <Paper
-          className="sidebar-row-3"
-          // style={style.paper}
-        >
+        <Paper style={style.paper}>
           <FlatButton
             className="Ingredients-sidebar-clear-selection"
             label="Clear Selection"

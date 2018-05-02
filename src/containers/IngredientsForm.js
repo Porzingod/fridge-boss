@@ -60,11 +60,7 @@ class IngredientsForm extends React.Component {
   render() {
     const {name} = this.state
     return (
-      <Paper
-        className="sidebar-row-1" 
-        // className="Ingredients-sidebar-form-paper"
-      >
-
+      <Paper className="Ingredients-sidebar-form-paper">
         <TextField
           inputStyle={style.textInputField}
           hintStyle={style.textHintField}

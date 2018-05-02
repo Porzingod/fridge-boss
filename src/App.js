@@ -42,11 +42,11 @@ class App extends Component {
     const { view, recipe } = this.props
     return (
       <div className="App app-container">
-        <div className="app-column-1">
+        <div className="Ingredients-sidebar">
           <IngredientsForm />
           <IngredientsList />
         </div>
-        <div className="app-column-2">
+        <div className="Recipes-list">
           {view === "favorites" ? <Favorites /> : recipe ? <FullRecipe recipe={recipe}/> : <RecipesList/>}
         </div>
       </div>
