@@ -1,5 +1,7 @@
 import React from 'react'
 
+import '../styles/User.css';
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { register } from '../actions/user_actions'
@@ -34,8 +36,8 @@ class Register extends React.Component {
       <div className="user-container">
         <div className="user-register-row-1"></div>
         <div className="user-register-row-2">
-          <div className="user-column-1"></div>
-          <div className="user-column-2">
+          <div className="user-register-column-1"></div>
+          <div className="user-register-column-2">
             <TextField
               hintText="Username"
               floatingLabelText="Username"
@@ -67,7 +69,7 @@ class Register extends React.Component {
               onClick={this.handleSubmit}
             />
           </div>
-          <div className="user-column-3"></div>
+          <div className="user-register-column-3"></div>
         </div>
         <div className="user-register-row-3"></div>
       </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './styles/User.css';
 import './styles/Sidebar.css'
 import { connect } from 'react-redux'
 
@@ -65,8 +66,10 @@ class App extends Component {
     const { userId } = this.props
     return (
       <MuiThemeProvider>
-        <Navbar />
-        {userId === 0 ? this.renderLoginRegister() : this.renderApp()}
+        <div className="main-container-column">
+          <Navbar />
+          {userId === 0 ? this.renderLoginRegister() : this.renderApp()}
+        </div>
       </MuiThemeProvider>
     );
   }
