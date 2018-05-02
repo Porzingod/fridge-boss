@@ -139,7 +139,7 @@ class IngredientsList extends React.Component {
         open={this.state.open}
         anchorEl={this.state.anchorEl}
         anchorOrigin={{horizontal: 'right', vertical: 'center'}}
-        targetOrigin={{horizontal: 'left', vertical: 'center'}}
+        targetOrigin={{horizontal: 'left', vertical: 'top'}}
         onRequestClose={this.handleRequestClose}
       >
         <Menu>
@@ -226,7 +226,7 @@ class IngredientsList extends React.Component {
           <br/>
           {this.renderPopover()}
           <FlatButton
-            label="Clear Selection"
+            label="Clear Ingredient Selection"
             labelStyle={{paddingTop: "0px"}}
             onClick={this.props.clearSelection}
             disableTouchRipple={true}

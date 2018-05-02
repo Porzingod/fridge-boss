@@ -71,6 +71,9 @@ class IngredientsForm extends React.Component {
         />
         <br/>
         <DatePicker
+          autoOk={true}
+          firstDayOfWeek={0}
+          openToYearSelection={true}
           inputStyle={style.datePicker}
           hintStyle={style.textHintField}
           onChange={this.handleExpirationDate}
