@@ -15,9 +15,6 @@ import IconButton from 'material-ui/IconButton';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left'
 import HardwareKeyboardArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 
-const windowHeight = window.innerHeight
-const gridHeight = windowHeight - 100
-
 const style = {
   prevButtonIcon: {
     width: 60,

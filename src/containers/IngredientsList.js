@@ -18,18 +18,6 @@ import Menu from 'material-ui/Menu';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-const windowHeight = window.innerHeight
-const paperHeight = windowHeight - 420
-
-const style = {
-  paper: {
-    height: paperHeight,
-    minWidth: 260,
-    maxWidth: "15%",
-    overflowY: 'auto'
-  },
-};
-
 class IngredientsList extends React.Component {
   state = {
     open: false,

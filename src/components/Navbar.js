@@ -5,7 +5,7 @@ import "../styles/Navbar.css"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { login, logout, renderRegisterForm, renderLoginForm } from '../actions/user_actions.js'
+import { logout, renderRegisterForm, renderLoginForm } from '../actions/user_actions.js'
 import { toggleFavorites, toggleBrowse } from '../actions/recipes_actions.js'
 
 import logo from '../images/logo.svg'
