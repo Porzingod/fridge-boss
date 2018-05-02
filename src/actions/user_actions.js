@@ -48,7 +48,7 @@ export const register = (body) => {
     dispatch({ type: "REGISTER_USER_PENDING" })
     return fetch(`${MY_API_URL}/users`, {
       method: "POST",
-      body: JSON.stringify(body),
+      body: JSON.stringify({user: body}),
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"

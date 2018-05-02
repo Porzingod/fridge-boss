@@ -81,4 +81,4 @@ const mapDispatchToProps = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapDispatchToProps)(Register)
+export default connect(null, mapDispatchToProps)(Register)
