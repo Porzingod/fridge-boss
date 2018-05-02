@@ -1,5 +1,7 @@
 import React from 'react'
 
+import '../styles/Recipes.css'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -17,12 +19,6 @@ const windowHeight = window.innerHeight
 const gridHeight = windowHeight - 100
 
 const style = {
-  gridList: {
-    width: "auto",
-    height: gridHeight,
-    overflowY: 'auto',
-    marginRight: 10
-  },
   prevButtonIcon: {
     width: 60,
     height: 60,
@@ -30,9 +26,6 @@ const style = {
   prevButton: {
     width: 120,
     height: 120,
-    float: 'left',
-    marginTop: windowHeight/2 - 120,
-    marginLeft: 20,
   },
   nextButtonIcon: {
     width: 60,
@@ -41,9 +34,6 @@ const style = {
   nextButton: {
     width: 120,
     height: 120,
-    float: 'right',
-    marginTop: windowHeight/2 - 120,
-    marginRight: 20,
   }
 };
 
@@ -57,29 +47,40 @@ class Favorites extends React.Component{
     const { favorites } = this.props
     const mappedFavorites = favorites.map( recipe => <Recipe key={recipe.id} recipe={recipe} /> )
     return(
-      <div style={{display: 'flex'}}>
-        <IconButton
-          style={style.prevButton}
-          iconStyle={style.prevButtonIcon}
-          onClick={this.decreasePage}
-          disabled={true}
-        >
-          <HardwareKeyboardArrowLeft/>
-        </IconButton>
-        <div className="Recipes-list-root">
+      <div className="Recipes-container">
+        <div className="Recipes-buttons-container">
+          <div className="Recipes-buttons-container-row-1" ></div>
+          <IconButton
+            className="Recipes-buttons-container-row-2"
+            style={style.prevButton}
+            iconStyle={style.prevButtonIcon}
+            onClick={this.decreasePage}
+            disabled={true}
+          >
+            <HardwareKeyboardArrowLeft/>
+          </IconButton>
+          <div className="Recipes-buttons-container-row-3" ></div>
+        </div>
+
+        <div className="Recipes-list">
           <GridList style={style.gridList} cols={4} >
             <Subheader>Favorites</Subheader>
             {mappedFavorites}
           </GridList>
         </div>
-        <IconButton
-          style={style.nextButton}
-          iconStyle={style.nextButtonIcon}
-          onClick={this.increasePage}
-          disabled={true}
-        >
-          <HardwareKeyboardArrowRight/>
-        </IconButton>
+        <div className="Recipes-buttons-container">
+          <div className="Recipes-buttons-container-row-1" ></div>
+          <IconButton
+            className="Recipes-buttons-container-row-2"
+            style={style.nextButton}
+            iconStyle={style.nextButtonIcon}
+            onClick={this.increasePage}
+            disabled={true}
+          >
+            <HardwareKeyboardArrowRight/>
+          </IconButton>
+          <div className="Recipes-buttons-container-row-3" ></div>
+        </div>
       </div>
     )
   }

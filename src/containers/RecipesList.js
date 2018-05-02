@@ -1,5 +1,7 @@
 import React from 'react'
 
+import '../styles/Recipes.css'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -19,12 +21,6 @@ const windowHeight = window.innerHeight
 const gridHeight = windowHeight - 100
 
 const style = {
-  gridList: {
-    width: "auto",
-    height: gridHeight,
-    overflowY: 'auto',
-    marginRight: 10
-  },
   button: {
     float: 'right',
     marginBottom: 10
@@ -36,9 +32,6 @@ const style = {
   prevButton: {
     width: 120,
     height: 120,
-    float: 'left',
-    marginTop: windowHeight/2 - 120,
-    marginLeft: 20,
   },
   nextButtonIcon: {
     width: 60,
@@ -47,17 +40,14 @@ const style = {
   nextButton: {
     width: 120,
     height: 120,
-    float: 'right',
-    marginTop: windowHeight/2 - 120,
-    marginRight: 20,
   }
 };
 
 class RecipesList extends React.Component {
-  // componentDidMount() {
-  //   !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
-  //   !this.props.fetchedFavorites ? this.props.fetchFavorites(this.props.userId) : null
-  // }
+  componentDidMount() {
+    !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
+    !this.props.fetchedFavorites ? this.props.fetchFavorites(this.props.userId) : null
+  }
 
   renderFetch = (recipes, fetched, element) => {
     if (recipes.length && fetched) {
@@ -87,34 +77,45 @@ class RecipesList extends React.Component {
     const {recipes, fetched, page} = this.props
     const mappedRecipes = recipes.map( recipe => <Recipe key={recipe.id} recipe={recipe} /> )
     const grid = (
-      <div style={{display: 'flex',}}>
-        <IconButton
-          iconStyle={style.prevButtonIcon}
-          style={style.prevButton}
-          onClick={this.decreasePage}
-          disabled={page > 0 ? false : true}
-        >
-          <HardwareKeyboardArrowLeft/>
-        </IconButton>
-        <div >
-          <GridList style={style.gridList} cols={4} >
+      <div className="Recipes-container">
+        <div className="Recipes-buttons-container">
+          <div className="Recipes-buttons-container-row-1" ></div>
+          <IconButton
+            className="Recipes-buttons-container-row-2"
+            iconStyle={style.prevButtonIcon}
+            style={style.prevButton}
+            onClick={this.decreasePage}
+            disabled={page > 0 ? false : true}
+          >
+            <HardwareKeyboardArrowLeft/>
+          </IconButton>
+          <div className="Recipes-buttons-container-row-3" ></div>
+        </div>
+
+        <div className="Recipes-list">
+          <GridList cols={4} >
             <Subheader>Browse</Subheader>
             {mappedRecipes}
           </GridList>
         </div>
-        <IconButton
-          iconStyle={style.nextButtonIcon}
-          style={style.nextButton}
-          onClick={this.increasePage}
-        >
-          <HardwareKeyboardArrowRight/>
-        </IconButton>
+        <div className="Recipes-buttons-container">
+          <div className="Recipes-buttons-container-row-1" ></div>
+          <IconButton
+            className="Recipes-buttons-container-row-2"
+            iconStyle={style.nextButtonIcon}
+            style={style.nextButton}
+            onClick={this.increasePage}
+          >
+            <HardwareKeyboardArrowRight/>
+          </IconButton>
+          <div className="Recipes-buttons-container-row-3" ></div>
+        </div>
       </div>
     )
     return(
-      <div className="main-container">
-        {/* {this.renderFetch(recipes, fetched, grid)} */}
-        <Loading />
+      <div className="main-container-row">
+        {this.renderFetch(recipes, fetched, grid)}
+        {/* <Loading /> */}
       </div>
     )
   }
