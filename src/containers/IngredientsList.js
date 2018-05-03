@@ -103,14 +103,16 @@ class IngredientsList extends React.Component {
   // Filter
   renderPopover = () => {
     const { cuisines, courses, allergies, diets } = this.props
-    const cuisinesSelection = cuisines.map( cuisine =>
+    const cuisinesSelection = cuisines.map( (cuisine, index) =>
       <MenuItem
+        key={index}
         value={cuisine}
         primaryText={cuisine}
       />
     )
-    const coursesSelection = courses.map( course =>
+    const coursesSelection = courses.map( (course, index) =>
       <MenuItem
+        key={index}
         value={course}
         primaryText={course}
       />
