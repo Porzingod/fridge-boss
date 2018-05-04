@@ -39,10 +39,10 @@ const style = {
 };
 
 class Favorites extends React.Component{
-  componentDidMount() {
-    !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
-    !this.props.fetchedFavorites ? typeof userId === "number" ? this.props.fetchFavorites(userId) : this.props.fetchFavorites(this.props.user_id) : null
-  }
+  // componentDidMount() {
+  //   !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
+  //   !this.props.fetchedFavorites ? typeof userId === "number" ? this.props.fetchFavorites(userId) : this.props.fetchFavorites(this.props.user_id) : null
+  // }
 
   render() {
     const { favorites } = this.props

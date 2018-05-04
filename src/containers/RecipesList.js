@@ -58,8 +58,15 @@ class RecipesList extends React.Component {
   //   !this.props.fetchedFavorites ? typeof userId === "number" ? this.props.fetchFavorites(userId) : this.props.fetchFavorites(this.props.user_id) : null
   // }
   componentDidMount() {
-    !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
-    !this.props.fetchedFavorites ? typeof userId === "number" ? this.props.fetchFavorites(userId) : this.props.fetchFavorites(this.props.user_id) : null
+    const { fetchRecipes, fetchFavorites, recipes, page, fetchedFavorites, user_id} = this.props
+    !recipes.length ? fetchRecipes(page) : null
+    if (fetchedFavorites) {
+      null
+    } else if (isNaN(userId)) {
+      fetchFavorites(user_id)
+    } else {
+      fetchFavorites(userId)
+    }
   }
 
   renderFetch = (recipes, fetched, element) => {

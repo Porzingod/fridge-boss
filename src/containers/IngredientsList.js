@@ -30,8 +30,25 @@ class IngredientsList extends React.Component {
   }
 
   componentDidMount() {
-    typeof userId === "number" ? this.props.fetchIngredients(userId) : this.props.fetchIngredients(this.props.user_id)
+    const { fetchIngredients, ingredients, user_id} = this.props
+    if (!!ingredients.length) {
+      null
+    } else if (isNaN(userId)) {
+      fetchIngredients(user_id)
+    } else {
+      fetchIngredients(userId)
+    }
   }
+
+  // shouldComponentUpdate(nextProps) {
+  //   const {ingredients, selectedIngredients, user_id} = this.props
+  //   debugger
+  // }
+  //
+  // componentDidUpdate(prevProps) {
+  //   const {ingredients, selectedIngredients, user_id} = this.props
+  //   debugger
+  // }
 
   handleSearch = () => {
     this.props.searchRecipesInitial(this.props.selectedIngredients, this.state.cuisine, this.state.course, this.state.allergies, this.state.diets)

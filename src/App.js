@@ -29,18 +29,23 @@ class App extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (this.props.location.pathname !== nextProps.location.pathname
-      || this.props.view !== nextProps.view
+    if (
+      // componentDidMount will initially change location
+      this.props.location.pathname !== nextProps.location.pathname
+      // register/login toggle will change userView
       || this.props.userView !== nextProps.userView
-      || this.props.recipe !== nextProps.recipe
+      // loggedIn status will render login/register or app
       || this.props.loggedIn !== nextProps.loggedIn
+      // view will toggle between browse/search and favorites
+      || this.props.view !== nextProps.view
+      // recipe will determine if fullRecipe is displayed
+      || this.props.recipe !== nextProps.recipe
+      // user_id
+      || this.props.user_id !== nextProps.user_id
     ) {
-      debugger
       return true
-    } else if (this.props.userView === nextProps.userView) {
-      return false
     } else {
-      return true
+      return false
     }
   }
 
@@ -71,7 +76,7 @@ class App extends Component {
 
   renderApp = () => {
     const { view, recipe, history } = this.props
-    view == "favorites" ? history.replace("/favorites") : recipe ? history.replace("/recipe") : history.replace("/browse")
+    view == "favorites" ? history.replace("/favorites") : recipe ? history.replace("/recipe") : history.replace("/recipes")
   }
 
   // render() {
@@ -94,7 +99,7 @@ class App extends Component {
           <Navbar />
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
-          <Route path="/browse" component={RecipesList}/>
+          <Route path="/recipes" component={RecipesList}/>
           <Route path="/favorites" component={Favorites}/>
           <Route path="/recipe" component={() => <FullRecipe recipe={recipe}/>}/>
         </div>
@@ -108,7 +113,8 @@ const mapStateToProps = state => {
     view: state.recipes.view,
     recipe: state.recipes.recipe,
     userView: state.user.view,
-    loggedIn: state.user.loggedIn
+    loggedIn: state.user.loggedIn,
+    user_id: state.user.user_id
   }
 }
 
