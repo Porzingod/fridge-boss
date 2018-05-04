@@ -8,6 +8,9 @@ import { userId } from '../constants'
 
 import { addFavorite, removeFavorite } from '../actions/recipes_actions'
 
+import IngredientsForm from '../containers/IngredientsForm'
+import IngredientsList from '../containers/IngredientsList'
+
 import placeholder from '../images/placeholder_meal.png'
 
 import {Card, CardMedia, CardTitle, CardText} from 'material-ui/Card'
@@ -52,39 +55,46 @@ class FullRecipe extends React.Component {
     const image = hostedLargeUrl ? hostedLargeUrl.slice(0, (hostedLargeUrl.length - 5)) : placeholder
     const favoriteIcon = this.props.favorites.map( recipe => {return {recipeId: recipe.recipeId, id: recipe.id} } ).find( recipe => recipe.recipeId === id || recipe.id === id ) ? <Favorite color="red"/> : <FavoriteBorder />
     return(
-      <div className="Full-recipe-container">
-        <div className="Full-recipe-column-1"></div>
-        <Card className="Full-recipe-column-2">
-          <CardMedia
-            className="Full-recipe-image"
-            overlay={
-              <CardTitle className="Full-recipe-image-title" title={name}/>
-            }>
-            <img src={image} alt={name}/>
-          </CardMedia>
-          <CardTitle
-            style={style.cardTitle}
-            title={`${course ? `${course}` : ""} ${cuisine ? `| ${cuisine}` : ""}`}
-          />
-          <RaisedButton
-            className="Full-recipe-favorite-button"
-            label="Favorite"
-            labelPosition="before"
-            icon={favoriteIcon}
-            onClick={this.handleFavorite}/>
-          <CardText>
-            <strong>Servings:</strong> {numberOfServings}<br/>
-            <strong>Cook Time:</strong> {totalTime}<br/><br/>
-            <p><strong>Ingredients: </strong></p>
-            <ul>{ingredientLines.map( (ingr, index) => <li key={index}>{ingr}</li> )}</ul>
-            <RaisedButton
-              href={sourceRecipeUrl}
-              target="_blank"
-              label="Click Here For Recipe Instructions"
+      <div className="App app-container">
+
+        <div className="Ingredients-container">
+          <IngredientsForm />
+          <IngredientsList />
+        </div>
+        <div className="Full-recipe-container">
+          <div className="Full-recipe-column-1"></div>
+          <Card className="Full-recipe-column-2">
+            <CardMedia
+              className="Full-recipe-image"
+              overlay={
+                <CardTitle className="Full-recipe-image-title" title={name}/>
+              }>
+              <img src={image} alt={name}/>
+            </CardMedia>
+            <CardTitle
+              style={style.cardTitle}
+              title={`${course ? `${course}` : ""} ${cuisine ? `| ${cuisine}` : ""}`}
             />
-          </CardText>
-        </Card>
-        <div className="Full-recipe-column-3"></div>
+            <RaisedButton
+              className="Full-recipe-favorite-button"
+              label="Favorite"
+              labelPosition="before"
+              icon={favoriteIcon}
+              onClick={this.handleFavorite}/>
+            <CardText>
+              <strong>Servings:</strong> {numberOfServings}<br/>
+              <strong>Cook Time:</strong> {totalTime}<br/><br/>
+              <p><strong>Ingredients: </strong></p>
+              <ul>{ingredientLines.map( (ingr, index) => <li key={index}>{ingr}</li> )}</ul>
+              <RaisedButton
+                href={sourceRecipeUrl}
+                target="_blank"
+                label="Click Here For Recipe Instructions"
+              />
+            </CardText>
+          </Card>
+          <div className="Full-recipe-column-3"></div>
+        </div>
       </div>
     )
   }

@@ -7,9 +7,16 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux'
 import store from './store'
 
+import { Router, Route, Link } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
+
+const history = createBrowserHistory()
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={history}>
+      <App />
+    </Router>
   </Provider>,
   document.getElementById('root'));
 registerServiceWorker();

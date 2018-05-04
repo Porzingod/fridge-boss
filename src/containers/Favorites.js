@@ -10,6 +10,8 @@ import { userId } from '../constants'
 import { fetchRecipes, fetchFavorites } from '../actions/recipes_actions'
 
 import Recipe from '../components/Recipe'
+import IngredientsForm from '../containers/IngredientsForm'
+import IngredientsList from '../containers/IngredientsList'
 
 import { GridList } from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
@@ -46,39 +48,45 @@ class Favorites extends React.Component{
     const { favorites } = this.props
     const mappedFavorites = favorites.map( recipe => <Recipe key={recipe.id} recipe={recipe} /> )
     return(
-      <div className="Recipes-container">
-        <div className="Recipes-buttons-container">
-          <div className="Recipes-buttons-container-row-1" ></div>
-          <IconButton
-            className="Recipes-buttons-container-row-2"
-            style={style.prevButton}
-            iconStyle={style.prevButtonIcon}
-            onClick={this.decreasePage}
-            disabled={true}
-          >
-            <HardwareKeyboardArrowLeft/>
-          </IconButton>
-          <div className="Recipes-buttons-container-row-3" ></div>
+      <div className="App app-container">
+        <div className="Ingredients-container">
+          <IngredientsForm />
+          <IngredientsList />
         </div>
+        <div className="Recipes-container">
+          <div className="Recipes-buttons-container">
+            <div className="Recipes-buttons-container-row-1" ></div>
+            <IconButton
+              className="Recipes-buttons-container-row-2"
+              style={style.prevButton}
+              iconStyle={style.prevButtonIcon}
+              onClick={this.decreasePage}
+              disabled={true}
+            >
+              <HardwareKeyboardArrowLeft/>
+            </IconButton>
+            <div className="Recipes-buttons-container-row-3" ></div>
+          </div>
 
-        <div className="Recipes-list">
-          <GridList style={style.gridList} cols={4} >
-            <Subheader>Favorites</Subheader>
-            {mappedFavorites}
-          </GridList>
-        </div>
-        <div className="Recipes-buttons-container">
-          <div className="Recipes-buttons-container-row-1" ></div>
-          <IconButton
-            className="Recipes-buttons-container-row-2"
-            style={style.nextButton}
-            iconStyle={style.nextButtonIcon}
-            onClick={this.increasePage}
-            disabled={true}
-          >
-            <HardwareKeyboardArrowRight/>
-          </IconButton>
-          <div className="Recipes-buttons-container-row-3" ></div>
+          <div className="Recipes-list">
+            <GridList style={style.gridList} cols={4} >
+              <Subheader>Favorites</Subheader>
+              {mappedFavorites}
+            </GridList>
+          </div>
+          <div className="Recipes-buttons-container">
+            <div className="Recipes-buttons-container-row-1" ></div>
+            <IconButton
+              className="Recipes-buttons-container-row-2"
+              style={style.nextButton}
+              iconStyle={style.nextButtonIcon}
+              onClick={this.increasePage}
+              disabled={true}
+            >
+              <HardwareKeyboardArrowRight/>
+            </IconButton>
+            <div className="Recipes-buttons-container-row-3" ></div>
+          </div>
         </div>
       </div>
     )

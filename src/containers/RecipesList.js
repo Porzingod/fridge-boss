@@ -126,9 +126,16 @@ class RecipesList extends React.Component {
       </div>
     )
     return(
-      <div className="main-container-row">
-        {this.renderFetch(recipes, fetched, grid)}
-        {/* <Loading /> */}
+      <div className="App app-container">
+
+        <div className="Ingredients-container">
+          <IngredientsForm />
+          <IngredientsList />
+        </div>
+        <div className="main-container-row">
+          {this.renderFetch(recipes, fetched, grid)}
+          {/* <Loading /> */}
+        </div>
       </div>
     )
   }
