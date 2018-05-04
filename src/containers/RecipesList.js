@@ -12,6 +12,8 @@ import { fetchRecipes, fetchFavorites, searchRecipes, decreasePage, increasePage
 import Recipe from '../components/Recipe'
 import NoResults from '../components/NoResults'
 import Loading from '../components/Loading'
+import IngredientsForm from '../containers/IngredientsForm'
+import IngredientsList from '../containers/IngredientsList'
 
 import {GridList} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
@@ -43,6 +45,18 @@ const style = {
 };
 
 class RecipesList extends React.Component {
+  // shouldComponentUpdate(nextProps) {
+  //   if (this.props.userId !== nextProps.userId){
+  //     return true
+  //   } else if(this.props.recipes !== nextProps.recipes){
+  //     return true
+  //   }
+  // }
+  //
+  // componentDidUpdate() {
+  //   !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
+  //   !this.props.fetchedFavorites ? typeof userId === "number" ? this.props.fetchFavorites(userId) : this.props.fetchFavorites(this.props.user_id) : null
+  // }
   componentDidMount() {
     !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
     !this.props.fetchedFavorites ? typeof userId === "number" ? this.props.fetchFavorites(userId) : this.props.fetchFavorites(this.props.user_id) : null
