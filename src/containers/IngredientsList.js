@@ -30,6 +30,8 @@ class IngredientsList extends React.Component {
   }
 
   componentDidMount() {
+    console.log(typeof userId === "number");
+    debugger
     typeof userId === "number" ? this.props.fetchIngredients(userId) : this.props.fetchIngredients(this.props.user_id)
   }
 

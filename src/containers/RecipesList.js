@@ -93,7 +93,7 @@ class RecipesList extends React.Component {
 
         <div className="Recipes-list">
           <GridList cols={4} >
-            <Subheader>{searchedIngredients || searchedAllergies || searchedDiets || cuisine || course ? "Search Results" : "Browse"}</Subheader>
+            <Subheader>{searchedIngredients.length || searchedAllergies.length || searchedDiets.length || cuisine || course ? "Search Results" : "Browse"}</Subheader>
             {mappedRecipes}
           </GridList>
         </div>
