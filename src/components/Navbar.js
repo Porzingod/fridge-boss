@@ -35,14 +35,14 @@ class Navbar extends React.Component{
         <FlatButton
           className="Navbar-button"
           label={
-            this.props.userId > 0 ? "Logout" :
+            this.props.loggedIn ? "Logout" :
             this.props.userView === "register" ? "Login" :
             "Register"
           }
           labelStyle={{color: "white"}}
           disableTouchRipple={true}
           onClick={
-            this.props.userId > 0 ? this.props.logout :
+            this.props.loggedIn ? this.props.logout :
             this.props.userView === "register" ? this.props.renderLoginForm :
             this.props.renderRegisterForm
           }
@@ -62,7 +62,7 @@ class Navbar extends React.Component{
 const mapStateToProps = state => {
   return {
     view: state.recipes.view,
-    userId: state.user.userId,
+    loggedIn: state.user.loggedIn,
     userView: state.user.view,
   }
 }

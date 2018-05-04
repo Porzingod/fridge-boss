@@ -5,6 +5,8 @@ import '../styles/Recipe.css'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { userId } from '../constants'
+
 import { getRecipe, addFavorite, removeFavorite } from '../actions/recipes_actions'
 
 import placeholder from '../images/placeholder_meal.png'
@@ -55,7 +57,7 @@ class Recipe extends React.Component {
   }
 
   handleFavorite = () => {
-    const {favorites, recipe, userId} = this.props
+    const {favorites, recipe} = this.props
     favorites.map( rec => {return {recipeId: rec.recipeId, id: rec.id} } ).find( rec => rec.recipeId === recipe.id || rec.id === recipe.id ) ? this.props.removeFavorite(recipe, userId) : this.props.addFavorite(recipe, userId)
   }
 
@@ -127,7 +129,6 @@ const mapStateToProps = state => {
   return {
     myIngredients: state.ingredients.ingredients,
     favorites: state.recipes.favorites,
-    userId: state.user.userId
   }
 }
 

@@ -5,6 +5,8 @@ import '../styles/Recipes.css'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { userId } from '../constants'
+
 import { fetchRecipes, fetchFavorites, searchRecipes, decreasePage, increasePage } from '../actions/recipes_actions'
 
 import Recipe from '../components/Recipe'
@@ -43,7 +45,7 @@ const style = {
 class RecipesList extends React.Component {
   componentDidMount() {
     !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
-    !this.props.fetchedFavorites ? this.props.fetchFavorites(this.props.userId) : null
+    !this.props.fetchedFavorites ? typeof userId === "number" ? this.props.fetchFavorites(userId) : this.props.fetchFavorites(this.props.user_id) : null
   }
 
   renderFetch = (recipes, fetched, element) => {
@@ -120,7 +122,6 @@ class RecipesList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.user.userId,
     recipes: state.recipes.recipes,
     criteria: state.recipes.criteria,
     fetched: state.recipes.fetched,
@@ -130,7 +131,8 @@ const mapStateToProps = state => {
     searchedDiets: state.recipes.searchedDiets,
     fetchedFavorites: state.recipes.fetchedFavorites,
     cuisine: state.recipes.cuisine,
-    course: state.recipes.course
+    course: state.recipes.course,
+    user_id: state.user.user_id
   }
 }
 

@@ -5,6 +5,8 @@ import '../styles/Sidebar.css'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { userId } from '../constants'
+
 import { fetchIngredients, clearSelection } from '../actions/ingredients_actions'
 import { searchRecipesInitial } from '../actions/recipes_actions'
 
@@ -28,16 +30,8 @@ class IngredientsList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchIngredients(this.props.userId)
+    typeof userId === "number" ? this.props.fetchIngredients(userId) : this.props.fetchIngredients(this.props.user_id)
   }
-  //
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return nextProps.userId !== this.props.userId ? true : false
-  // }
-  //
-  // componentWillUpdate(nextProps, nextState) {
-  //   this.props.fetchIngredients(nextProps.userId)
-  // }
 
   handleSearch = () => {
     this.props.searchRecipesInitial(this.props.selectedIngredients, this.state.cuisine, this.state.course, this.state.allergies, this.state.diets)
@@ -249,14 +243,14 @@ class IngredientsList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.user.userId,
     ingredients: state.ingredients.ingredients,
     selectedIngredients: state.ingredients.selectedIngredients,
     page: state.recipes.page,
     cuisines: state.filters.cuisines,
     courses: state.filters.courses,
     allergies: state.filters.allergies,
-    diets: state.filters.diets
+    diets: state.filters.diets,
+    user_id: state.user.user_id
   }
 }
 

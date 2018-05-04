@@ -5,6 +5,8 @@ import '../styles/Sidebar.css'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { userId } from '../constants'
+
 import { addIngredient } from '../actions/ingredients_actions'
 
 import Paper from 'material-ui/Paper';
@@ -48,7 +50,7 @@ class IngredientsForm extends React.Component {
       this.setState({
         expiration_date: expiration_date.toDateString().slice(4)
       }, () => {
-        this.props.addIngredient(this.state, this.props.userId)
+        this.props.addIngredient(this.state, userId)
         this.setState({
           name: "",
           expiration_date: new Date()
@@ -91,12 +93,12 @@ class IngredientsForm extends React.Component {
     )
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    userId: state.user.userId,
-  }
-}
+//
+// const mapStateToProps = state => {
+//   return {
+//
+//   }
+// }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
@@ -104,4 +106,4 @@ const mapDispatchToProps = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IngredientsForm)
+export default connect(null, mapDispatchToProps)(IngredientsForm)

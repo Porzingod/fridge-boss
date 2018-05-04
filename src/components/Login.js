@@ -3,7 +3,10 @@ import '../styles/User.css';
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { login } from '../actions/user_actions'
+
+import { userId } from '../constants'
+
+import { login, rememberUser } from '../actions/user_actions'
 
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -12,6 +15,10 @@ class Login extends React.Component {
   state = {
     username: "",
     password: ""
+  }
+
+  componentDidMount() {
+    localStorage.user ? this.props.rememberUser(userId) : null
   }
 
   handleChange = (e) => {
@@ -70,6 +77,7 @@ class Login extends React.Component {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     login: login,
+    rememberUser: rememberUser,
   }, dispatch)
 }
 

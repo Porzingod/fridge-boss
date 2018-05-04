@@ -6,6 +6,14 @@ export const renderLoginForm = () => {
   }
 }
 
+export const rememberUser = (userId) => {
+  return (dispatch) => {
+    dispatch({
+      type: "REMEMBER_USER",
+      payload: userId })
+  }
+}
+
 export const login = (body) => {
   return (dispatch) => {
     dispatch({ type: "LOGIN_PENDING" })
@@ -18,11 +26,13 @@ export const login = (body) => {
       }
     })
       .then(res => res.json())
-      .then(json => dispatch({
+      .then(json => {
+        localStorage.user = json.id
+        dispatch({
           type: "LOGIN_FULFILLED",
           payload: json
         })
-      )
+      })
       .catch(err => dispatch({
         type: "LOGIN_REJECTED",
         payload: err
@@ -33,6 +43,7 @@ export const login = (body) => {
 
 export const logout = () => {
   return (dispatch) => {
+    localStorage.removeItem("user")
     dispatch({ type: "LOGOUT_USER" })
     dispatch({ type: "CLEAR_RECIPES" })
     dispatch({ type: "CLEAR_INGREDIENTS" })
@@ -58,11 +69,13 @@ export const register = (body) => {
       }
     })
       .then(res => res.json())
-      .then(json => dispatch({
+      .then(json => {
+        localStorage.user = json.id
+        dispatch({
         type: "REGISTER_USER_FULFILLED",
         payload: json
       })
-    )
+    })
       .catch(err => dispatch({
         type: "REGISTER_USER_REJECTED",
         payload: err

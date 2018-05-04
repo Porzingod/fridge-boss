@@ -5,6 +5,8 @@ import '../styles/Sidebar.css'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { userId } from '../constants'
+
 import { deleteIngredient, selectIngredient, deselectIngredient } from '../actions/ingredients_actions'
 
 import Checkbox from 'material-ui/Checkbox';
@@ -42,7 +44,7 @@ class Ingredient extends React.Component {
   }
 
   handleDelete = () => {
-    this.props.deleteIngredient(this.props.ingredient.id, this.props.userId)
+    this.props.deleteIngredient(this.props.ingredient.id, userId)
   }
 
   render() {
@@ -78,11 +80,10 @@ class Ingredient extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    userId: state.user.userId,
-  }
-}
+// const mapStateToProps = state => {
+//   return {
+//   }
+// }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
@@ -92,4 +93,4 @@ const mapDispatchToProps = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Ingredient)
+export default connect(null, mapDispatchToProps)(Ingredient)

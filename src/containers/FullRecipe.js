@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 
 import '../styles/FullRecipe.css'
 
+import { userId } from '../constants'
+
 import { addFavorite, removeFavorite } from '../actions/recipes_actions'
 
 import placeholder from '../images/placeholder_meal.png'
@@ -37,7 +39,7 @@ const style = {
 class FullRecipe extends React.Component {
 
   handleFavorite = () => {
-    const {favorites, recipes, recipe, userId} = this.props
+    const {favorites, recipes, recipe} = this.props
     let foundRecipe = recipes.find( rec => rec.id === recipe.id )
     favorites.map( rec => rec.id).includes(recipe.id) ? this.props.removeFavorite(foundRecipe, userId) : this.props.addFavorite(foundRecipe, userId)
   }
@@ -91,7 +93,6 @@ class FullRecipe extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.user.userId,
     recipes: state.recipes.recipes,
     favorites: state.recipes.favorites
   }

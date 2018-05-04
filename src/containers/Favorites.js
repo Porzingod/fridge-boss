@@ -5,6 +5,8 @@ import '../styles/Recipes.css'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { userId } from '../constants'
+
 import { fetchRecipes, fetchFavorites } from '../actions/recipes_actions'
 
 import Recipe from '../components/Recipe'
@@ -37,7 +39,7 @@ const style = {
 class Favorites extends React.Component{
   componentDidMount() {
     !this.props.recipes.length ? this.props.fetchRecipes(this.props.page) : null
-    !this.props.fetchedFavorites ? this.props.fetchFavorites(this.props.userId) : null
+    !this.props.fetchedFavorites ? typeof userId === "number" ? this.props.fetchFavorites(userId) : this.props.fetchFavorites(this.props.user_id) : null
   }
 
   render() {
@@ -89,7 +91,7 @@ const mapStateToProps = state => {
     fetchedFavorites: state.recipes.fetchedFavorites,
     recipes: state.recipes.recipes,
     page: state.recipes.page,
-    userId: state.user.userId
+    user_id: state.user.user_id
   }
 }
 
