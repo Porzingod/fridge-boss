@@ -80,17 +80,17 @@ class RecipesList extends React.Component {
   }
 
   decreasePage = () => {
-    const {criteria, searchedIngredients, searchedAllergies, searchedDiets, page, cuisine, course} = this.props
-    const {searchRecipes, fetchRecipes} = this.props
-    this.props.decreasePage()
-    criteria || course || cuisine ? searchRecipes(searchedIngredients, page - 1, cuisine, course, searchedAllergies, searchedDiets) : fetchRecipes(page - 1)
+    const { criteria, searchedIngredients, searchedAllergies, searchedDiets, page, cuisine, course } = this.props
+    const { searchRecipes, fetchRecipes, decreasePage } = this.props
+    decreasePage()
+    !!criteria.allowedIngredient || !!criteria.allowedDiet || !!criteria.allowedAllergy || course || cuisine ? searchRecipes(searchedIngredients, page - 1, cuisine, course, searchedAllergies, searchedDiets) : fetchRecipes(page - 1)
   }
 
   increasePage = () => {
-    const {criteria, searchedIngredients, searchedAllergies, searchedDiets, page, cuisine, course} = this.props
-    const {searchRecipes, fetchRecipes} = this.props
-    this.props.increasePage()
-    criteria || course || cuisine ? searchRecipes(searchedIngredients, page + 1, cuisine, course, searchedAllergies, searchedDiets) : fetchRecipes(page + 1)
+    const { criteria, searchedIngredients, searchedAllergies, searchedDiets, page, cuisine, course } = this.props
+    const { searchRecipes, fetchRecipes, increasePage } = this.props
+    increasePage()
+    !!criteria.allowedIngredient || !!criteria.allowedDiet || !!criteria.allowedAllergy || course || cuisine ? searchRecipes(searchedIngredients, page + 1, cuisine, course, searchedAllergies, searchedDiets) : fetchRecipes(page + 1)
   }
 
   render() {

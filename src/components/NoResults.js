@@ -5,11 +5,20 @@ import '../styles/NoResults.css'
 import { connect } from 'react-redux'
 
 const NoResults = (props) => {
+  debugger
   const ingredientNames = props.searchedIngredients.map( ingr => ingr.name )
-  const last = ingredientNames.length - 1
-  const ingredients = `"${ingredientNames.slice(0, last).join(", ")} and ${ingredientNames[last]}"`
+  let last
+  let ingredients
+
+  if (ingredientNames.length > 1) {
+    last = ingredientNames.length - 1
+    ingredients = `"${ingredientNames.slice(0, last).join(", ")} and ${ingredientNames[last]}"`
+  } else {
+    ingredients = `"${ingredientNames[0]}"`
+  }
+
   return (
-    <div className="No-results-page">
+    <div className="main-container-column">
       <h3>
         We couldn't find any recipes including {ingredients}
       </h3>
