@@ -47,16 +47,15 @@ class FullRecipe extends React.Component {
     favorites.map( rec => rec.id).includes(recipe.id) ? this.props.removeFavorite(foundRecipe, userId) : this.props.addFavorite(foundRecipe, userId)
   }
 
-  render() {
+  renderRecipe = () => {
     const {attributes, images, source, id, ingredientLines, name, numberOfServings, totalTime} = this.props.recipe
     const {course, cuisine} = attributes
     const {hostedLargeUrl} = images[0]
     const {sourceRecipeUrl} = source
     const image = hostedLargeUrl ? hostedLargeUrl.slice(0, (hostedLargeUrl.length - 5)) : placeholder
     const favoriteIcon = this.props.favorites.map( recipe => {return {recipeId: recipe.recipeId, id: recipe.id} } ).find( recipe => recipe.recipeId === id || recipe.id === id ) ? <Favorite color="red"/> : <FavoriteBorder />
-    return(
+    return (
       <div className="App app-container">
-
         <div className="Ingredients-container">
           <IngredientsForm />
           <IngredientsList />
@@ -98,11 +97,16 @@ class FullRecipe extends React.Component {
       </div>
     )
   }
+
+  render() {
+    return this.props.recipe ? this.renderRecipe() : (<div></div>)
+  }
 }
 
 
 const mapStateToProps = state => {
   return {
+    recipe: state.recipes.recipe,
     recipes: state.recipes.recipes,
     favorites: state.recipes.favorites
   }

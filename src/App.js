@@ -101,7 +101,7 @@ class App extends Component {
           <Route path="/register" component={Register}/>
           <Route path="/recipes" component={RecipesList}/>
           <Route path="/favorites" component={Favorites}/>
-          <Route path="/recipe" component={() => <FullRecipe recipe={recipe}/>}/>
+          <Route path="/recipe" component={FullRecipe}/>
         </div>
       </MuiThemeProvider>
     )
