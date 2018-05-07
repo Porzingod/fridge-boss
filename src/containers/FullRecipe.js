@@ -84,7 +84,7 @@ class FullRecipe extends React.Component {
               <strong>Servings:</strong> {numberOfServings}<br/>
               <strong>Cook Time:</strong> {totalTime}<br/><br/>
               <p><strong>Ingredients: </strong></p>
-              <ul>{ingredientLines.map( (ingr, index) => <li key={index}>{ingr}</li> )}</ul>
+              <ul className="Full-recipe-ingredients-list">{ingredientLines.map( (ingr, index) => <li key={index} className="Full-recipe-ingredient">{ingr}</li> )}</ul>
               <RaisedButton
                 href={sourceRecipeUrl}
                 target="_blank"

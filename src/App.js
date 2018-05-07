@@ -9,6 +9,14 @@ import { Router, Route, Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {
+  red700, red500,
+  pinkA200,
+  grey100, grey300, grey400, grey500,
+  white, darkBlack, fullBlack,
+} from 'material-ui/styles/colors';
+import {fade} from 'material-ui/utils/colorManipulator'
 
 import Navbar from './components/Navbar'
 import IngredientsForm from './containers/IngredientsForm'
@@ -19,7 +27,14 @@ import Favorites from './containers/Favorites'
 import Login from './components/Login'
 import Register from './components/Register'
 
-const YUMMLY_ATTRIBUTION = "Recipe search powered by <a href='http://www.yummly.co/recipes'><img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></a>"
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: red700,
+  },
+  datePicker: {
+    headerColor: red700,
+  }
+})
 
 class App extends Component {
 
@@ -75,8 +90,14 @@ class App extends Component {
   // }
 
   renderApp = () => {
-    const { view, recipe, history } = this.props
-    view == "favorites" ? history.replace("/favorites") : recipe ? history.replace("/recipe") : history.replace("/recipes")
+    const { view, recipe, history, page } = this.props
+    if (view === "favorites") {
+      history.replace("/favorites")
+    } else if (recipe) {
+      history.replace(`/recipe/${recipe.id}`)
+    } else {
+      history.replace("/recipes")
+    }
   }
 
   // render() {
@@ -94,7 +115,7 @@ class App extends Component {
   render() {
     const { recipe } = this.props
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <div className="main-container-column">
           <Navbar />
           <Route path="/login" component={Login}/>
@@ -102,6 +123,7 @@ class App extends Component {
           <Route path="/recipes" component={RecipesList}/>
           <Route path="/favorites" component={Favorites}/>
           <Route path="/recipe" component={FullRecipe}/>
+          <div className="Attribution">Recipe search powered by <a href='http://www.yummly.co/recipes' className="Yummly"><img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></a></div>
         </div>
       </MuiThemeProvider>
     )
@@ -114,7 +136,8 @@ const mapStateToProps = state => {
     recipe: state.recipes.recipe,
     userView: state.user.view,
     loggedIn: state.user.loggedIn,
-    user_id: state.user.user_id
+    user_id: state.user.user_id,
+    page: state.recipes.page
   }
 }
 

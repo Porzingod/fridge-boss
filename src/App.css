@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 2px;
   padding-left: 20px;
   max-width: auto;
   max-height: auto;
@@ -83,6 +83,18 @@
   max-width: 85%;
   height: 850px;
   overflow-y: auto;
+}
+
+.Attribution {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(.8);
+}
+
+.Yummly {
+  margin-left: -5px;
+  transform: scale(.8);
 }
 
 @keyframes App-logo-spin {

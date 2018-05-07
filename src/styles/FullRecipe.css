@@ -16,6 +16,16 @@
   flex-direction: row;
 }
 
+.Full-recipe-ingredients-list {
+  /* text-align: left; */
+  list-style-type: none;
+  padding: 0px;
+}
+
+.Full-recipe-ingredient {
+  padding: 6px;
+}
+
 .Full-recipe-row-1 {
 
 }
