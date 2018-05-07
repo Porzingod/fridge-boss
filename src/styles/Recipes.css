@@ -8,7 +8,7 @@
   flex: 8;
   overflow-y: auto;
   overflow-x: hidden;
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 
 .Recipes-buttons-container {
@@ -31,6 +31,9 @@
 
 .Recipes-buttons-container-row-2 {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Recipes-buttons-container-row-3 {

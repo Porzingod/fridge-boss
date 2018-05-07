@@ -20,6 +20,10 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import RaisedButton from 'material-ui/RaisedButton'
 
+String.prototype.capitalize = function() {
+  return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+}
+
 const style = {
   menu: {
     minWidth: "40%",
@@ -63,7 +67,7 @@ class Recipe extends React.Component {
 
   renderPopover = () => {
     const {recipeName, totalTimeInSeconds, ingredients, attributes, id} = this.props.recipe
-    let ingredientsList = ingredients.map( (ingr, index) => <li key={index}>{ingr}</li> )
+    let ingredientsList = ingredients.map( (ingr, index) => <li key={index}>{ingr.capitalize()}</li> )
     let favoriteIcon = this.props.favorites.map( recipe => {return {recipeId: recipe.recipeId, id: recipe.id} } ).find( recipe => recipe.recipeId === id || recipe.id === id ) ? <Favorite color="red"/> : <FavoriteBorder />
     return (
       <Popover

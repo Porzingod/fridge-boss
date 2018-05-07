@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   padding-top: 20px;
-  padding-bottom: 2px;
+  padding-bottom: 4px;
   padding-left: 20px;
   max-width: auto;
   max-height: auto;
@@ -85,7 +85,17 @@
   overflow-y: auto;
 }
 
-.Attribution {
+.Attribution-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.Attribution-1 {
+  flex: 1;
+}
+
+.Attribution-2 {
+  flex: 4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,6 +104,7 @@
 
 .Yummly {
   margin-left: -5px;
+  margin-bottom: -5px;
   transform: scale(.8);
 }
 

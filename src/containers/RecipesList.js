@@ -100,15 +100,16 @@ class RecipesList extends React.Component {
       <div className="Recipes-container">
         <div className="Recipes-buttons-container">
           <div className="Recipes-buttons-container-row-1" ></div>
-          <IconButton
-            className="Recipes-buttons-container-row-2"
-            iconStyle={style.prevButtonIcon}
-            style={style.prevButton}
-            onClick={this.decreasePage}
-            disabled={page > 0 ? false : true}
-          >
-            <HardwareKeyboardArrowLeft/>
-          </IconButton>
+          <div className="Recipes-buttons-container-row-2">
+            <IconButton
+              iconStyle={style.prevButtonIcon}
+              style={style.prevButton}
+              onClick={this.decreasePage}
+              disabled={page > 0 ? false : true}
+            >
+              <HardwareKeyboardArrowLeft/>
+            </IconButton>
+          </div>
           <div className="Recipes-buttons-container-row-3" ></div>
         </div>
 
@@ -120,14 +121,15 @@ class RecipesList extends React.Component {
         </div>
         <div className="Recipes-buttons-container">
           <div className="Recipes-buttons-container-row-1" ></div>
-          <IconButton
-            className="Recipes-buttons-container-row-2"
-            iconStyle={style.nextButtonIcon}
-            style={style.nextButton}
-            onClick={this.increasePage}
-          >
-            <HardwareKeyboardArrowRight/>
-          </IconButton>
+          <div className="Recipes-buttons-container-row-2">
+            <IconButton
+              iconStyle={style.nextButtonIcon}
+              style={style.nextButton}
+              onClick={this.increasePage}
+            >
+              <HardwareKeyboardArrowRight/>
+            </IconButton>
+          </div>
           <div className="Recipes-buttons-container-row-3" ></div>
         </div>
       </div>
