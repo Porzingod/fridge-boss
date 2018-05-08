@@ -162,6 +162,7 @@ class IngredientsList extends React.Component {
             onChange={this.handleCuisineChange}
             floatingLabelText="Cuisine"
             floatingLabelFixed={true}
+            floatingLabelStyle={{color: "rgba(0, 0, 0, .9)"}}
             inputStyle={{paddingLeft: '5px'}}
             className="Ingredients-sidebar-filter-select"
           >
@@ -175,6 +176,7 @@ class IngredientsList extends React.Component {
             onChange={this.handleCourseChange}
             floatingLabelText="Course"
             floatingLabelFixed={true}
+            floatingLabelStyle={{color: "rgba(0, 0, 0, .9)"}}
             inputStyle={{paddingLeft: '5px'}}
             className="Ingredients-sidebar-filter-select"
           >
@@ -190,6 +192,7 @@ class IngredientsList extends React.Component {
             multiple={true}
             floatingLabelText="Allergies"
             floatingLabelFixed={true}
+            floatingLabelStyle={{color: "rgba(0, 0, 0, .9)"}}
             inputStyle={{paddingleft: '5px'}}
             className="Ingredients-sidebar-filter-select"
           >
@@ -204,6 +207,7 @@ class IngredientsList extends React.Component {
             multiple={true}
             floatingLabelText="Diets"
             floatingLabelFixed={true}
+            floatingLabelStyle={{color: "rgba(0, 0, 0, .9)"}}
             inputStyle={{paddingleft: '5px'}}
             className="Ingredients-sidebar-filter-select"
           >

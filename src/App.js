@@ -10,12 +10,7 @@ import { withRouter } from 'react-router'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {
-  red700, red500,
-  pinkA200,
-  grey100, grey300, grey400, grey500,
-  white, darkBlack, fullBlack,
-} from 'material-ui/styles/colors';
+import { red500, yellowA400 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator'
 
 import Navbar from './components/Navbar'
@@ -29,10 +24,19 @@ import Register from './components/Register'
 
 const muiTheme = getMuiTheme({
   palette: {
-    primary1Color: red700,
+    primary1Color: red500,
   },
   datePicker: {
-    headerColor: red700,
+    color: "#e53935",
+    selectColor: "#ffeb3b",
+    headerColor: "#ffeb3b",
+    calendarTextColor: "rgba(0, 0, 0, 0.87)",
+    textColor: "#ffffff",
+    selectTextColor: "#f44336",
+    calendarYearBackgroundColor: "#ffffff"
+  },
+  checkbox: {
+    checkedColor: "#ff1744"
   }
 })
 
