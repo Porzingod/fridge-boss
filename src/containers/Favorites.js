@@ -5,8 +5,6 @@ import '../styles/Recipes.css'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { userId } from '../constants'
-
 import { fetchRecipes, fetchFavorites } from '../actions/recipes_actions'
 
 import Recipe from '../components/Recipe'

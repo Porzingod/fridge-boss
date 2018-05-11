@@ -50,7 +50,7 @@ class IngredientsForm extends React.Component {
       this.setState({
         expiration_date: expiration_date.toDateString().slice(4)
       }, () => {
-        this.props.addIngredient(this.state, userId)
+        this.props.addIngredient({...this.state, name: this.state.name.toLowerCase()}, userId)
         this.setState({
           name: "",
           expiration_date: new Date()
@@ -79,7 +79,7 @@ class IngredientsForm extends React.Component {
           inputStyle={style.datePicker}
           hintStyle={style.textHintField}
           onChange={this.handleExpirationDate}
-          hintText="Best Before Date"
+          hintText="Best By Date"
           name="expiration_date"
           mode="landscape"
           container="inline"

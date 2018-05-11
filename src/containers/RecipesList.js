@@ -29,6 +29,7 @@ const style = {
   prevButtonIcon: {
     width: 60,
     height: 60,
+    fill: "red",
   },
   prevButton: {
     width: 120,
@@ -37,6 +38,7 @@ const style = {
   nextButtonIcon: {
     width: 60,
     height: 60,
+    fill: "red",
   },
   nextButton: {
     width: 120,

@@ -5,17 +5,14 @@ import './styles/Recipes.css'
 import './styles/Sidebar.css'
 import { connect } from 'react-redux'
 
-import { Router, Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { red500, yellowA400 } from 'material-ui/styles/colors';
-import {fade} from 'material-ui/utils/colorManipulator'
+import { red500 } from 'material-ui/styles/colors';
 
 import Navbar from './components/Navbar'
-import IngredientsForm from './containers/IngredientsForm'
-import IngredientsList from './containers/IngredientsList'
 import RecipesList from './containers/RecipesList'
 import FullRecipe from './containers/FullRecipe'
 import Favorites from './containers/Favorites'
@@ -30,7 +27,7 @@ const muiTheme = getMuiTheme({
     color: "#e53935",
     selectColor: "#ffeb3b",
     headerColor: "#ffeb3b",
-    calendarTextColor: "rgba(0, 0, 0, 0.87)",
+    calendarTextColor: "rgba(0, 0, 0, 0.77)",
     textColor: "#ffffff",
     selectTextColor: "#f44336",
     calendarYearBackgroundColor: "#ffffff"
@@ -94,7 +91,7 @@ class App extends Component {
   // }
 
   renderApp = () => {
-    const { view, recipe, history, page } = this.props
+    const { view, recipe, history } = this.props
     if (view === "favorites") {
       history.replace("/favorites")
     } else if (recipe) {
@@ -117,7 +114,6 @@ class App extends Component {
   // }
 
   render() {
-    const { recipe } = this.props
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className="main-container-column">

@@ -33,22 +33,14 @@ class IngredientsList extends React.Component {
     const { fetchIngredients, ingredients, user_id} = this.props
     if (!!ingredients.length) {
       null
-    } else if (isNaN(userId)) {
+    } else if (!!user_id) {
       fetchIngredients(user_id)
     } else {
+      console.log(userId)
+      debugger
       fetchIngredients(userId)
     }
   }
-
-  // shouldComponentUpdate(nextProps) {
-  //   const {ingredients, selectedIngredients, user_id} = this.props
-  //   debugger
-  // }
-  //
-  // componentDidUpdate(prevProps) {
-  //   const {ingredients, selectedIngredients, user_id} = this.props
-  //   debugger
-  // }
 
   handleSearch = () => {
     this.props.searchRecipesInitial(this.props.selectedIngredients, this.state.cuisine, this.state.course, this.state.allergies, this.state.diets)
@@ -271,7 +263,8 @@ const mapStateToProps = state => {
     courses: state.filters.courses,
     allergies: state.filters.allergies,
     diets: state.filters.diets,
-    user_id: state.user.user_id
+    user_id: state.user.user_id,
+    loggedIn: state.user.loggedIn
   }
 }
 

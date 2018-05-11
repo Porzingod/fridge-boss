@@ -65,8 +65,8 @@ class Ingredient extends React.Component {
               <span className="Ingredient-list-item-label">{name}</span>
               <br/>
               {this.expiringSoon() ?
-                <span className="Ingredient-list-item-secondary-label-red">Best Before: {expiration_date}</span>
-              : <span className="Ingredient-list-item-secondary-label">Best Before: {expiration_date}</span>
+                <span className="Ingredient-list-item-secondary-label-red">Best By: {expiration_date}</span>
+              : <span className="Ingredient-list-item-secondary-label">Best By: {expiration_date}</span>
               }
             </label>
           )}
