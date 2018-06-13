@@ -5,7 +5,6 @@ import '../styles/NoResults.css'
 import { connect } from 'react-redux'
 
 const NoResults = (props) => {
-  debugger
   const ingredientNames = props.searchedIngredients.map( ingr => ingr.name )
   let last
   let ingredients

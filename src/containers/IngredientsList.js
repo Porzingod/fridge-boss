@@ -36,8 +36,6 @@ class IngredientsList extends React.Component {
     } else if (!!user_id) {
       fetchIngredients(user_id)
     } else {
-      console.log(userId)
-      debugger
       fetchIngredients(userId)
     }
   }
