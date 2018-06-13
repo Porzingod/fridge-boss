@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from './reducers'
 import thunk from 'redux-thunk'
-import logger from 'redux-logger'
 
 // const routerMiddleware = (history) => () => (next) => ({type, payload}) => {
 //   switch (type) {
@@ -25,10 +24,11 @@ import logger from 'redux-logger'
 //   }
 // };
 
-const middleware = applyMiddleware(thunk, logger)
+const middleware = applyMiddleware(thunk)
 
 const store = createStore(
   reducer,
-  compose(middleware, window.devToolsExtension ? window.devToolsExtension() : f => f)
+  // compose(middleware, window.devToolsExtension ? window.devToolsExtension() : f => f)
+  compose(middleware)
 )
 export default store
