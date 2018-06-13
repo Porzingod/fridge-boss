@@ -113,6 +113,15 @@ class App extends Component {
   //   )
   // }
 
+  renderAttribution = () => {
+    return (
+      <div className="Attribution-container">
+        <div className="Attribution-1"></div>
+        <div className="Attribution-2">Fridge Boss 2018 by Jason Lim  -  Recipe search powered by <a href='http://www.yummly.co/recipes' className="Yummly"><img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></a></div>
+      </div>
+    )
+  }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -123,10 +132,7 @@ class App extends Component {
           <Route path="/recipes" component={RecipesList}/>
           <Route path="/favorites" component={Favorites}/>
           <Route path="/recipe" component={FullRecipe}/>
-          <div className="Attribution-container">
-            <div className="Attribution-1"></div>
-            <div className="Attribution-2">Fridge Boss 2018 by Jason Lim  -  Recipe search powered by <a href='http://www.yummly.co/recipes' className="Yummly"><img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></a></div>
-          </div>
+          {this.props.loggedIn ? this.renderAttribution() : null}
         </div>
       </MuiThemeProvider>
     )

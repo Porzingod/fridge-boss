@@ -64,7 +64,7 @@ class RecipesList extends React.Component {
     !recipes.length ? fetchRecipes(page) : null
     if (fetchedFavorites) {
       null
-    } else if (isNaN(userId)) {
+    } else if (!!user_id) {
       fetchFavorites(user_id)
     } else {
       fetchFavorites(userId)
