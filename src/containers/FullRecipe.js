@@ -49,6 +49,7 @@ class FullRecipe extends React.Component {
 
   renderRecipe = () => {
     const {attributes, images, source, id, ingredientLines, name, numberOfServings, totalTime} = this.props.recipe
+    const filteredIngredients = removeDuplicates(ingredientLines)
     const {course, cuisine} = attributes
     const {hostedLargeUrl} = images[0]
     const {sourceRecipeUrl} = source
@@ -84,7 +85,7 @@ class FullRecipe extends React.Component {
               <strong>Servings:</strong> {numberOfServings}<br/>
               <strong>Cook Time:</strong> {totalTime}<br/><br/>
               <p><strong>Ingredients: </strong></p>
-              <ul className="Full-recipe-ingredients-list">{ingredientLines.map( (ingr, index) => <li key={index} className="Full-recipe-ingredient">{ingr}</li> )}</ul>
+              <ul className="Full-recipe-ingredients-list">{filteredIngredients.map( (ingr, index) => <li key={index} className="Full-recipe-ingredient">{ingr}</li> )}</ul>
               <RaisedButton
                 href={sourceRecipeUrl}
                 target="_blank"
@@ -117,6 +118,14 @@ const mapDispatchToProps = dispatch => {
     addFavorite: addFavorite,
     removeFavorite: removeFavorite,
   }, dispatch)
+}
+
+const removeDuplicates = array => {
+  let res = []
+  for (let ing of array) {
+    res.includes(ing) ? null : res.push(ing)
+  }
+  return res
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FullRecipe)
