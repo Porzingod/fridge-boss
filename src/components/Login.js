@@ -35,6 +35,13 @@ class Login extends React.Component {
     })
   }
 
+  handleDemo = (e) => {
+    this.props.login({
+      username: "jason",
+      password: "jason"
+    })
+  }
+
   render() {
     return (
       <div className="user-container">
@@ -63,6 +70,11 @@ class Login extends React.Component {
             <RaisedButton
               label="Login"
               onClick={this.handleSubmit}
+            />
+            <br />
+            <RaisedButton
+              label="Try Demo"
+              onClick={this.handleDemo}
             />
           </div>
           <div className="user-login-column-3"></div>
